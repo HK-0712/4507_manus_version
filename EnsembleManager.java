@@ -1,7 +1,5 @@
-import java.util.AbstractList;
 import java.util.LinkedList;
 import java.util.Stack;
-import java.util.Iterator;
 
 public class EnsembleManager {
     private LinkedList<Ensemble> ensembles;
@@ -135,8 +133,45 @@ public class EnsembleManager {
             Command command = redoStack.pop();
             command.execute();
             history.push(command);
+            
             // 確保只輸出一次 redo 訊息
             System.out.println("Command (" + command.getDescription() + ") is redone.");
+            
+            // 處理 redo 後的樂團切換邏輯
+            boolean ensembleSwitched = false;
+            
+            // 檢查是否為 CreateEnsembleCommand 的 redo (即重新創建樂團)
+            if (command instanceof CreateEnsembleCommand) {
+                // CreateEnsembleCommand 的 execute() 會將樂團重新加入到 ensembles 列表中
+                // 應該將 currentEnsemble 切換到新創建的樂團
+                Ensemble redoneEnsemble = ((CreateEnsembleCommand) command).getEnsemble();
+                this.currentEnsemble = redoneEnsemble;
+                ensembleSwitched = true;
+            }
+            // 檢查是否為其他 EnsembleCommand 的 redo
+            else if (command instanceof EnsembleCommand) {
+                Ensemble ensembleInvolved = ((EnsembleCommand) command).getEnsemble();
+                // 確保 ensembleInvolved 仍然存在於 ensembles 列表中
+                boolean ensembleInvolvedExists = false;
+                for (Ensemble e : ensembles) {
+                    if (e.equals(ensembleInvolved)) {
+                        ensembleInvolvedExists = true;
+                        break;
+                    }
+                }
+                
+                if (ensembleInvolvedExists && !ensembleInvolved.equals(currentEnsemble)) {
+                    // 如果 redo 的命令涉及一個不同的樂團,切換到它
+                    this.currentEnsemble = ensembleInvolved;
+                    ensembleSwitched = true;
+                }
+            }
+            
+            // 輸出樂團切換訊息
+            if (ensembleSwitched && currentEnsemble != null) {
+                System.out.println("The current ensemble is changed to " + this.currentEnsemble.getEnsembleID() + " " + this.currentEnsemble.getName() + ".");
+            }
+            
             return command;
         } else {
             System.out.println("Redo List is empty.");
