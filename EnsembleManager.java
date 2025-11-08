@@ -58,38 +58,41 @@ public class EnsembleManager {
         history.push(command);
     }
 
-    public void undo() {
+    public Command undo() {
         if (!history.isEmpty()) {
             Command command = history.pop();
             command.undo();
             redoStack.push(command);
             // System.out.println("Command (" + command.getDescription() + ") is undone."); // Removed to match PDF
+            return command;
         } else {
             System.out.println("Undo List is empty.");
         }
+        return null;
     }
 
-    public void redo() {
+    public Command redo() {
         if (!redoStack.isEmpty()) {
             Command command = redoStack.pop();
             command.execute();
             history.push(command);
             // System.out.println("Command (" + command.getDescription() + ") is redone."); // Removed to match PDF
+            return command;
         } else {
             System.out.println("Redo List is empty.");
         }
+        return null;
     }
 
     public void listUndoRedo() {
         System.out.println("Undo List");
-        for (int i = history.size() - 1; i >= 0; i--) {
+        for (int i = 0; i < history.size(); i++) {
             System.out.println(history.get(i).getDescription());
         }
         System.out.println("-- End of undo list --");
 
         System.out.println("Redo List");
-        // Print redo stack in reverse order
-        for (int i = redoStack.size() - 1; i >= 0; i--) {
+        for (int i = 0; i < redoStack.size(); i++) {
             System.out.println(redoStack.get(i).getDescription());
         }
         System.out.println("-- End of redo list --");

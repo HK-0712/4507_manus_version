@@ -27,6 +27,6 @@ public class ChangeNameCommand implements Command {
     
     @Override
     public String getDescription() {
-        return "Change ensemble's name, " + ensemble.getEnsembleID() + ", " + newName;
+        return "Change ensemble\u2019s name, " + ensemble.getEnsembleID() + ", " + newName;
     }
 }

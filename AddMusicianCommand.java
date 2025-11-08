@@ -2,11 +2,15 @@ public class AddMusicianCommand implements Command {
     private EnsembleManager manager;
     private Ensemble ensemble;
     private Musician musician;
+    private final String roleName;
+    private final String description;
     // private String roleName; // Removed to enforce OCP
     
     public AddMusicianCommand(Ensemble ensemble, Musician musician) {
         this.ensemble = ensemble;
         this.musician = musician;
+        this.roleName = resolveRoleName(musician.getRole());
+        this.description = buildDescription();
     }
 
     @Override
@@ -26,13 +30,19 @@ public class AddMusicianCommand implements Command {
     
     @Override
     public String getDescription() {
-        // Assuming the ensemble has a method to get the role name from the role ID
-        String roleName = "";
-        if (ensemble instanceof OrchestraEnsemble) {
-            roleName = ((OrchestraEnsemble) ensemble).getRoleName(musician.getRole());
-        } else if (ensemble instanceof JazzBandEnsemble) {
-            roleName = ((JazzBandEnsemble) ensemble).getRoleName(musician.getRole());
-        }
+        return description;
+    }
+
+    private String buildDescription() {
         return "Add musician, " + musician.getMID() + ", " + musician.getName() + ", " + roleName;
+    }
+
+    private String resolveRoleName(int role) {
+        if (ensemble instanceof OrchestraEnsemble) {
+            return ((OrchestraEnsemble) ensemble).getRoleName(role);
+        } else if (ensemble instanceof JazzBandEnsemble) {
+            return ((JazzBandEnsemble) ensemble).getRoleName(role);
+        }
+        return "unknown";
     }
 }

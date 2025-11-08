@@ -148,7 +148,7 @@ public class CommandFactory {
             }
         }
 
-        return new ModifyInstrumentCommand(targetMusician, newRole);
+    return new ModifyInstrumentCommand(currentEnsemble, targetMusician, newRole);
     }
 
     private Command deleteMusicianCommand() {

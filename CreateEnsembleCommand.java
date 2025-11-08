@@ -4,11 +4,17 @@ public class CreateEnsembleCommand implements Command {
     private EnsembleManager manager;
     private LinkedList<Ensemble> ensembles;
     private Ensemble ensemble;
+    private final String ensembleTypeDescription;
+    private final String ensembleID;
+    private final String ensembleNameSnapshot;
     // private String ensembleType; // Removed to enforce OCP
     
     public CreateEnsembleCommand(LinkedList<Ensemble> ensembles, Ensemble ensemble) {
         this.ensembles = ensembles;
         this.ensemble = ensemble;
+        this.ensembleTypeDescription = ensemble.getEnsembleTypeDescription();
+        this.ensembleID = ensemble.getEnsembleID();
+        this.ensembleNameSnapshot = ensemble.getName();
     }
 
     @Override
@@ -29,6 +35,6 @@ public class CreateEnsembleCommand implements Command {
     
     @Override
     public String getDescription() {
-        return "Create " + ensemble.getEnsembleTypeDescription() + ", " + ensemble.getEnsembleID() + ", " + ensemble.getName();
+        return "Create " + ensembleTypeDescription + ", " + ensembleID + ", " + ensembleNameSnapshot;
     }
 }

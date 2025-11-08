@@ -51,11 +51,15 @@ public class TestEnsemble {
             } else if (commandCode.equals("sa")) {
                 manager.displayAllEnsembles();
             } else if (commandCode.equals("u")) {
-                manager.undo();
-                System.out.println("Command (" + manager.getHistory().peek().getDescription() + ") is undone.");
+                Command undoneCommand = manager.undo();
+                if (undoneCommand != null) {
+                    System.out.println("Command (" + undoneCommand.getDescription() + ") is undone.");
+                }
             } else if (commandCode.equals("r")) {
-                manager.redo();
-                System.out.println("Command (" + manager.getRedoStack().peek().getDescription() + ") is redone.");
+                Command redoneCommand = manager.redo();
+                if (redoneCommand != null) {
+                    System.out.println("Command (" + redoneCommand.getDescription() + ") is redone.");
+                }
             } else if (commandCode.equals("l")) {
                 manager.listUndoRedo();
             } else {

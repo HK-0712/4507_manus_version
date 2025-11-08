@@ -1,19 +1,24 @@
 public class ModifyInstrumentCommand implements Command {
-    private EnsembleManager manager;
+    private Ensemble ensemble;
     private Musician musician;
     private int oldRole;
     private int newRole;
+    private final String roleName;
+    private final String description;
     // private String newRoleName; // Removed to enforce OCP
     
-    public ModifyInstrumentCommand(Musician musician, int newRole) {
+    public ModifyInstrumentCommand(Ensemble ensemble, Musician musician, int newRole) {
+        this.ensemble = ensemble;
         this.musician = musician;
         this.newRole = newRole;
         this.oldRole = musician.getRole();
+        this.roleName = resolveRoleName(newRole);
+        this.description = buildDescription();
     }
 
     @Override
     public void setManager(EnsembleManager manager) {
-        this.manager = manager;
+        // Manager reference is not required; ensemble is provided directly.
     }
     
     @Override
@@ -28,15 +33,19 @@ public class ModifyInstrumentCommand implements Command {
     
     @Override
     public String getDescription() {
-        // This command is executed on the current ensemble, which is stored in the manager.
-        // We need to find the current ensemble to get the role name.
-        Ensemble currentEnsemble = manager.getCurrentEnsemble();
-        String roleName = "";
-        if (currentEnsemble instanceof OrchestraEnsemble) {
-            roleName = ((OrchestraEnsemble) currentEnsemble).getRoleName(newRole);
-        } else if (currentEnsemble instanceof JazzBandEnsemble) {
-            roleName = ((JazzBandEnsemble) currentEnsemble).getRoleName(newRole);
+        return description;
+    }
+
+    private String resolveRoleName(int role) {
+        if (ensemble instanceof OrchestraEnsemble) {
+            return ((OrchestraEnsemble) ensemble).getRoleName(role);
+        } else if (ensemble instanceof JazzBandEnsemble) {
+            return ((JazzBandEnsemble) ensemble).getRoleName(role);
         }
-        return "Modify musician's instrument, " + musician.getMID() + ", " + roleName;
+        return "unknown";
+    }
+
+    private String buildDescription() {
+        return "Modify musician\u2019s instrument, " + musician.getMID() + ", " + roleName;
     }
 }
