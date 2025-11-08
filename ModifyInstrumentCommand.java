@@ -1,10 +1,15 @@
-public class ModifyInstrumentCommand implements Command {
+public class ModifyInstrumentCommand implements EnsembleCommand {
     private Ensemble ensemble;
     private Musician musician;
     private int oldRole;
     private int newRole;
     private final String roleName;
     private final String description;
+
+    @Override
+    public Ensemble getEnsemble() {
+        return ensemble;
+    }
     // private String newRoleName; // Removed to enforce OCP
     
     public ModifyInstrumentCommand(Ensemble ensemble, Musician musician, int newRole) {

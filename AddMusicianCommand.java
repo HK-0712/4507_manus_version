@@ -1,9 +1,14 @@
-public class AddMusicianCommand implements Command {
+public class AddMusicianCommand implements EnsembleCommand {
     private EnsembleManager manager;
     private Ensemble ensemble;
     private Musician musician;
     private final String roleName;
     private final String description;
+
+    @Override
+    public Ensemble getEnsemble() {
+        return ensemble;
+    }
     // private String roleName; // Removed to enforce OCP
     
     public AddMusicianCommand(Ensemble ensemble, Musician musician) {

@@ -1,7 +1,12 @@
-public class DeleteMusicianCommand implements Command {
+public class DeleteMusicianCommand implements EnsembleCommand {
     private EnsembleManager manager;
     private Ensemble ensemble;
     private Musician musician;
+
+    @Override
+    public Ensemble getEnsemble() {
+        return ensemble;
+    }
     
     public DeleteMusicianCommand(Ensemble ensemble, Musician musician) {
         this.ensemble = ensemble;

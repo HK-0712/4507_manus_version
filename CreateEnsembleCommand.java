@@ -1,12 +1,17 @@
 import java.util.LinkedList;
 
-public class CreateEnsembleCommand implements Command {
+public class CreateEnsembleCommand implements EnsembleCommand {
     private EnsembleManager manager;
     private LinkedList<Ensemble> ensembles;
     private Ensemble ensemble;
     private final String ensembleTypeDescription;
     private final String ensembleID;
     private final String ensembleNameSnapshot;
+
+    @Override
+    public Ensemble getEnsemble() {
+        return ensemble;
+    }
     // private String ensembleType; // Removed to enforce OCP
     
     public CreateEnsembleCommand(LinkedList<Ensemble> ensembles, Ensemble ensemble) {

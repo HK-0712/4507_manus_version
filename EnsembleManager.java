@@ -62,6 +62,14 @@ public class EnsembleManager {
         if (!history.isEmpty()) {
             Command command = history.pop();
             command.undo();
+            // Check if the undone command was related to a specific ensemble
+            if (command instanceof EnsembleCommand) {
+                Ensemble ensembleInvolved = ((EnsembleCommand) command).getEnsemble();
+                if (ensembleInvolved != null && !ensembleInvolved.equals(currentEnsemble)) {
+                    // If the undone command involved a different ensemble, switch to it
+                    this.currentEnsemble = ensembleInvolved;
+                }
+            }
             redoStack.push(command);
             // System.out.println("Command (" + command.getDescription() + ") is undone."); // Removed to match PDF
             return command;
@@ -125,7 +133,7 @@ public class EnsembleManager {
             return;
         }
         for (Ensemble e : ensembles) {
-            System.out.println(e.getName() + " (" + e.getEnsembleID() + ")");
+            System.out.println(e.getEnsembleTypeDescription() + " " + e.getName() + " (" + e.getEnsembleID() + ")");
         }
     }
 
