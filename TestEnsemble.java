@@ -1,6 +1,4 @@
 import java.util.Scanner;
-import java.util.AbstractList;
-import java.util.Iterator;
 
 public class TestEnsemble {
     public static void main(String[] args) {
@@ -42,7 +40,9 @@ public class TestEnsemble {
                 }
                 if (target != null) {
                     manager.setCurrentEnsemble(target);
-                    System.out.println("Changed current ensemble to " + eID + ".");
+                    String targetName = target.getName();
+                    String nameSuffix = (targetName != null && !targetName.isBlank()) ? " " + targetName : "";
+                    System.out.println("The current ensemble is changed to " + eID + nameSuffix + ".");
                 } else {
                     System.out.println("Ensemble " + eID + " not found!");
                 }
@@ -92,7 +92,9 @@ public class TestEnsemble {
                         // System.out.println(newEnsemble.getEnsembleTypeDescription() + " is created.");
                         // System.out.println("Changed current ensemble to " + newEnsemble.getEnsembleID() + ".");
                         // We will assume the command prints the first line, and we print the second.
-                        System.out.println("Changed current ensemble to " + newEnsemble.getEnsembleID() + ".");
+                        String newName = newEnsemble.getName();
+                        String nameSuffix = (newName != null && !newName.isBlank()) ? " " + newName : "";
+                        System.out.println("The current ensemble is changed to " + newEnsemble.getEnsembleID() + nameSuffix + ".");
                     } else if (commandCode.equals("a")) {
                         System.out.println("Musician is added.");
                     } else if (commandCode.equals("m")) {
