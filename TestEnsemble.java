@@ -73,9 +73,8 @@ public class TestEnsemble {
                         manager.setCurrentEnsemble(newEnsemble);
                         
                     // The output message is handled by the command itself, but the current ensemble change message is missing.
-                    String newName = newEnsemble.getName();
-                    String nameSuffix = (newName != null && !newName.isBlank()) ? " " + newName : "";
-                    System.out.println("Current ensemble is changed to " + newEnsemble.getEnsembleID() + nameSuffix + ".");
+                    // 根據 PDF 範例，輸出應為 "Current ensemble is changed to E001."
+                    System.out.println("Current ensemble is changed to " + newEnsemble.getEnsembleID() + ".");
                 } else if (commandCode.equals("a")) {
                     // 輸出已在 AddMusicianCommand 中處理
                 } else if (commandCode.equals("m")) {

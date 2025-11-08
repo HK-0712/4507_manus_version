@@ -64,35 +64,65 @@ public class EnsembleManager {
             command.undo();
             
             // 檢查是否為 CreateEnsembleCommand 的 undo (即刪除樂團)
+            boolean ensembleSwitched = false;
             if (command instanceof CreateEnsembleCommand) {
-                // 由於 CreateEnsembleCommand 的 undo 刪除了樂團，需要檢查 currentEnsemble 是否仍有效
-                // 這裡的邏輯是：如果 currentEnsemble 仍然存在於 ensembles 列表中，則保持不變。
-                // 否則，如果 currentEnsemble 被刪除，則 currentEnsemble 應設為 null (由 CreateEnsembleCommand 的 undo 處理)
-                // 根據 PDF 範例，即使 currentEnsemble 沒變，也需要輸出狀態切換訊息
+                // CreateEnsembleCommand 的 undo() 會將樂團從 ensembles 列表中移除。
+                // 檢查 currentEnsemble 是否還存在於 ensembles 列表中
+                boolean currentEnsembleExists = false;
+                for (Ensemble e : ensembles) {
+                    if (e.equals(currentEnsemble)) {
+                        currentEnsembleExists = true;
+                        break;
+                    }
+                }
                 
-                // 檢查是否需要輸出狀態切換訊息 (無論是否真的切換)
-                // 由於 CreateEnsembleCommand 的 undo 已經輸出了 "orchestra ensemble is created." 或 "jazz band ensemble is created."
-                // 我們需要確保在 undo 之後，如果 currentEnsemble 仍然存在，則輸出其狀態
+                if (!currentEnsembleExists && !ensembles.isEmpty()) {
+                    // 如果 currentEnsemble 被刪除，且還有其他樂團，則切換到第一個樂團 (E001 SYO)
+                    this.currentEnsemble = ensembles.getFirst();
+                    ensembleSwitched = true;
+                } else if (ensembles.isEmpty()) {
+                    // 如果所有樂團都被刪除
+                    this.currentEnsemble = null;
+                    ensembleSwitched = true; // 雖然是 null，但狀態改變了
+                } else if (currentEnsembleExists) {
+                    // 如果 currentEnsemble 仍然存在 (例如 undo 刪除 E102 時 currentEnsemble 是 E001)，
+                    // 根據 PDF 範例，即使沒有切換，只要是 CreateEnsembleCommand 的 undo，也需要輸出狀態切換訊息。
+                    ensembleSwitched = true;
+                }
+            }
+            
+            // 檢查是否為其他 EnsembleCommand 的 undo (即涉及切換 currentEnsemble)
+            // 只有在不是 CreateEnsembleCommand 的 undo 時才執行此邏輯。
+            if (!(command instanceof CreateEnsembleCommand) && command instanceof EnsembleCommand) {
+                Ensemble ensembleInvolved = ((EnsembleCommand) command).getEnsemble();
+                // 確保 ensembleInvolved 仍然存在於 ensembles 列表中
+                boolean ensembleInvolvedExists = false;
+                for (Ensemble e : ensembles) {
+                    if (e.equals(ensembleInvolved)) {
+                        ensembleInvolvedExists = true;
+                        break;
+                    }
+                }
+                
+                if (ensembleInvolvedExists && !ensembleInvolved.equals(currentEnsemble)) {
+                    // 如果 undone command 涉及一個不同的樂團，切換到它
+                    this.currentEnsemble = ensembleInvolved;
+                    ensembleSwitched = true;
+                }
+            }
+            
+            redoStack.push(command);
+            
+            // 確保只輸出一次 undo 訊息
+            System.out.println("Command (" + command.getDescription() + ") is undone.");
+            
+            // 統一輸出樂團切換訊息
+            if (ensembleSwitched) {
                 if (currentEnsemble != null) {
                     System.out.println("The current ensemble is changed to " + this.currentEnsemble.getEnsembleID() + " " + this.currentEnsemble.getName() + ".");
                 }
             }
             
-            // 檢查是否為其他 EnsembleCommand 的 undo (即涉及切換 currentEnsemble)
-            if (command instanceof EnsembleCommand) {
-                Ensemble ensembleInvolved = ((EnsembleCommand) command).getEnsemble();
-                if (ensembleInvolved != null && !ensembleInvolved.equals(currentEnsemble)) {
-                    // 如果 undone command 涉及一個不同的樂團，切換到它
-                    this.currentEnsemble = ensembleInvolved;
-                    System.out.println("The current ensemble is changed to " + this.currentEnsemble.getEnsembleID() + " " + this.currentEnsemble.getName() + ".");
-                }
-            }
-            
-            redoStack.push(command);
-            // 確保只輸出一次 undo 訊息
-            // Command 的 undo() 方法不應該輸出 "Command (...) is undone."
-            // 而是由 EnsembleManager 統一輸出
-            System.out.println("Command (" + command.getDescription() + ") is undone.");
             return command;
         } else {
             System.out.println("Undo List is empty.");

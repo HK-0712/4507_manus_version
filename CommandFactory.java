@@ -68,7 +68,13 @@ public class CommandFactory {
         }
 
         System.out.print("Please input musician information (id, name):- ");
-        String[] info = scanner.nextLine().trim().split(", ");
+        String inputLine = scanner.nextLine().trim();
+        // 檢查輸入是否包含逗號和空格，以符合 "id, name" 格式
+        if (!inputLine.contains(", ")) {
+            System.out.println("Invalid musician information format.");
+            return null;
+        }
+        String[] info = inputLine.split(", ");
         if (info.length != 2) {
             System.out.println("Invalid musician information format.");
             return null;
@@ -82,19 +88,29 @@ public class CommandFactory {
         // Role selection logic based on ensemble type
         if (currentEnsemble instanceof OrchestraEnsemble) {
             System.out.print("Instrument (1 = violinist | 2 = cellist ):- ");
-            int instrument = Integer.parseInt(scanner.nextLine().trim());
-            if (instrument == 1 || instrument == 2) {
-                newMusician.setRole(instrument);
-            } else {
+            try {
+                int instrument = Integer.parseInt(scanner.nextLine().trim());
+                if (instrument == 1 || instrument == 2) {
+                    newMusician.setRole(instrument);
+                } else {
+                    System.out.println("Invalid instrument choice.");
+                    return null;
+                }
+            } catch (NumberFormatException e) {
                 System.out.println("Invalid instrument choice.");
                 return null;
             }
         } else if (currentEnsemble instanceof JazzBandEnsemble) {
             System.out.print("Instrument (1 = pianist | 2 = saxophonist | 3 = drummer):- ");
-            int instrument = Integer.parseInt(scanner.nextLine().trim());
-            if (instrument >= 1 && instrument <= 3) {
-                newMusician.setRole(instrument);
-            } else {
+            try {
+                int instrument = Integer.parseInt(scanner.nextLine().trim());
+                if (instrument >= 1 && instrument <= 3) {
+                    newMusician.setRole(instrument);
+                } else {
+                    System.out.println("Invalid instrument choice.");
+                    return null;
+                }
+            } catch (NumberFormatException e) {
                 System.out.println("Invalid instrument choice.");
                 return null;
             }
@@ -134,15 +150,33 @@ public class CommandFactory {
         int newRole = 0;
         if (currentEnsemble instanceof OrchestraEnsemble) {
             System.out.print("Instrument (1 = violinist | 2 = cellist ):- ");
-            newRole = Integer.parseInt(scanner.nextLine().trim());
-            if (newRole != 1 && newRole != 2) {
+            try {
+                newRole = Integer.parseInt(scanner.nextLine().trim());
+                if (currentEnsemble instanceof OrchestraEnsemble) {
+            System.out.print("Instrument (1 = violinist | 2 = cellist ):- ");
+            try {
+                newRole = Integer.parseInt(scanner.nextLine().trim());
+                if (newRole != 1 && newRole != 2) {
+                    System.out.println("Invalid instrument choice.");
+                    return null;
+                }
+            } catch (NumberFormatException e) {
                 System.out.println("Invalid instrument choice.");
                 return null;
             }
         } else if (currentEnsemble instanceof JazzBandEnsemble) {
             System.out.print("Instrument (1 = pianist | 2 = saxophonist | 3 = drummer):- ");
-            newRole = Integer.parseInt(scanner.nextLine().trim());
-            if (newRole < 1 || newRole > 3) {
+            try {
+                newRole = Integer.parseInt(scanner.nextLine().trim());
+                if (newRole < 1 || newRole > 3) {
+                    System.out.println("Invalid instrument choice.");
+                    return null;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid instrument choice.");
+                return null;
+            }
+        } } catch (NumberFormatException e) {
                 System.out.println("Invalid instrument choice.");
                 return null;
             }
