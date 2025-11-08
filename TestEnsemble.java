@@ -11,10 +11,12 @@ public class TestEnsemble {
             // CommandFactory needs the current state of the manager to create commands correctly
             CommandFactory factory = new CommandFactory(manager.getEnsembles(), manager.getCurrentEnsemble(), scanner);
 
+            // 輸出命令選單
             System.out.println("c = create ensemble, s = set current ensemble, a = add musician, m = modify musician’s instrument,");
             System.out.println("d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble’s name,");
             System.out.println("u = undo, r = redo, l = list undo/redo, x = exit system");
             
+            // 輸出當前樂團狀態
             Ensemble current = manager.getCurrentEnsemble();
             if (current != null) {
                 System.out.println("The current ensemble is " + current.getEnsembleID() + " " + current.getName() + ".");
@@ -51,15 +53,9 @@ public class TestEnsemble {
             } else if (commandCode.equals("sa")) {
                 manager.displayAllEnsembles();
             } else if (commandCode.equals("u")) {
-                Command undoneCommand = manager.undo();
-                if (undoneCommand != null) {
-                    System.out.println("Command (" + undoneCommand.getDescription() + ") is undone.");
-                }
+                manager.undo(); // 輸出已在 EnsembleManager 中處理
             } else if (commandCode.equals("r")) {
-                Command redoneCommand = manager.redo();
-                if (redoneCommand != null) {
-                    System.out.println("Command (" + redoneCommand.getDescription() + ") is redone.");
-                }
+                manager.redo(); // 輸出已在 EnsembleManager 中處理
             } else if (commandCode.equals("l")) {
                 manager.listUndoRedo();
             } else {
@@ -76,19 +72,19 @@ public class TestEnsemble {
                         Ensemble newEnsemble = manager.getEnsembles().get(manager.getEnsembles().size() - 1);
                         manager.setCurrentEnsemble(newEnsemble);
                         
-                        // The output message is handled by the command itself, but the current ensemble change message is missing.
-                        String newName = newEnsemble.getName();
-                        String nameSuffix = (newName != null && !newName.isBlank()) ? " " + newName : "";
-                        System.out.println("Current ensemble is changed to " + newEnsemble.getEnsembleID() + nameSuffix + ".");
-                    } else if (commandCode.equals("a")) {
-                        System.out.println("Musician is added.");
-                    } else if (commandCode.equals("m")) {
-                        System.out.println("Instrument is updated.");
-                    } else if (commandCode.equals("d")) {
-                        System.out.println("Musician is deleted.");
-                    } else if (commandCode.equals("cn")) {
-                        System.out.println("Ensemble’s name is updated.");
-                    }
+                    // The output message is handled by the command itself, but the current ensemble change message is missing.
+                    String newName = newEnsemble.getName();
+                    String nameSuffix = (newName != null && !newName.isBlank()) ? " " + newName : "";
+                    System.out.println("Current ensemble is changed to " + newEnsemble.getEnsembleID() + nameSuffix + ".");
+                } else if (commandCode.equals("a")) {
+                    // 輸出已在 AddMusicianCommand 中處理
+                } else if (commandCode.equals("m")) {
+                    // 輸出已在 ModifyInstrumentCommand 中處理
+                } else if (commandCode.equals("d")) {
+                    // 輸出已在 DeleteMusicianCommand 中處理
+                } else if (commandCode.equals("cn")) {
+                    // 輸出已在 ChangeNameCommand 中處理
+                }
                 } else if (!commandCode.isEmpty()) {
                     System.out.println("Invalid command.");
                 }
