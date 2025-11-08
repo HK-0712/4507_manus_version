@@ -4,7 +4,7 @@ d = delete musician, se = show ensemble, sa = display all ensembles, cn = change
 u = undo, r = redo, l = list undo/redo, x = exit system
 No current ensemble set.
 Please enter command [ c | s | a | m | d | se | sa | cn | u | r | l | x ] :- Enter music type (o = orchestra | j = jazz band) :- Ensemble ID:- Ensemble Name:- orchestra ensemble is created.
-Current ensemble is changed to E001.
+Changed current ensemble to E001.
 c = create ensemble, s = set current ensemble, a = add musician, m = modify musician’s instrument,
 d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble’s name,
 u = undo, r = redo, l = list undo/redo, x = exit system
@@ -29,7 +29,7 @@ d = delete musician, se = show ensemble, sa = display all ensembles, cn = change
 u = undo, r = redo, l = list undo/redo, x = exit system
 The current ensemble is E001 SYO.
 Please enter command [ c | s | a | m | d | se | sa | cn | u | r | l | x ] :- Enter music type (o = orchestra | j = jazz band) :- Ensemble ID:- Ensemble Name:- jazz band ensemble is created.
-Current ensemble is changed to E102.
+Changed current ensemble to E102.
 c = create ensemble, s = set current ensemble, a = add musician, m = modify musician’s instrument,
 d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble’s name,
 u = undo, r = redo, l = list undo/redo, x = exit system
@@ -66,7 +66,7 @@ c = create ensemble, s = set current ensemble, a = add musician, m = modify musi
 d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble’s name,
 u = undo, r = redo, l = list undo/redo, x = exit system
 The current ensemble is E102 BLUE NOTE.
-Please enter command [ c | s | a | m | d | se | sa | cn | u | r | l | x ] :- Please input ensemble ID:- Current ensemble is changed to E001.
+Please enter command [ c | s | a | m | d | se | sa | cn | u | r | l | x ] :- Please input ensemble ID:- Changed current ensemble to E001.
 c = create ensemble, s = set current ensemble, a = add musician, m = modify musician’s instrument,
 d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble’s name,
 u = undo, r = redo, l = list undo/redo, x = exit system

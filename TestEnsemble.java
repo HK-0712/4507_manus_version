@@ -42,7 +42,7 @@ public class TestEnsemble {
                 }
                 if (target != null) {
                     manager.setCurrentEnsemble(target);
-                    System.out.println("Current ensemble is changed to " + eID + ".");
+                    System.out.println("Changed current ensemble to " + eID + ".");
                 } else {
                     System.out.println("Ensemble " + eID + " not found!");
                 }
@@ -69,7 +69,7 @@ public class TestEnsemble {
                         Ensemble newEnsemble = manager.getEnsembles().get(manager.getEnsembles().size() - 1);
                         manager.setCurrentEnsemble(newEnsemble);
                         System.out.println(newEnsemble.getEnsembleTypeDescription() + " is created.");
-                        System.out.println("Current ensemble is changed to " + newEnsemble.getEnsembleID() + ".");
+                        System.out.println("Changed current ensemble to " + newEnsemble.getEnsembleID() + ".");
                     } else if (commandCode.equals("a")) {
                         System.out.println("Musician is added.");
                     } else if (commandCode.equals("m")) {
