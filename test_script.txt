@@ -1,0 +1,52 @@
+c
+o
+E001
+SYO
+c
+j
+E002
+Jazz Band
+s
+E001
+a
+M001, John
+1
+a
+M002, Mary
+2
+se
+a
+M003, David
+1
+a
+M004, Eva
+2
+se
+s
+E002
+a
+M005, Tom
+1
+a
+M006, Jerry
+2
+a
+M007, Ken
+3
+se
+u
+l
+r
+l
+d
+M006
+se
+cn
+Jazz Band 2
+se
+u
+l
+r
+l
+sa
+x

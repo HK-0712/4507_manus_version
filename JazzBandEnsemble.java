@@ -18,6 +18,11 @@ public class JazzBandEnsemble extends Ensemble {
     public void updateMusicianRole() {
         // Not used in this version - handled by main program
     }
+
+    @Override
+    public String getEnsembleTypeDescription() {
+        return "jazz band ensemble";
+    }
     
     @Override
     public void showEnsemble() {

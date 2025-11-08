@@ -1,4 +1,4 @@
-public class Musician {
+public class Musician implements Cloneable {
     // Attributes
     private String musicianID;
     private String mName;
@@ -31,5 +31,14 @@ public class Musician {
     
     public void setName(String name) {
         this.mName = name;
+    }
+
+    @Override
+    public Musician clone() {
+        try {
+            return (Musician) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -1,14 +1,19 @@
 public class ModifyInstrumentCommand implements Command {
+    private EnsembleManager manager;
     private Musician musician;
     private int oldRole;
     private int newRole;
-    private String newRoleName;
+    // private String newRoleName; // Removed to enforce OCP
     
-    public ModifyInstrumentCommand(Musician musician, int oldRole, int newRole, String newRoleName) {
+    public ModifyInstrumentCommand(Musician musician, int newRole) {
         this.musician = musician;
-        this.oldRole = oldRole;
         this.newRole = newRole;
-        this.newRoleName = newRoleName;
+        this.oldRole = musician.getRole();
+    }
+
+    @Override
+    public void setManager(EnsembleManager manager) {
+        this.manager = manager;
     }
     
     @Override
@@ -23,6 +28,15 @@ public class ModifyInstrumentCommand implements Command {
     
     @Override
     public String getDescription() {
-        return "Modify musician's instrument, " + musician.getMID() + ", " + newRoleName;
+        // This command is executed on the current ensemble, which is stored in the manager.
+        // We need to find the current ensemble to get the role name.
+        Ensemble currentEnsemble = manager.getCurrentEnsemble();
+        String roleName = "";
+        if (currentEnsemble instanceof OrchestraEnsemble) {
+            roleName = ((OrchestraEnsemble) currentEnsemble).getRoleName(newRole);
+        } else if (currentEnsemble instanceof JazzBandEnsemble) {
+            roleName = ((JazzBandEnsemble) currentEnsemble).getRoleName(newRole);
+        }
+        return "Modify musician's instrument, " + musician.getMID() + ", " + roleName;
     }
 }

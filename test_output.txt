@@ -1,0 +1,218 @@
+Music Ensembles Management System (MEMS)
+c = create ensemble, s = set current ensemble, a = add musician, m = modify musician's instrument,
+d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble's name,
+u = undo, r = redo, l = list undo/redo, x = exit system
+No current ensemble set.
+Please enter command [c | s | a | m | d | se | sa | cn | u | r | l | x] :- Enter music type (o = orchestra || j = jazz band) :- Ensemble ID:- Ensemble Name:- orchestra ensemble is created.
+Current ensemble is changed to E001.
+c = create ensemble, s = set current ensemble, a = add musician, m = modify musician's instrument,
+d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble's name,
+u = undo, r = redo, l = list undo/redo, x = exit system
+The current ensemble is E001 SYO.
+Please enter command [c | s | a | m | d | se | sa | cn | u | r | l | x] :- Enter music type (o = orchestra || j = jazz band) :- Ensemble ID:- Ensemble Name:- jazz band ensemble is created.
+Current ensemble is changed to E002.
+c = create ensemble, s = set current ensemble, a = add musician, m = modify musician's instrument,
+d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble's name,
+u = undo, r = redo, l = list undo/redo, x = exit system
+The current ensemble is E002 Jazz Band.
+Please enter command [c | s | a | m | d | se | sa | cn | u | r | l | x] :- Please input Ensemble ID:- Current ensemble is changed to E001.
+c = create ensemble, s = set current ensemble, a = add musician, m = modify musician's instrument,
+d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble's name,
+u = undo, r = redo, l = list undo/redo, x = exit system
+The current ensemble is E001 SYO.
+Please enter command [c | s | a | m | d | se | sa | cn | u | r | l | x] :- Please input musician information (id, name):- Instrument (1 = violinist | 2 = cellist ):- Musician is added.
+c = create ensemble, s = set current ensemble, a = add musician, m = modify musician's instrument,
+d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble's name,
+u = undo, r = redo, l = list undo/redo, x = exit system
+The current ensemble is E001 SYO.
+Please enter command [c | s | a | m | d | se | sa | cn | u | r | l | x] :- Please input musician information (id, name):- Instrument (1 = violinist | 2 = cellist ):- Musician is added.
+c = create ensemble, s = set current ensemble, a = add musician, m = modify musician's instrument,
+d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble's name,
+u = undo, r = redo, l = list undo/redo, x = exit system
+The current ensemble is E001 SYO.
+Please enter command [c | s | a | m | d | se | sa | cn | u | r | l | x] :- Orchestra Ensemble SYO (E001)
+Violinist:
+M001, John
+Cellist:
+M002, Mary
+c = create ensemble, s = set current ensemble, a = add musician, m = modify musician's instrument,
+d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble's name,
+u = undo, r = redo, l = list undo/redo, x = exit system
+The current ensemble is E001 SYO.
+Please enter command [c | s | a | m | d | se | sa | cn | u | r | l | x] :- Please input musician information (id, name):- Instrument (1 = violinist | 2 = cellist ):- Musician is added.
+c = create ensemble, s = set current ensemble, a = add musician, m = modify musician's instrument,
+d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble's name,
+u = undo, r = redo, l = list undo/redo, x = exit system
+The current ensemble is E001 SYO.
+Please enter command [c | s | a | m | d | se | sa | cn | u | r | l | x] :- Please input musician information (id, name):- Instrument (1 = violinist | 2 = cellist ):- Musician is added.
+c = create ensemble, s = set current ensemble, a = add musician, m = modify musician's instrument,
+d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble's name,
+u = undo, r = redo, l = list undo/redo, x = exit system
+The current ensemble is E001 SYO.
+Please enter command [c | s | a | m | d | se | sa | cn | u | r | l | x] :- Orchestra Ensemble SYO (E001)
+Violinist:
+M001, John
+M003, David
+Cellist:
+M002, Mary
+M004, Eva
+c = create ensemble, s = set current ensemble, a = add musician, m = modify musician's instrument,
+d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble's name,
+u = undo, r = redo, l = list undo/redo, x = exit system
+The current ensemble is E001 SYO.
+Please enter command [c | s | a | m | d | se | sa | cn | u | r | l | x] :- Please input Ensemble ID:- Current ensemble is changed to E002.
+c = create ensemble, s = set current ensemble, a = add musician, m = modify musician's instrument,
+d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble's name,
+u = undo, r = redo, l = list undo/redo, x = exit system
+The current ensemble is E002 Jazz Band.
+Please enter command [c | s | a | m | d | se | sa | cn | u | r | l | x] :- Please input musician information (id, name):- Instrument (1 = pianist | 2 = saxophonist | 3 = drummer):- Musician is added.
+c = create ensemble, s = set current ensemble, a = add musician, m = modify musician's instrument,
+d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble's name,
+u = undo, r = redo, l = list undo/redo, x = exit system
+The current ensemble is E002 Jazz Band.
+Please enter command [c | s | a | m | d | se | sa | cn | u | r | l | x] :- Please input musician information (id, name):- Instrument (1 = pianist | 2 = saxophonist | 3 = drummer):- Musician is added.
+c = create ensemble, s = set current ensemble, a = add musician, m = modify musician's instrument,
+d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble's name,
+u = undo, r = redo, l = list undo/redo, x = exit system
+The current ensemble is E002 Jazz Band.
+Please enter command [c | s | a | m | d | se | sa | cn | u | r | l | x] :- Please input musician information (id, name):- Instrument (1 = pianist | 2 = saxophonist | 3 = drummer):- Musician is added.
+c = create ensemble, s = set current ensemble, a = add musician, m = modify musician's instrument,
+d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble's name,
+u = undo, r = redo, l = list undo/redo, x = exit system
+The current ensemble is E002 Jazz Band.
+Please enter command [c | s | a | m | d | se | sa | cn | u | r | l | x] :- Jazz Band Ensemble Jazz Band (E002)
+Pianist:
+M005, Tom
+Saxophonist:
+M006, Jerry
+Drummer:
+M007, Ken
+c = create ensemble, s = set current ensemble, a = add musician, m = modify musician's instrument,
+d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble's name,
+u = undo, r = redo, l = list undo/redo, x = exit system
+The current ensemble is E002 Jazz Band.
+Please enter command [c | s | a | m | d | se | sa | cn | u | r | l | x] :- Command (Add musician, M007, Ken, drummer) is undone.
+c = create ensemble, s = set current ensemble, a = add musician, m = modify musician's instrument,
+d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble's name,
+u = undo, r = redo, l = list undo/redo, x = exit system
+The current ensemble is E002 Jazz Band.
+Please enter command [c | s | a | m | d | se | sa | cn | u | r | l | x] :- Undo List --
+Add musician, M006, Jerry, saxophonist
+Add musician, M005, Tom, pianist
+Add musician, M004, Eva, cellist
+Add musician, M003, David, violinist
+Add musician, M002, Mary, cellist
+Add musician, M001, John, violinist
+Create jazz band ensemble, E002, Jazz Band
+Create orchestra ensemble, E001, SYO
+Redo List --
+Add musician, M007, Ken, drummer
+c = create ensemble, s = set current ensemble, a = add musician, m = modify musician's instrument,
+d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble's name,
+u = undo, r = redo, l = list undo/redo, x = exit system
+The current ensemble is E002 Jazz Band.
+Please enter command [c | s | a | m | d | se | sa | cn | u | r | l | x] :- Command (Add musician, M007, Ken, drummer) is redone.
+c = create ensemble, s = set current ensemble, a = add musician, m = modify musician's instrument,
+d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble's name,
+u = undo, r = redo, l = list undo/redo, x = exit system
+The current ensemble is E002 Jazz Band.
+Please enter command [c | s | a | m | d | se | sa | cn | u | r | l | x] :- Undo List --
+Add musician, M007, Ken, drummer
+Add musician, M006, Jerry, saxophonist
+Add musician, M005, Tom, pianist
+Add musician, M004, Eva, cellist
+Add musician, M003, David, violinist
+Add musician, M002, Mary, cellist
+Add musician, M001, John, violinist
+Create jazz band ensemble, E002, Jazz Band
+Create orchestra ensemble, E001, SYO
+Redo List --
+Empty
+c = create ensemble, s = set current ensemble, a = add musician, m = modify musician's instrument,
+d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble's name,
+u = undo, r = redo, l = list undo/redo, x = exit system
+The current ensemble is E002 Jazz Band.
+Please enter command [c | s | a | m | d | se | sa | cn | u | r | l | x] :- Please input Musician ID:- Musician is deleted.
+c = create ensemble, s = set current ensemble, a = add musician, m = modify musician's instrument,
+d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble's name,
+u = undo, r = redo, l = list undo/redo, x = exit system
+The current ensemble is E002 Jazz Band.
+Please enter command [c | s | a | m | d | se | sa | cn | u | r | l | x] :- Jazz Band Ensemble Jazz Band (E002)
+Pianist:
+M005, Tom
+Saxophonist:
+NIL
+Drummer:
+M007, Ken
+c = create ensemble, s = set current ensemble, a = add musician, m = modify musician's instrument,
+d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble's name,
+u = undo, r = redo, l = list undo/redo, x = exit system
+The current ensemble is E002 Jazz Band.
+Please enter command [c | s | a | m | d | se | sa | cn | u | r | l | x] :- Please input new name of the current ensemble:- Ensemble's name is updated.
+c = create ensemble, s = set current ensemble, a = add musician, m = modify musician's instrument,
+d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble's name,
+u = undo, r = redo, l = list undo/redo, x = exit system
+The current ensemble is E002 Jazz Band 2.
+Please enter command [c | s | a | m | d | se | sa | cn | u | r | l | x] :- Jazz Band Ensemble Jazz Band 2 (E002)
+Pianist:
+M005, Tom
+Saxophonist:
+NIL
+Drummer:
+M007, Ken
+c = create ensemble, s = set current ensemble, a = add musician, m = modify musician's instrument,
+d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble's name,
+u = undo, r = redo, l = list undo/redo, x = exit system
+The current ensemble is E002 Jazz Band 2.
+Please enter command [c | s | a | m | d | se | sa | cn | u | r | l | x] :- Command (Change ensemble's name, E002, Jazz Band 2) is undone.
+c = create ensemble, s = set current ensemble, a = add musician, m = modify musician's instrument,
+d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble's name,
+u = undo, r = redo, l = list undo/redo, x = exit system
+The current ensemble is E002 Jazz Band.
+Please enter command [c | s | a | m | d | se | sa | cn | u | r | l | x] :- Undo List --
+Delete musician, M006
+Add musician, M007, Ken, drummer
+Add musician, M006, Jerry, saxophonist
+Add musician, M005, Tom, pianist
+Add musician, M004, Eva, cellist
+Add musician, M003, David, violinist
+Add musician, M002, Mary, cellist
+Add musician, M001, John, violinist
+Create jazz band ensemble, E002, Jazz Band
+Create orchestra ensemble, E001, SYO
+Redo List --
+Change ensemble's name, E002, Jazz Band 2
+c = create ensemble, s = set current ensemble, a = add musician, m = modify musician's instrument,
+d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble's name,
+u = undo, r = redo, l = list undo/redo, x = exit system
+The current ensemble is E002 Jazz Band.
+Please enter command [c | s | a | m | d | se | sa | cn | u | r | l | x] :- Command (Change ensemble's name, E002, Jazz Band 2) is redone.
+c = create ensemble, s = set current ensemble, a = add musician, m = modify musician's instrument,
+d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble's name,
+u = undo, r = redo, l = list undo/redo, x = exit system
+The current ensemble is E002 Jazz Band 2.
+Please enter command [c | s | a | m | d | se | sa | cn | u | r | l | x] :- Undo List --
+Change ensemble's name, E002, Jazz Band 2
+Delete musician, M006
+Add musician, M007, Ken, drummer
+Add musician, M006, Jerry, saxophonist
+Add musician, M005, Tom, pianist
+Add musician, M004, Eva, cellist
+Add musician, M003, David, violinist
+Add musician, M002, Mary, cellist
+Add musician, M001, John, violinist
+Create jazz band ensemble, E002, Jazz Band 2
+Create orchestra ensemble, E001, SYO
+Redo List --
+Empty
+c = create ensemble, s = set current ensemble, a = add musician, m = modify musician's instrument,
+d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble's name,
+u = undo, r = redo, l = list undo/redo, x = exit system
+The current ensemble is E002 Jazz Band 2.
+Please enter command [c | s | a | m | d | se | sa | cn | u | r | l | x] :- SYO (E001)
+Jazz Band 2 (E002)
+c = create ensemble, s = set current ensemble, a = add musician, m = modify musician's instrument,
+d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble's name,
+u = undo, r = redo, l = list undo/redo, x = exit system
+The current ensemble is E002 Jazz Band 2.
+Please enter command [c | s | a | m | d | se | sa | cn | u | r | l | x] :- Exiting system.

@@ -1,14 +1,19 @@
 import java.util.LinkedList;
 
 public class CreateEnsembleCommand implements Command {
+    private EnsembleManager manager;
     private LinkedList<Ensemble> ensembles;
     private Ensemble ensemble;
-    private String ensembleType;
+    // private String ensembleType; // Removed to enforce OCP
     
-    public CreateEnsembleCommand(LinkedList<Ensemble> ensembles, Ensemble ensemble, String ensembleType) {
+    public CreateEnsembleCommand(LinkedList<Ensemble> ensembles, Ensemble ensemble) {
         this.ensembles = ensembles;
         this.ensemble = ensemble;
-        this.ensembleType = ensembleType;
+    }
+
+    @Override
+    public void setManager(EnsembleManager manager) {
+        this.manager = manager;
     }
     
     @Override
@@ -23,10 +28,6 @@ public class CreateEnsembleCommand implements Command {
     
     @Override
     public String getDescription() {
-        if (ensembleType.equals("o")) {
-            return "Create orchestra ensemble, " + ensemble.getEnsembleID() + ", " + ensemble.getName();
-        } else {
-            return "Create jazz band ensemble, " + ensemble.getEnsembleID() + ", " + ensemble.getName();
-        }
+        return "Create " + ensemble.getEnsembleTypeDescription() + ", " + ensemble.getEnsembleID() + ", " + ensemble.getName();
     }
 }

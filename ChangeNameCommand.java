@@ -1,12 +1,18 @@
 public class ChangeNameCommand implements Command {
+    private EnsembleManager manager;
     private Ensemble ensemble;
     private String oldName;
     private String newName;
     
-    public ChangeNameCommand(Ensemble ensemble, String oldName, String newName) {
+    public ChangeNameCommand(Ensemble ensemble, String newName) {
         this.ensemble = ensemble;
-        this.oldName = oldName;
         this.newName = newName;
+        this.oldName = ensemble.getName();
+    }
+
+    @Override
+    public void setManager(EnsembleManager manager) {
+        this.manager = manager;
     }
     
     @Override
