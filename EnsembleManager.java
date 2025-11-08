@@ -68,10 +68,11 @@ public class EnsembleManager {
                 if (ensembleInvolved != null && !ensembleInvolved.equals(currentEnsemble)) {
                     // If the undone command involved a different ensemble, switch to it
                     this.currentEnsemble = ensembleInvolved;
+                    System.out.println("The current ensemble is changed to " + this.currentEnsemble.getEnsembleID() + " " + this.currentEnsemble.getName() + ".");
                 }
             }
             redoStack.push(command);
-            // System.out.println("Command (" + command.getDescription() + ") is undone."); // Removed to match PDF
+            System.out.println("Command (" + command.getDescription() + ") is undone.");
             return command;
         } else {
             System.out.println("Undo List is empty.");
@@ -84,7 +85,7 @@ public class EnsembleManager {
             Command command = redoStack.pop();
             command.execute();
             history.push(command);
-            // System.out.println("Command (" + command.getDescription() + ") is redone."); // Removed to match PDF
+            System.out.println("Command (" + command.getDescription() + ") is redone.");
             return command;
         } else {
             System.out.println("Redo List is empty.");

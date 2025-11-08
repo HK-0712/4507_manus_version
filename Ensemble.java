@@ -1,18 +1,20 @@
 import java.util.AbstractList;
 import java.util.LinkedList;
 import java.util.Iterator;
+import java.util.TreeMap;
+import java.util.Map;
 
 public abstract class Ensemble implements Cloneable {
     // Attributes
     private String ensembleID;
     private String eName;
-    private AbstractList<Musician> musicians;
+    private Map<String, Musician> musicians;
     
     // Constructor
     public Ensemble(String eID) {
         this.ensembleID = eID;
         this.eName = "";
-        this.musicians = new LinkedList<Musician>();
+        this.musicians = new TreeMap<String, Musician>();
     }
     
     // Getter methods
@@ -37,11 +39,10 @@ public abstract class Ensemble implements Cloneable {
     public Ensemble clone() {
         try {
             Ensemble cloned = (Ensemble) super.clone();
-            // Deep copy the musicians list
-            cloned.musicians = new LinkedList<Musician>();
-            Iterator<Musician> it = this.musicians.iterator();
-            while (it.hasNext()) {
-                cloned.musicians.add(it.next().clone());
+            // Deep copy the musicians map
+            cloned.musicians = new TreeMap<String, Musician>();
+            for (Map.Entry<String, Musician> entry : this.musicians.entrySet()) {
+                cloned.musicians.put(entry.getKey(), entry.getValue().clone());
             }
             return cloned;
         } catch (CloneNotSupportedException e) {
@@ -51,15 +52,15 @@ public abstract class Ensemble implements Cloneable {
     
     // Methods for managing musicians
     public void addMusician(Musician m) {
-        musicians.add(m);
+        musicians.put(m.getMID(), m);
     }
     
     public void dropMusician(Musician m) {
-        musicians.remove(m);
+        musicians.remove(m.getMID());
     }
     
     public Iterator<Musician> getMusicians() {
-        return musicians.iterator();
+        return musicians.values().iterator();
     }
     
     // Abstract methods

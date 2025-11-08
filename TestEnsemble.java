@@ -70,31 +70,16 @@ public class TestEnsemble {
                     manager.executeCommand(command);
                     
                     // The command itself should handle its own output.
-                    // The command's execute method should return a String message to be printed.
-                    // The original code had the output logic here, which is incorrect for OCP.
-                    // However, to match the original code's intent and the PDF output, we need to check the command type.
-                    
-                    // The output messages in the original code were:
-                    // c: {ensemble type} is created. \n Changed current ensemble to {ID}.
-                    // a: Musician is added.
-                    // m: Instrument is updated.
-                    // d: Musician is deleted.
-                    // cn: Ensemble's name is updated.
-                    
-                    // To match the PDF, we need to ensure the output is correct.
-                    // The 'c' command needs special handling to set the current ensemble.
+                    // The 'c' command needs special handling to set the current ensemble and print the change message.
                     if (commandCode.equals("c")) {
                         // The ensemble is the last one added to the list
                         Ensemble newEnsemble = manager.getEnsembles().get(manager.getEnsembles().size() - 1);
                         manager.setCurrentEnsemble(newEnsemble);
+                        
                         // The output message is handled by the command itself, but the current ensemble change message is missing.
-                        // The original code had:
-                        // System.out.println(newEnsemble.getEnsembleTypeDescription() + " is created.");
-                        // System.out.println("Changed current ensemble to " + newEnsemble.getEnsembleID() + ".");
-                        // We will assume the command prints the first line, and we print the second.
                         String newName = newEnsemble.getName();
                         String nameSuffix = (newName != null && !newName.isBlank()) ? " " + newName : "";
-                        System.out.println("The current ensemble is changed to " + newEnsemble.getEnsembleID() + nameSuffix + ".");
+                        System.out.println("Current ensemble is changed to " + newEnsemble.getEnsembleID() + nameSuffix + ".");
                     } else if (commandCode.equals("a")) {
                         System.out.println("Musician is added.");
                     } else if (commandCode.equals("m")) {
@@ -102,7 +87,7 @@ public class TestEnsemble {
                     } else if (commandCode.equals("d")) {
                         System.out.println("Musician is deleted.");
                     } else if (commandCode.equals("cn")) {
-                        System.out.println("Ensemble's name is updated.");
+                        System.out.println("Ensemble’s name is updated.");
                     }
                 } else if (!commandCode.isEmpty()) {
                     System.out.println("Invalid command.");
