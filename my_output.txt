@@ -154,7 +154,7 @@ c = create ensemble, s = set current ensemble, a = add musician, m = modify musi
 d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble’s name,
 u = undo, r = redo, l = list undo/redo, x = exit system
 The current ensemble is E001 HSO.
-Please enter command [ c | s | a | m | d | se | sa | cn | u | r | l | x ] :- Command (Delete musician, m001) is undone.
+Please enter command [ c | s | a | m | d | se | sa | cn | u | r | l | x ] :- Command (Change ensemble's name, E001, HSO) is undone.
 c = create ensemble, s = set current ensemble, a = add musician, m = modify musician’s instrument,
 d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble’s name,
 u = undo, r = redo, l = list undo/redo, x = exit system
@@ -168,7 +168,7 @@ c = create ensemble, s = set current ensemble, a = add musician, m = modify musi
 d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble’s name,
 u = undo, r = redo, l = list undo/redo, x = exit system
 The current ensemble is E001 SYO.
-Please enter command [ c | s | a | m | d | se | sa | cn | u | r | l | x ] :- Command (Modify musician's instrument, m001, cellist) is undone.
+Please enter command [ c | s | a | m | d | se | sa | cn | u | r | l | x ] :- Command (Delete musician, m001) is undone.
 c = create ensemble, s = set current ensemble, a = add musician, m = modify musician’s instrument,
 d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble’s name,
 u = undo, r = redo, l = list undo/redo, x = exit system
@@ -183,7 +183,7 @@ c = create ensemble, s = set current ensemble, a = add musician, m = modify musi
 d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble’s name,
 u = undo, r = redo, l = list undo/redo, x = exit system
 The current ensemble is E001 SYO.
-Please enter command [ c | s | a | m | d | se | sa | cn | u | r | l | x ] :- Command (Add musician, m003, Joshua Bell, violinist) is undone.
+Please enter command [ c | s | a | m | d | se | sa | cn | u | r | l | x ] :- Command (Modify musician's instrument, m001, cellist) is undone.
 c = create ensemble, s = set current ensemble, a = add musician, m = modify musician’s instrument,
 d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble’s name,
 u = undo, r = redo, l = list undo/redo, x = exit system
@@ -191,6 +191,20 @@ The current ensemble is E001 SYO.
 Please enter command [ c | s | a | m | d | se | sa | cn | u | r | l | x ] :- Orchestra Ensemble SYO (E001)
 Violinist:
 m003, Joshua Bell
+m001, Chole Chua
+Cellist:
+m002, Mischa Maisky
+c = create ensemble, s = set current ensemble, a = add musician, m = modify musician’s instrument,
+d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble’s name,
+u = undo, r = redo, l = list undo/redo, x = exit system
+The current ensemble is E001 SYO.
+Please enter command [ c | s | a | m | d | se | sa | cn | u | r | l | x ] :- Command (Add musician, m003, Joshua Bell, violinist) is undone.
+c = create ensemble, s = set current ensemble, a = add musician, m = modify musician’s instrument,
+d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble’s name,
+u = undo, r = redo, l = list undo/redo, x = exit system
+The current ensemble is E001 SYO.
+Please enter command [ c | s | a | m | d | se | sa | cn | u | r | l | x ] :- Orchestra Ensemble SYO (E001)
+Violinist:
 m001, Chole Chua
 Cellist:
 m002, Mischa Maisky
@@ -245,20 +259,6 @@ c = create ensemble, s = set current ensemble, a = add musician, m = modify musi
 d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble’s name,
 u = undo, r = redo, l = list undo/redo, x = exit system
 The current ensemble is E001 SYO.
-Please enter command [ c | s | a | m | d | se | sa | cn | u | r | l | x ] :- Orchestra Ensemble SYO (E001)
-Violinist:
-m001, Chole Chua
-Cellist:
-m002, Mischa Maisky
-c = create ensemble, s = set current ensemble, a = add musician, m = modify musician’s instrument,
-d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble’s name,
-u = undo, r = redo, l = list undo/redo, x = exit system
-The current ensemble is E001 SYO.
-Please enter command [ c | s | a | m | d | se | sa | cn | u | r | l | x ] :- Command (Add musician, m002, Mischa Maisky, cellist) is undone.
-c = create ensemble, s = set current ensemble, a = add musician, m = modify musician’s instrument,
-d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble’s name,
-u = undo, r = redo, l = list undo/redo, x = exit system
-The current ensemble is E001 SYO.
 Please enter command [ c | s | a | m | d | se | sa | cn | u | r | l | x ] :- Please input ensemble ID:- Ensemble E102 not found!
 c = create ensemble, s = set current ensemble, a = add musician, m = modify musician’s instrument,
 d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble’s name,
@@ -283,8 +283,21 @@ c = create ensemble, s = set current ensemble, a = add musician, m = modify musi
 d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble’s name,
 u = undo, r = redo, l = list undo/redo, x = exit system
 The current ensemble is E001 SYO.
-Please enter command [ c | s | a | m | d | se | sa | cn | u | r | l | x ] :- jazz band ensemble is created.
-Command (Add musician, m101, Herbie Hancock, pianist) is redone.
+Please enter command [ c | s | a | m | d | se | sa | cn | u | r | l | x ] :- Command (Create jazz band ensemble, E102, BLUE NOTE) is redone.
+c = create ensemble, s = set current ensemble, a = add musician, m = modify musician’s instrument,
+d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble’s name,
+u = undo, r = redo, l = list undo/redo, x = exit system
+The current ensemble is E001 SYO.
+Please enter command [ c | s | a | m | d | se | sa | cn | u | r | l | x ] :- Orchestra Ensemble SYO (E001)
+Violinist:
+m001, Chole Chua
+Cellist:
+m002, Mischa Maisky
+c = create ensemble, s = set current ensemble, a = add musician, m = modify musician’s instrument,
+d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble’s name,
+u = undo, r = redo, l = list undo/redo, x = exit system
+The current ensemble is E001 SYO.
+Please enter command [ c | s | a | m | d | se | sa | cn | u | r | l | x ] :- Command (Add musician, m101, Herbie Hancock, pianist) is redone.
 c = create ensemble, s = set current ensemble, a = add musician, m = modify musician’s instrument,
 d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble’s name,
 u = undo, r = redo, l = list undo/redo, x = exit system
@@ -334,6 +347,7 @@ The current ensemble is E001 SYO.
 Please enter command [ c | s | a | m | d | se | sa | cn | u | r | l | x ] :- Orchestra Ensemble SYO (E001)
 Violinist:
 m001, Chole Chua
+m003, Joshua Bell
 Cellist:
 m002, Mischa Maisky
 c = create ensemble, s = set current ensemble, a = add musician, m = modify musician’s instrument,
@@ -347,30 +361,15 @@ u = undo, r = redo, l = list undo/redo, x = exit system
 The current ensemble is E001 SYO.
 Please enter command [ c | s | a | m | d | se | sa | cn | u | r | l | x ] :- Orchestra Ensemble SYO (E001)
 Violinist:
-m001, Chole Chua
 m003, Joshua Bell
 Cellist:
 m002, Mischa Maisky
+m001, Chole Chua
 c = create ensemble, s = set current ensemble, a = add musician, m = modify musician’s instrument,
 d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble’s name,
 u = undo, r = redo, l = list undo/redo, x = exit system
 The current ensemble is E001 SYO.
 Please enter command [ c | s | a | m | d | se | sa | cn | u | r | l | x ] :- Command (Delete musician, m001) is redone.
-c = create ensemble, s = set current ensemble, a = add musician, m = modify musician’s instrument,
-d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble’s name,
-u = undo, r = redo, l = list undo/redo, x = exit system
-The current ensemble is E001 SYO.
-Please enter command [ c | s | a | m | d | se | sa | cn | u | r | l | x ] :- Orchestra Ensemble SYO (E001)
-Violinist:
-m003, Joshua Bell
-Cellist:
-m002, Mischa Maisky
-m001, Chole Chua
-c = create ensemble, s = set current ensemble, a = add musician, m = modify musician’s instrument,
-d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble’s name,
-u = undo, r = redo, l = list undo/redo, x = exit system
-The current ensemble is E001 SYO.
-Please enter command [ c | s | a | m | d | se | sa | cn | u | r | l | x ] :- Command (Change ensemble's name, E001, HSO) is redone.
 c = create ensemble, s = set current ensemble, a = add musician, m = modify musician’s instrument,
 d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble’s name,
 u = undo, r = redo, l = list undo/redo, x = exit system

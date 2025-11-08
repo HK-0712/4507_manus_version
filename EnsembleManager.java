@@ -63,7 +63,7 @@ public class EnsembleManager {
             Command command = history.pop();
             command.undo();
             redoStack.push(command);
-            System.out.println("Command (" + command.getDescription() + ") is undone.");
+            // System.out.println("Command (" + command.getDescription() + ") is undone."); // Removed to match PDF
         } else {
             System.out.println("Undo List is empty.");
         }
@@ -74,7 +74,7 @@ public class EnsembleManager {
             Command command = redoStack.pop();
             command.execute();
             history.push(command);
-            System.out.println("Command (" + command.getDescription() + ") is redone.");
+            // System.out.println("Command (" + command.getDescription() + ") is redone."); // Removed to match PDF
         } else {
             System.out.println("Redo List is empty.");
         }
@@ -124,5 +124,13 @@ public class EnsembleManager {
         for (Ensemble e : ensembles) {
             System.out.println(e.getName() + " (" + e.getEnsembleID() + ")");
         }
+    }
+
+    public Stack<Command> getHistory() {
+        return history;
+    }
+
+    public Stack<Command> getRedoStack() {
+        return redoStack;
     }
 }

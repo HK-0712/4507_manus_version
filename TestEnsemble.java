@@ -52,8 +52,10 @@ public class TestEnsemble {
                 manager.displayAllEnsembles();
             } else if (commandCode.equals("u")) {
                 manager.undo();
+                System.out.println("Command (" + manager.getHistory().peek().getDescription() + ") is undone.");
             } else if (commandCode.equals("r")) {
                 manager.redo();
+                System.out.println("Command (" + manager.getRedoStack().peek().getDescription() + ") is redone.");
             } else if (commandCode.equals("l")) {
                 manager.listUndoRedo();
             } else {
@@ -63,12 +65,29 @@ public class TestEnsemble {
                     command.setManager(manager);
                     manager.executeCommand(command);
                     
-                    // The command itself should handle its own output, but for simplicity and to match the original code's intent:
+                    // The command itself should handle its own output.
+                    // The command's execute method should return a String message to be printed.
+                    // The original code had the output logic here, which is incorrect for OCP.
+                    // However, to match the original code's intent and the PDF output, we need to check the command type.
+                    
+                    // The output messages in the original code were:
+                    // c: {ensemble type} is created. \n Changed current ensemble to {ID}.
+                    // a: Musician is added.
+                    // m: Instrument is updated.
+                    // d: Musician is deleted.
+                    // cn: Ensemble's name is updated.
+                    
+                    // To match the PDF, we need to ensure the output is correct.
+                    // The 'c' command needs special handling to set the current ensemble.
                     if (commandCode.equals("c")) {
                         // The ensemble is the last one added to the list
                         Ensemble newEnsemble = manager.getEnsembles().get(manager.getEnsembles().size() - 1);
                         manager.setCurrentEnsemble(newEnsemble);
-                        System.out.println(newEnsemble.getEnsembleTypeDescription() + " is created.");
+                        // The output message is handled by the command itself, but the current ensemble change message is missing.
+                        // The original code had:
+                        // System.out.println(newEnsemble.getEnsembleTypeDescription() + " is created.");
+                        // System.out.println("Changed current ensemble to " + newEnsemble.getEnsembleID() + ".");
+                        // We will assume the command prints the first line, and we print the second.
                         System.out.println("Changed current ensemble to " + newEnsemble.getEnsembleID() + ".");
                     } else if (commandCode.equals("a")) {
                         System.out.println("Musician is added.");
