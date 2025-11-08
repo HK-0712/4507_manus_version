@@ -38,7 +38,7 @@ public class CommandFactory {
     }
 
     private Command createEnsembleCommand() {
-        System.out.print("Enter music type (o = orchestra || j = jazz band) :- ");
+        System.out.print("Enter music type (o = orchestra | j = jazz band) :- ");
         String type = scanner.nextLine().trim().toLowerCase();
         
         System.out.print("Ensemble ID:- ");
@@ -113,7 +113,7 @@ public class CommandFactory {
             return null;
         }
 
-        System.out.print("Please input Musician ID:- ");
+        System.out.print("Please input musician ID:- ");
         String mID = scanner.nextLine().trim();
 
         Musician targetMusician = null;
@@ -157,7 +157,7 @@ public class CommandFactory {
             return null;
         }
 
-        System.out.print("Please input Musician ID:- ");
+        System.out.print("Please input musician ID:- ");
         String mID = scanner.nextLine().trim();
 
         Musician targetMusician = null;

@@ -81,23 +81,18 @@ public class EnsembleManager {
     }
 
     public void listUndoRedo() {
-        System.out.println("Undo List --");
-        if (history.isEmpty()) {
-            System.out.println("Empty");
-        } else {
-            for (int i = history.size() - 1; i >= 0; i--) {
-                System.out.println(history.get(i).getDescription());
-            }
+        System.out.println("Undo List");
+        for (int i = history.size() - 1; i >= 0; i--) {
+            System.out.println(history.get(i).getDescription());
         }
+        System.out.println("-- End of undo list --");
 
-        System.out.println("Redo List --");
-        if (redoStack.isEmpty()) {
-            System.out.println("Empty");
-        } else {
-            for (int i = redoStack.size() - 1; i >= 0; i--) {
-                System.out.println(redoStack.get(i).getDescription());
-            }
+        System.out.println("Redo List");
+        // Print redo stack in reverse order
+        for (int i = redoStack.size() - 1; i >= 0; i--) {
+            System.out.println(redoStack.get(i).getDescription());
         }
+        System.out.println("-- End of redo list --");
     }
 
     // Utility methods for main program

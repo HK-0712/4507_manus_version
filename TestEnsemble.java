@@ -13,8 +13,8 @@ public class TestEnsemble {
             // CommandFactory needs the current state of the manager to create commands correctly
             CommandFactory factory = new CommandFactory(manager.getEnsembles(), manager.getCurrentEnsemble(), scanner);
 
-            System.out.println("c = create ensemble, s = set current ensemble, a = add musician, m = modify musician's instrument,");
-            System.out.println("d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble's name,");
+            System.out.println("c = create ensemble, s = set current ensemble, a = add musician, m = modify musician’s instrument,");
+            System.out.println("d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble’s name,");
             System.out.println("u = undo, r = redo, l = list undo/redo, x = exit system");
             
             Ensemble current = manager.getCurrentEnsemble();
@@ -24,14 +24,14 @@ public class TestEnsemble {
                 System.out.println("No current ensemble set.");
             }
 
-            System.out.print("Please enter command [c | s | a | m | d | se | sa | cn | u | r | l | x] :- ");
+            System.out.print("Please enter command [ c | s | a | m | d | se | sa | cn | u | r | l | x ] :- ");
             String commandCode = scanner.nextLine().trim().toLowerCase();
 
             if (commandCode.equals("x")) {
                 System.out.println("Exiting system.");
                 break;
             } else if (commandCode.equals("s")) {
-                System.out.print("Please input Ensemble ID:- ");
+                System.out.print("Please input ensemble ID:- ");
                 String eID = scanner.nextLine().trim();
                 Ensemble target = null;
                 for (Ensemble e : manager.getEnsembles()) {
