@@ -53,46 +53,46 @@ public class EnsembleManager {
             Command command = history.pop();
             command.undo();
 
-            boolean ensembleSwitched = false;
+            boolean switched = false;
             if (command instanceof CreateEnsembleCommand) {
 
-                boolean currentEnsembleExists = false;
+                boolean currExists = false;
                 for (Ensemble e : ensembles) {
                     if (e.equals(currentEnsemble)) {
-                        currentEnsembleExists = true;
+                        currExists = true;
                         break;
                     }
                 }
 
-                if (!currentEnsembleExists && !ensembles.isEmpty()) {
+                if (!currExists && !ensembles.isEmpty()) {
 
                     this.currentEnsemble = ensembles.getFirst();
-                    ensembleSwitched = true;
+                    switched = true;
                 } else if (ensembles.isEmpty()) {
 
                     this.currentEnsemble = null;
-                    ensembleSwitched = true;
-                } else if (currentEnsembleExists) {
+                    switched = true;
+                } else if (currExists) {
 
-                    ensembleSwitched = true;
+                    switched = true;
                 }
             }
 
             if (!(command instanceof CreateEnsembleCommand) && command instanceof EnsembleCommand) {
-                Ensemble ensembleInvolved = ((EnsembleCommand) command).getEnsemble();
+                Ensemble ens = ((EnsembleCommand) command).getEnsemble();
 
-                boolean ensembleInvolvedExists = false;
+                boolean ensExists = false;
                 for (Ensemble e : ensembles) {
-                    if (e.equals(ensembleInvolved)) {
-                        ensembleInvolvedExists = true;
+                    if (e.equals(ens)) {
+                        ensExists = true;
                         break;
                     }
                 }
 
-                if (ensembleInvolvedExists && !ensembleInvolved.equals(currentEnsemble)) {
+                if (ensExists && !ens.equals(currentEnsemble)) {
 
-                    this.currentEnsemble = ensembleInvolved;
-                    ensembleSwitched = true;
+                    this.currentEnsemble = ens;
+                    switched = true;
                 }
             }
 
@@ -100,7 +100,7 @@ public class EnsembleManager {
 
             System.out.println("Command (" + command.getDescription() + ") is undone.");
 
-            if (ensembleSwitched) {
+            if (switched) {
                 if (currentEnsemble != null) {
                     System.out.println("The current ensemble is changed to " + this.currentEnsemble.getEnsembleID()
                             + " " + this.currentEnsemble.getName() + ".");
@@ -122,34 +122,34 @@ public class EnsembleManager {
 
             System.out.println("Command (" + command.getDescription() + ") is redone.");
 
-            boolean ensembleSwitched = false;
+            boolean switched = false;
 
             if (command instanceof CreateEnsembleCommand) {
 
-                Ensemble redoneEnsemble = ((CreateEnsembleCommand) command).getEnsemble();
-                this.currentEnsemble = redoneEnsemble;
-                ensembleSwitched = true;
+                Ensemble ens = ((CreateEnsembleCommand) command).getEnsemble();
+                this.currentEnsemble = ens;
+                switched = true;
             }
 
             else if (command instanceof EnsembleCommand) {
-                Ensemble ensembleInvolved = ((EnsembleCommand) command).getEnsemble();
+                Ensemble ens = ((EnsembleCommand) command).getEnsemble();
 
-                boolean ensembleInvolvedExists = false;
+                boolean ensExists = false;
                 for (Ensemble e : ensembles) {
-                    if (e.equals(ensembleInvolved)) {
-                        ensembleInvolvedExists = true;
+                    if (e.equals(ens)) {
+                        ensExists = true;
                         break;
                     }
                 }
 
-                if (ensembleInvolvedExists && !ensembleInvolved.equals(currentEnsemble)) {
+                if (ensExists && !ens.equals(currentEnsemble)) {
 
-                    this.currentEnsemble = ensembleInvolved;
-                    ensembleSwitched = true;
+                    this.currentEnsemble = ens;
+                    switched = true;
                 }
             }
 
-            if (ensembleSwitched && currentEnsemble != null) {
+            if (switched && currentEnsemble != null) {
                 System.out.println("The current ensemble is changed to " + this.currentEnsemble.getEnsembleID() + " "
                         + this.currentEnsemble.getName() + ".");
             }

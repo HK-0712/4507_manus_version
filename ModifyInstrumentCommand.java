@@ -2,9 +2,9 @@ public class ModifyInstrumentCommand implements EnsembleCommand {
     private EnsembleManager manager;
     private Ensemble ensemble;
     private Musician musician;
-    private int newRole;
-    private final String roleName;
-    private final String description;
+    private int newrole;
+    private final String instrmntName;
+    private final String descr;
     private Memento memento;
 
     @Override
@@ -15,9 +15,9 @@ public class ModifyInstrumentCommand implements EnsembleCommand {
     public ModifyInstrumentCommand(Ensemble ensemble, Musician musician, int newRole) {
         this.ensemble = ensemble;
         this.musician = musician;
-        this.newRole = newRole;
-        this.roleName = resolveRoleName(newRole);
-        this.description = buildDescription();
+        this.newrole = newRole;
+        this.instrmntName = getInstrumentName(newRole);
+        this.descr = getDesc();
     }
 
     @Override
@@ -31,7 +31,7 @@ public class ModifyInstrumentCommand implements EnsembleCommand {
         if (manager != null) {
             memento = manager.saveState();
         }
-        musician.setRole(newRole);
+        musician.setRole(newrole);
         System.out.println("instrument is updated.");
     }
 
@@ -45,10 +45,10 @@ public class ModifyInstrumentCommand implements EnsembleCommand {
 
     @Override
     public String getDescription() {
-        return description;
+        return descr;
     }
 
-    private String resolveRoleName(int role) {
+    private String getInstrumentName(int role) {
         if (ensemble instanceof OrchestraEnsemble) {
             return ((OrchestraEnsemble) ensemble).getRoleName(role);
         } else if (ensemble instanceof JazzBandEnsemble) {
@@ -57,7 +57,7 @@ public class ModifyInstrumentCommand implements EnsembleCommand {
         return "unknown";
     }
 
-    private String buildDescription() {
-        return "Modify musician\u2019s instrument, " + musician.getMID() + ", " + roleName;
+    private String getDesc() {
+        return "Modify musician's instrument, " + musician.getMID() + ", " + instrmntName;
     }
 }

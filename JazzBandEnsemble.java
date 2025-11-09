@@ -26,40 +26,40 @@ public class JazzBandEnsemble extends Ensemble {
     public void showEnsemble() {
         System.out.println("Jazz Band Ensemble " + getName() + " (" + getEnsembleID() + ")");
 
-        Map<Integer, StringBuilder> roleGroups = new LinkedHashMap<>();
-        roleGroups.put(PIANIST_ROLE, new StringBuilder());
-        roleGroups.put(SAXOPHONIST_ROLE, new StringBuilder());
-        roleGroups.put(DRUMMER_ROLE, new StringBuilder());
+        Map<Integer, StringBuilder> roles = new LinkedHashMap<>();
+        roles.put(PIANIST_ROLE, new StringBuilder());
+        roles.put(SAXOPHONIST_ROLE, new StringBuilder());
+        roles.put(DRUMMER_ROLE, new StringBuilder());
 
         Iterator<Musician> iterator = getMusicians();
         while (iterator.hasNext()) {
             Musician m = iterator.next();
             int role = m.getRole();
-            if (roleGroups.containsKey(role)) {
-                if (roleGroups.get(role).length() > 0) {
-                    roleGroups.get(role).append("\n");
+            if (roles.containsKey(role)) {
+                if (roles.get(role).length() > 0) {
+                    roles.get(role).append("\n");
                 }
-                roleGroups.get(role).append(m.getMID()).append(", ").append(m.getName());
+                roles.get(role).append(m.getMID()).append(", ").append(m.getName());
             }
         }
 
         System.out.println("Pianist:");
-        if (roleGroups.get(PIANIST_ROLE).length() > 0) {
-            System.out.println(roleGroups.get(PIANIST_ROLE).toString());
+        if (roles.get(PIANIST_ROLE).length() > 0) {
+            System.out.println(roles.get(PIANIST_ROLE).toString());
         } else {
             System.out.println("NIL");
         }
 
         System.out.println("Saxophonist:");
-        if (roleGroups.get(SAXOPHONIST_ROLE).length() > 0) {
-            System.out.println(roleGroups.get(SAXOPHONIST_ROLE).toString());
+        if (roles.get(SAXOPHONIST_ROLE).length() > 0) {
+            System.out.println(roles.get(SAXOPHONIST_ROLE).toString());
         } else {
             System.out.println("NIL");
         }
 
         System.out.println("Drummer:");
-        if (roleGroups.get(DRUMMER_ROLE).length() > 0) {
-            System.out.println(roleGroups.get(DRUMMER_ROLE).toString());
+        if (roles.get(DRUMMER_ROLE).length() > 0) {
+            System.out.println(roles.get(DRUMMER_ROLE).toString());
         } else {
             System.out.println("NIL");
         }

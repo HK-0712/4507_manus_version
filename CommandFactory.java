@@ -41,18 +41,18 @@ public class CommandFactory {
         System.out.print("Ensemble Name:- ");
         String eName = scanner.nextLine().trim();
 
-        Ensemble newEnsemble = null;
+        Ensemble ens = null;
         if (type.equals("o")) {
-            newEnsemble = new OrchestraEnsemble(eID);
+            ens = new OrchestraEnsemble(eID);
         } else if (type.equals("j")) {
-            newEnsemble = new JazzBandEnsemble(eID);
+            ens = new JazzBandEnsemble(eID);
         } else {
             System.out.println("Invalid music type.");
             return null;
         }
 
-        newEnsemble.setName(eName);
-        return new CreateEnsembleCommand(ensembles, newEnsemble);
+        ens.setName(eName);
+        return new CreateEnsembleCommand(ensembles, ens);
     }
 
     private Command addMusicianCommand() {
@@ -76,15 +76,15 @@ public class CommandFactory {
         String mID = info[0];
         String mName = info[1];
 
-        Musician newMusician = new Musician(mID);
-        newMusician.setName(mName);
+        Musician m = new Musician(mID);
+        m.setName(mName);
 
         if (currentEnsemble instanceof OrchestraEnsemble) {
             System.out.print("Instrument (1 = violinist | 2 = cellist ):- ");
             try {
-                int instrument = Integer.parseInt(scanner.nextLine().trim());
-                if (instrument == 1 || instrument == 2) {
-                    newMusician.setRole(instrument);
+                int inst = Integer.parseInt(scanner.nextLine().trim());
+                if (inst == 1 || inst == 2) {
+                    m.setRole(inst);
                 } else {
                     System.out.println("Invalid instrument choice.");
                     return null;
@@ -96,9 +96,9 @@ public class CommandFactory {
         } else if (currentEnsemble instanceof JazzBandEnsemble) {
             System.out.print("Instrument (1 = pianist | 2 = saxophonist | 3 = drummer):- ");
             try {
-                int instrument = Integer.parseInt(scanner.nextLine().trim());
-                if (instrument >= 1 && instrument <= 3) {
-                    newMusician.setRole(instrument);
+                int inst = Integer.parseInt(scanner.nextLine().trim());
+                if (inst >= 1 && inst <= 3) {
+                    m.setRole(inst);
                 } else {
                     System.out.println("Invalid instrument choice.");
                     return null;
@@ -113,7 +113,7 @@ public class CommandFactory {
             return null;
         }
 
-        return new AddMusicianCommand(currentEnsemble, newMusician);
+        return new AddMusicianCommand(currentEnsemble, m);
     }
 
     private Command modifyInstrumentCommand() {
@@ -125,27 +125,27 @@ public class CommandFactory {
         System.out.print("Please input musician ID:- ");
         String mID = scanner.nextLine().trim();
 
-        Musician targetMusician = null;
+        Musician musican = null;
         Iterator<Musician> it = currentEnsemble.getMusicians();
         while (it.hasNext()) {
             Musician m = it.next();
             if (m.getMID().equals(mID)) {
-                targetMusician = m;
+                musican = m;
                 break;
             }
         }
 
-        if (targetMusician == null) {
+        if (musican == null) {
             System.out.println("Musician not found in current ensemble.");
             return null;
         }
 
-        int newRole = 0;
+        int role = 0;
         if (currentEnsemble instanceof OrchestraEnsemble) {
             System.out.print("Instrument (1 = violinist | 2 = cellist ):- ");
             try {
-                newRole = Integer.parseInt(scanner.nextLine().trim());
-                if (newRole != 1 && newRole != 2) {
+                role = Integer.parseInt(scanner.nextLine().trim());
+                if (role != 1 && role != 2) {
                     System.out.println("Invalid instrument choice.");
                     return null;
                 }
@@ -156,8 +156,8 @@ public class CommandFactory {
         } else if (currentEnsemble instanceof JazzBandEnsemble) {
             System.out.print("Instrument (1 = pianist | 2 = saxophonist | 3 = drummer):- ");
             try {
-                newRole = Integer.parseInt(scanner.nextLine().trim());
-                if (newRole < 1 || newRole > 3) {
+                role = Integer.parseInt(scanner.nextLine().trim());
+                if (role < 1 || role > 3) {
                     System.out.println("Invalid instrument choice.");
                     return null;
                 }
@@ -167,7 +167,7 @@ public class CommandFactory {
             }
         }
 
-        return new ModifyInstrumentCommand(currentEnsemble, targetMusician, newRole);
+        return new ModifyInstrumentCommand(currentEnsemble, musican, role);
     }
 
     private Command deleteMusicianCommand() {
@@ -179,22 +179,22 @@ public class CommandFactory {
         System.out.print("Please input musician ID:- ");
         String mID = scanner.nextLine().trim();
 
-        Musician targetMusician = null;
+        Musician musican = null;
         Iterator<Musician> it = currentEnsemble.getMusicians();
         while (it.hasNext()) {
             Musician m = it.next();
             if (m.getMID().equals(mID)) {
-                targetMusician = m;
+                musican = m;
                 break;
             }
         }
 
-        if (targetMusician == null) {
+        if (musican == null) {
             System.out.println("Musician not found in current ensemble.");
             return null;
         }
 
-        return new DeleteMusicianCommand(currentEnsemble, targetMusician);
+        return new DeleteMusicianCommand(currentEnsemble, musican);
     }
 
     private Command changeNameCommand() {

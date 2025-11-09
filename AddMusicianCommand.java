@@ -4,8 +4,8 @@ public class AddMusicianCommand implements EnsembleCommand {
     private EnsembleManager manager;
     private Ensemble ensemble;
     private Musician musician;
-    private final String roleName;
-    private final String description;
+    private final String instrumnt;
+    private final String desc;
 
     @Override
     public Ensemble getEnsemble() {
@@ -15,8 +15,8 @@ public class AddMusicianCommand implements EnsembleCommand {
     public AddMusicianCommand(Ensemble ensemble, Musician musician) {
         this.ensemble = ensemble;
         this.musician = musician;
-        this.roleName = resolveRoleName(musician.getRole());
-        this.description = buildDescription();
+        this.instrumnt = getRoleStr(musician.getRole());
+        this.desc = makeDesc();
     }
 
     @Override
@@ -37,14 +37,14 @@ public class AddMusicianCommand implements EnsembleCommand {
 
     @Override
     public String getDescription() {
-        return description;
+        return desc;
     }
 
-    private String buildDescription() {
-        return "Add musician, " + musician.getMID() + ", " + musician.getName() + ", " + roleName;
+    private String makeDesc() {
+        return "Add musician, " + musician.getMID() + ", " + musician.getName() + ", " + instrumnt;
     }
 
-    private String resolveRoleName(int role) {
+    private String getRoleStr(int role) {
         if (ensemble instanceof OrchestraEnsemble) {
             return ((OrchestraEnsemble) ensemble).getRoleName(role);
         } else if (ensemble instanceof JazzBandEnsemble) {

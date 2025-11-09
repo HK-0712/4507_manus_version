@@ -6,26 +6,26 @@ import java.util.Map;
 
 public abstract class Ensemble implements Cloneable {
 
-    private String ensembleID;
-    private String eName;
+    private String eID;
+    private String name;
     private Map<String, Musician> musicians;
 
     public Ensemble(String eID) {
-        this.ensembleID = eID;
-        this.eName = "";
+        this.eID = eID;
+        this.name = "";
         this.musicians = new TreeMap<String, Musician>();
     }
 
     public String getEnsembleID() {
-        return ensembleID;
+        return eID;
     }
 
     public String getName() {
-        return eName;
+        return name;
     }
 
     public void setName(String name) {
-        this.eName = name;
+        this.name = name;
     }
 
     public abstract String getEnsembleTypeDescription();

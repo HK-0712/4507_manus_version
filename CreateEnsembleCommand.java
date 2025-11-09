@@ -4,9 +4,9 @@ public class CreateEnsembleCommand implements EnsembleCommand {
     private EnsembleManager manager;
     private LinkedList<Ensemble> ensembles;
     private Ensemble ensemble;
-    private final String ensembleTypeDescription;
-    private final String ensembleID;
-    private final String ensembleNameSnapshot;
+    private final String ensType;
+    private final String eID;
+    private final String ensemblName;
 
     @Override
     public Ensemble getEnsemble() {
@@ -16,9 +16,9 @@ public class CreateEnsembleCommand implements EnsembleCommand {
     public CreateEnsembleCommand(LinkedList<Ensemble> ensembles, Ensemble ensemble) {
         this.ensembles = ensembles;
         this.ensemble = ensemble;
-        this.ensembleTypeDescription = ensemble.getEnsembleTypeDescription();
-        this.ensembleID = ensemble.getEnsembleID();
-        this.ensembleNameSnapshot = ensemble.getName();
+        this.ensType = ensemble.getEnsembleTypeDescription();
+        this.eID = ensemble.getEnsembleID();
+        this.ensemblName = ensemble.getName();
     }
 
     @Override
@@ -39,6 +39,6 @@ public class CreateEnsembleCommand implements EnsembleCommand {
 
     @Override
     public String getDescription() {
-        return "Create " + ensembleTypeDescription + ", " + ensembleID + ", " + ensembleNameSnapshot;
+        return "Create " + ensType + ", " + eID + ", " + ensemblName;
     }
 }

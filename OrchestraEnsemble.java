@@ -25,32 +25,32 @@ public class OrchestraEnsemble extends Ensemble {
     public void showEnsemble() {
         System.out.println("Orchestra Ensemble " + getName() + " (" + getEnsembleID() + ")");
 
-        Map<Integer, StringBuilder> roleGroups = new LinkedHashMap<>();
-        roleGroups.put(VIOLINIST_ROLE, new StringBuilder());
-        roleGroups.put(CELLIST_ROLE, new StringBuilder());
+        Map<Integer, StringBuilder> roles = new LinkedHashMap<>();
+        roles.put(VIOLINIST_ROLE, new StringBuilder());
+        roles.put(CELLIST_ROLE, new StringBuilder());
 
         Iterator<Musician> iterator = getMusicians();
         while (iterator.hasNext()) {
             Musician m = iterator.next();
             int role = m.getRole();
-            if (roleGroups.containsKey(role)) {
-                if (roleGroups.get(role).length() > 0) {
-                    roleGroups.get(role).append("\n");
+            if (roles.containsKey(role)) {
+                if (roles.get(role).length() > 0) {
+                    roles.get(role).append("\n");
                 }
-                roleGroups.get(role).append(m.getMID()).append(", ").append(m.getName());
+                roles.get(role).append(m.getMID()).append(", ").append(m.getName());
             }
         }
 
         System.out.println("Violinist:");
-        if (roleGroups.get(VIOLINIST_ROLE).length() > 0) {
-            System.out.println(roleGroups.get(VIOLINIST_ROLE).toString());
+        if (roles.get(VIOLINIST_ROLE).length() > 0) {
+            System.out.println(roles.get(VIOLINIST_ROLE).toString());
         } else {
             System.out.println("NIL");
         }
 
         System.out.println("Cellist:");
-        if (roleGroups.get(CELLIST_ROLE).length() > 0) {
-            System.out.println(roleGroups.get(CELLIST_ROLE).toString());
+        if (roles.get(CELLIST_ROLE).length() > 0) {
+            System.out.println(roles.get(CELLIST_ROLE).toString());
         } else {
             System.out.println("NIL");
         }

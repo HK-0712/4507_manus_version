@@ -1,17 +1,17 @@
 public class Musician implements Cloneable {
 
-    private String musicianID;
-    private String mName;
+    private String mID;
+    private String name;
     private int role;
 
     public Musician(String mID) {
-        this.musicianID = mID;
-        this.mName = "";
+        this.mID = mID;
+        this.name = "";
         this.role = 0;
     }
 
     public String getMID() {
-        return musicianID;
+        return mID;
     }
 
     public int getRole() {
@@ -19,7 +19,7 @@ public class Musician implements Cloneable {
     }
 
     public String getName() {
-        return mName;
+        return name;
     }
 
     public void setRole(int role) {
@@ -27,7 +27,7 @@ public class Musician implements Cloneable {
     }
 
     public void setName(String name) {
-        this.mName = name;
+        this.name = name;
     }
 
     @Override

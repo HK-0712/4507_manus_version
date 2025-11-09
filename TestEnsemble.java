@@ -34,15 +34,15 @@ public class TestEnsemble {
             } else if (commandCode.equals("s")) {
                 System.out.print("Please input ensemble ID:- ");
                 String eID = scanner.nextLine().trim();
-                Ensemble target = null;
+                Ensemble ens = null;
                 for (Ensemble e : manager.getEnsembles()) {
                     if (e.getEnsembleID().equals(eID)) {
-                        target = e;
+                        ens = e;
                         break;
                     }
                 }
-                if (target != null) {
-                    manager.setCurrentEnsemble(target);
+                if (ens != null) {
+                    manager.setCurrentEnsemble(ens);
                     System.out.println("Changed current ensemble to " + eID + ".");
                 } else {
                     System.out.println("Ensemble " + eID + " is not found!!");
@@ -66,10 +66,10 @@ public class TestEnsemble {
 
                     if (commandCode.equals("c")) {
 
-                        Ensemble newEnsemble = manager.getEnsembles().get(manager.getEnsembles().size() - 1);
-                        manager.setCurrentEnsemble(newEnsemble);
+                        Ensemble ens = manager.getEnsembles().get(manager.getEnsembles().size() - 1);
+                        manager.setCurrentEnsemble(ens);
 
-                        System.out.println("Current ensemble is changed to " + newEnsemble.getEnsembleID() + ".");
+                        System.out.println("Current ensemble is changed to " + ens.getEnsembleID() + ".");
                     } else if (commandCode.equals("a")) {
 
                     } else if (commandCode.equals("m")) {
