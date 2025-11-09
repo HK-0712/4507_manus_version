@@ -1,6 +1,6 @@
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Scanner;
-import java.util.Iterator;
 
 public class CommandFactory {
     private LinkedList<Ensemble> ensembles;
@@ -152,10 +152,6 @@ public class CommandFactory {
             System.out.print("Instrument (1 = violinist | 2 = cellist ):- ");
             try {
                 newRole = Integer.parseInt(scanner.nextLine().trim());
-                if (currentEnsemble instanceof OrchestraEnsemble) {
-            System.out.print("Instrument (1 = violinist | 2 = cellist ):- ");
-            try {
-                newRole = Integer.parseInt(scanner.nextLine().trim());
                 if (newRole != 1 && newRole != 2) {
                     System.out.println("Invalid instrument choice.");
                     return null;
@@ -176,13 +172,9 @@ public class CommandFactory {
                 System.out.println("Invalid instrument choice.");
                 return null;
             }
-        } } catch (NumberFormatException e) {
-                System.out.println("Invalid instrument choice.");
-                return null;
-            }
         }
 
-    return new ModifyInstrumentCommand(currentEnsemble, targetMusician, newRole);
+        return new ModifyInstrumentCommand(currentEnsemble, targetMusician, newRole);
     }
 
     private Command deleteMusicianCommand() {
