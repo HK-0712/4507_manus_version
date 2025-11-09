@@ -26,6 +26,7 @@ public class ChangeNameCommand implements EnsembleCommand {
             memento = manager.saveState();
         }
         ensemble.setName(newName);
+        System.out.println("Ensemble's name is changed.");
     }
     
     @Override

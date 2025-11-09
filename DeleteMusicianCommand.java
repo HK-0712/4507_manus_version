@@ -21,6 +21,7 @@ public class DeleteMusicianCommand implements EnsembleCommand {
     @Override
     public void execute() {
         ensemble.dropMusician(musician);
+        System.out.println("Musician is deleted.");
     }
     
     @Override
