@@ -33,7 +33,7 @@ public class ModifyInstrumentCommand implements EnsembleCommand {
             memento = manager.saveState();
         }
         musician.setRole(newRole);
-        System.out.println("Musician's instrument is changed.");
+        System.out.println("instrument is updated.");
     }
     
     @Override

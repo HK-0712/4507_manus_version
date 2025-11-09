@@ -5,8 +5,6 @@ public class TestEnsemble {
         Scanner scanner = new Scanner(System.in);
         EnsembleManager manager = new EnsembleManager();
         
-        System.out.println("Music Ensembles Management System (MEMS)");
-        
         while (true) {
             // CommandFactory needs the current state of the manager to create commands correctly
             CommandFactory factory = new CommandFactory(manager.getEnsembles(), manager.getCurrentEnsemble(), scanner);
@@ -44,11 +42,9 @@ public class TestEnsemble {
                 }
                 if (target != null) {
                     manager.setCurrentEnsemble(target);
-                    String targetName = target.getName();
-                    String nameSuffix = (targetName != null && !targetName.isBlank()) ? " " + targetName : "";
-                    System.out.println("The current ensemble is changed to " + eID + nameSuffix + ".");
+                    System.out.println("Changed current ensemble to " + eID + ".");
                 } else {
-                    System.out.println("Ensemble " + eID + " not found!");
+                    System.out.println("Ensemble " + eID + " is not found!!");
                 }
             } else if (commandCode.equals("se")) {
                 manager.showCurrentEnsemble();

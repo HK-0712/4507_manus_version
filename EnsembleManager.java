@@ -186,6 +186,7 @@ public class EnsembleManager {
             System.out.println(history.get(i).getDescription());
         }
         System.out.println("-- End of undo list --");
+        System.err.println("");
 
         System.out.println("Redo List");
         for (int i = 0; i < redoStack.size(); i++) {
