@@ -12,6 +12,8 @@ public class TestEnsemble {
             CommandFactory factory = new CommandFactory(manager.getEnsembles(), manager.getCurrentEnsemble(), scanner);
 
             // 輸出命令選單
+            System.out.println("");
+            System.err.println("Music Ensembles Management System (MEMS)");
             System.out.println("c = create ensemble, s = set current ensemble, a = add musician, m = modify musician’s instrument,");
             System.out.println("d = delete musician, se = show ensemble, sa = display all ensembles, cn = change ensemble’s name,");
             System.out.println("u = undo, r = redo, l = list undo/redo, x = exit system");
