@@ -1,10 +1,11 @@
 public class ModifyInstrumentCommand implements EnsembleCommand {
+    private EnsembleManager manager;
     private Ensemble ensemble;
     private Musician musician;
-    private int oldRole;
     private int newRole;
     private final String roleName;
     private final String description;
+    private Memento memento; // Memento Pattern: 儲存執行前的狀態
 
     @Override
     public Ensemble getEnsemble() {
@@ -16,24 +17,30 @@ public class ModifyInstrumentCommand implements EnsembleCommand {
         this.ensemble = ensemble;
         this.musician = musician;
         this.newRole = newRole;
-        this.oldRole = musician.getRole();
         this.roleName = resolveRoleName(newRole);
         this.description = buildDescription();
     }
 
     @Override
     public void setManager(EnsembleManager manager) {
-        // Manager reference is not required; ensemble is provided directly.
+        this.manager = manager;
     }
     
     @Override
     public void execute() {
+        // Memento Pattern: 在執行前保存狀態
+        if (manager != null) {
+            memento = manager.saveState();
+        }
         musician.setRole(newRole);
     }
     
     @Override
     public void undo() {
-        musician.setRole(oldRole);
+        // Memento Pattern: 使用 Memento 還原狀態
+        if (manager != null && memento != null) {
+            manager.restoreState(memento);
+        }
     }
     
     @Override

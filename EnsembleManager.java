@@ -16,30 +16,31 @@ public class EnsembleManager {
 
     // Originator: Save state to Memento
     public Memento saveState() {
-        // Deep copy the list of ensembles
-        LinkedList<Ensemble> clonedEnsembles = new LinkedList<>();
-        for (Ensemble e : ensembles) {
-            clonedEnsembles.add(e.clone());
-        }
-        
-        // Find the corresponding currentEnsemble in the cloned list
-        Ensemble clonedCurrentEnsemble = null;
-        if (currentEnsemble != null) {
-            for (Ensemble e : clonedEnsembles) {
-                if (e.getEnsembleID().equals(currentEnsemble.getEnsembleID())) {
-                    clonedCurrentEnsemble = e;
-                    break;
-                }
-            }
-        }
-        
-        return new Memento(clonedEnsembles, clonedCurrentEnsemble);
+        // 儲存當前所有 musician roles 和 ensemble names 的快照
+        return new Memento(ensembles);
     }
 
     // Originator: Restore state from Memento
     public void restoreState(Memento memento) {
-        this.ensembles = memento.getState();
-        this.currentEnsemble = memento.getCurrentEnsemble();
+        // 還原所有 musician 的 roles
+        for (Ensemble e : ensembles) {
+            java.util.Iterator<Musician> it = e.getMusicians();
+            while (it.hasNext()) {
+                Musician m = it.next();
+                Integer savedRole = memento.getMusicianRoles().get(m.getMID());
+                if (savedRole != null) {
+                    m.setRole(savedRole);
+                }
+            }
+        }
+        
+        // 還原所有 ensemble 的 names
+        for (Ensemble e : ensembles) {
+            String savedName = memento.getEnsembleNames().get(e.getEnsembleID());
+            if (savedName != null) {
+                e.setName(savedName);
+            }
+        }
     }
 
     // Caretaker: Execute command with Memento logic

@@ -1,28 +1,34 @@
+import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.LinkedList;
+import java.util.Map;
 
 public class Memento {
-    private LinkedList<Ensemble> state;
-    private Ensemble currentEnsemble;
+    // 儲存每個 Musician 的 role 快照
+    private Map<String, Integer> musicianRoles;
+    // 儲存每個 Ensemble 的 name 快照
+    private Map<String, String> ensembleNames;
 
-    public Memento(LinkedList<Ensemble> ensembles, Ensemble current) {
-        // Deep copy the list of ensembles and the current ensemble reference
-        this.state = new LinkedList<>();
+    public Memento(LinkedList<Ensemble> ensembles) {
+        this.musicianRoles = new HashMap<>();
+        this.ensembleNames = new HashMap<>();
+        
+        // 保存所有 ensemble 的名稱和其中所有 musician 的 role
         for (Ensemble e : ensembles) {
-            // Assuming Ensemble has a copy constructor or clone method for deep copy
-            // For simplicity in this context, we'll assume a shallow copy of the list is sufficient,
-            // but in a real-world scenario, a deep copy of Ensemble objects would be necessary.
-            // Since the state is the list of ensembles and the current ensemble, we'll focus on copying the list structure.
-            this.state.add(e);
+            ensembleNames.put(e.getEnsembleID(), e.getName());
+            
+            java.util.Iterator<Musician> it = e.getMusicians();
+            while (it.hasNext()) {
+                Musician m = it.next();
+                musicianRoles.put(m.getMID(), m.getRole());
+            }
         }
-        this.currentEnsemble = current;
     }
 
-    public LinkedList<Ensemble> getState() {
-        return state;
+    public Map<String, Integer> getMusicianRoles() {
+        return musicianRoles;
     }
 
-    public Ensemble getCurrentEnsemble() {
-        return currentEnsemble;
+    public Map<String, String> getEnsembleNames() {
+        return ensembleNames;
     }
 }

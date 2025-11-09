@@ -1,8 +1,8 @@
 public class ChangeNameCommand implements EnsembleCommand {
     private EnsembleManager manager;
     private Ensemble ensemble;
-    private String oldName;
     private String newName;
+    private Memento memento; // Memento Pattern: 儲存執行前的狀態
 
     @Override
     public Ensemble getEnsemble() {
@@ -12,7 +12,6 @@ public class ChangeNameCommand implements EnsembleCommand {
     public ChangeNameCommand(Ensemble ensemble, String newName) {
         this.ensemble = ensemble;
         this.newName = newName;
-        this.oldName = ensemble.getName();
     }
 
     @Override
@@ -22,12 +21,19 @@ public class ChangeNameCommand implements EnsembleCommand {
     
     @Override
     public void execute() {
+        // Memento Pattern: 在執行前保存狀態
+        if (manager != null) {
+            memento = manager.saveState();
+        }
         ensemble.setName(newName);
     }
     
     @Override
     public void undo() {
-        ensemble.setName(oldName);
+        // Memento Pattern: 使用 Memento 還原狀態
+        if (manager != null && memento != null) {
+            manager.restoreState(memento);
+        }
     }
     
     @Override
