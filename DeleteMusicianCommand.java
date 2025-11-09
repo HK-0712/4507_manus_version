@@ -7,7 +7,7 @@ public class DeleteMusicianCommand implements EnsembleCommand {
     public Ensemble getEnsemble() {
         return ensemble;
     }
-    
+
     public DeleteMusicianCommand(Ensemble ensemble, Musician musician) {
         this.ensemble = ensemble;
         this.musician = musician;
@@ -17,18 +17,18 @@ public class DeleteMusicianCommand implements EnsembleCommand {
     public void setManager(EnsembleManager manager) {
         this.manager = manager;
     }
-    
+
     @Override
     public void execute() {
         ensemble.dropMusician(musician);
         System.out.println("Musician is deleted.");
     }
-    
+
     @Override
     public void undo() {
         ensemble.addMusician(musician);
     }
-    
+
     @Override
     public String getDescription() {
         return "Delete musician, " + musician.getMID();

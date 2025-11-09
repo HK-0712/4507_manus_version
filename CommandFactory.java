@@ -25,13 +25,7 @@ public class CommandFactory {
                 return deleteMusicianCommand();
             case "cn":
                 return changeNameCommand();
-            // case "s": // set current ensemble - handled by main program
-            // case "se": // show current ensemble - handled by main program
-            // case "sa": // display all ensembles - handled by main program
-            // case "u": // undo - handled by main program
-            // case "r": // redo - handled by main program
-            // case "l": // list undo/redo - handled by main program
-            // case "x": // exit - handled by main program
+
             default:
                 return null;
         }
@@ -40,10 +34,10 @@ public class CommandFactory {
     private Command createEnsembleCommand() {
         System.out.print("Enter music type (o = orchestra | j = jazz band) :- ");
         String type = scanner.nextLine().trim().toLowerCase();
-        
+
         System.out.print("Ensemble ID:- ");
         String eID = scanner.nextLine().trim();
-        
+
         System.out.print("Ensemble Name:- ");
         String eName = scanner.nextLine().trim();
 
@@ -69,7 +63,7 @@ public class CommandFactory {
 
         System.out.print("Please input musician information (id, name):- ");
         String inputLine = scanner.nextLine().trim();
-        // 檢查輸入是否包含逗號和空格，以符合 "id, name" 格式
+
         if (!inputLine.contains(", ")) {
             System.out.println("Invalid musician information format.");
             return null;
@@ -85,7 +79,6 @@ public class CommandFactory {
         Musician newMusician = new Musician(mID);
         newMusician.setName(mName);
 
-        // Role selection logic based on ensemble type
         if (currentEnsemble instanceof OrchestraEnsemble) {
             System.out.print("Instrument (1 = violinist | 2 = cellist ):- ");
             try {
@@ -115,7 +108,7 @@ public class CommandFactory {
                 return null;
             }
         } else {
-            // Should not happen if OCP is followed, but for safety
+
             System.out.println("Unknown ensemble type.");
             return null;
         }

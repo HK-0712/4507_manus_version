@@ -1,4 +1,6 @@
+
 public class AddMusicianCommand implements EnsembleCommand {
+
     private EnsembleManager manager;
     private Ensemble ensemble;
     private Musician musician;
@@ -9,8 +11,7 @@ public class AddMusicianCommand implements EnsembleCommand {
     public Ensemble getEnsemble() {
         return ensemble;
     }
-    // private String roleName; // Removed to enforce OCP
-    
+
     public AddMusicianCommand(Ensemble ensemble, Musician musician) {
         this.ensemble = ensemble;
         this.musician = musician;
@@ -22,7 +23,7 @@ public class AddMusicianCommand implements EnsembleCommand {
     public void setManager(EnsembleManager manager) {
         this.manager = manager;
     }
-    
+
     @Override
     public void execute() {
         ensemble.addMusician(musician);
@@ -32,7 +33,9 @@ public class AddMusicianCommand implements EnsembleCommand {
     @Override
     public void undo() {
         ensemble.dropMusician(musician);
-    }    @Override
+    }
+
+    @Override
     public String getDescription() {
         return description;
     }
