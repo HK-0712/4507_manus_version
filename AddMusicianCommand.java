@@ -1,4 +1,4 @@
-
+// Command to add musician to ensemble
 public class AddMusicianCommand implements EnsembleCommand {
 
     private EnsembleManager manager;

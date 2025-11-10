@@ -1,3 +1,4 @@
+// Command to delete musician from ensemble
 public class DeleteMusicianCommand implements EnsembleCommand {
     private EnsembleManager manager;
     private Ensemble ensemble;

@@ -1,3 +1,4 @@
+// Command to modify musician's instrument with undo support
 public class ModifyInstrumentCommand implements EnsembleCommand {
     private EnsembleManager manager;
     private Ensemble ensemble;
@@ -5,7 +6,7 @@ public class ModifyInstrumentCommand implements EnsembleCommand {
     private int newrole;
     private final String instrmntName;
     private final String descr;
-    // Classic Memento Pattern: Command saves the Memento of the specific Musician being modified
+    // Memento to save musician's old instrument
     private Musician.MusicianMemento memento;
 
     @Override
@@ -28,7 +29,7 @@ public class ModifyInstrumentCommand implements EnsembleCommand {
 
     @Override
     public void execute() {
-        // Classic Memento Pattern: Save state of only the Musician being modified
+        // Save old instrument before modifying
         memento = musician.save();
         musician.setRole(newrole);
         System.out.println("instrument is updated.");
@@ -36,7 +37,7 @@ public class ModifyInstrumentCommand implements EnsembleCommand {
 
     @Override
     public void undo() {
-        // Classic Memento Pattern: Restore state of only the Musician
+        // Restore old instrument
         if (memento != null) {
             musician.restore(memento);
         }

@@ -1,6 +1,6 @@
 public class Musician implements Cloneable {
 
-    // Memento class (Inner class for encapsulation)
+    // Memento pattern - inner class to store musician state
     public static class MusicianMemento {
         private final int role;
 
@@ -13,11 +13,12 @@ public class Musician implements Cloneable {
         }
     }
 
-    // Originator methods - Classic Memento Pattern
+    // Save current state
     public MusicianMemento save() {
         return new MusicianMemento(this.role);
     }
 
+    // Restore from memento
     public void restore(MusicianMemento memento) {
         if (memento != null) {
             this.role = memento.getRole();

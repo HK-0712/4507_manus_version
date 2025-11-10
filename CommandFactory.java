@@ -2,6 +2,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+// Factory pattern to create different command objects
 public class CommandFactory {
     private LinkedList<Ensemble> ensembles;
     private Ensemble currentEnsemble;
@@ -13,6 +14,7 @@ public class CommandFactory {
         this.scanner = scanner;
     }
 
+    // Factory method to create appropriate command based on user input
     public Command createCommand(String commandCode) {
         switch (commandCode) {
             case "c":
@@ -31,6 +33,7 @@ public class CommandFactory {
         }
     }
 
+    // Create different types of ensemble objects based on user choice
     private Command createEnsembleCommand() {
         System.out.print("Enter music type (o = orchestra | j = jazz band) :- ");
         String type = scanner.nextLine().trim().toLowerCase();

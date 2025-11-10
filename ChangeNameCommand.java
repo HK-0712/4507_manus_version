@@ -1,8 +1,9 @@
+// Command to change ensemble name with undo support
 public class ChangeNameCommand implements EnsembleCommand {
     private EnsembleManager manager;
     private Ensemble ensemble;
     private String newName;
-    // Classic Memento Pattern: Command saves the Memento of the specific Ensemble being modified
+    // Memento to save ensemble's old name
     private Ensemble.EnsembleMemento memento;
 
     @Override
@@ -22,7 +23,7 @@ public class ChangeNameCommand implements EnsembleCommand {
 
     @Override
     public void execute() {
-        // Classic Memento Pattern: Save state of only the Ensemble being modified
+        // Save old name before changing
         memento = ensemble.save();
         ensemble.setName(newName);
         System.out.println("Ensemble's name is updated.");
@@ -30,7 +31,7 @@ public class ChangeNameCommand implements EnsembleCommand {
 
     @Override
     public void undo() {
-        // Classic Memento Pattern: Restore state of only the Ensemble
+        // Restore old name
         if (memento != null) {
             ensemble.restore(memento);
         }

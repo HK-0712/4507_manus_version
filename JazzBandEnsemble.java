@@ -2,6 +2,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+// Jazz band ensemble with specific instruments
 public class JazzBandEnsemble extends Ensemble {
 
     public static final int PIANIST_ROLE = 1;

@@ -1,12 +1,13 @@
 import java.util.Scanner;
 
+// Main class for Music Ensembles Management System
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         EnsembleManager manager = new EnsembleManager();
 
         while (true) {
-
+            // Create factory for command creation
             CommandFactory factory = new CommandFactory(manager.getEnsembles(), manager.getCurrentEnsemble(), scanner);
 
             System.out.println("");

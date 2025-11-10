@@ -2,6 +2,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+// Orchestra ensemble with specific instruments
 public class OrchestraEnsemble extends Ensemble {
 
     public static final int VIOLINIST_ROLE = 1;

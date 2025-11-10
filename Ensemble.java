@@ -6,7 +6,7 @@ import java.util.Map;
 
 public abstract class Ensemble implements Cloneable {
 
-    // Memento class (Inner class for encapsulation)
+    // Memento pattern - stores ensemble name for undo/redo
     public static class EnsembleMemento {
         private final String name;
 
@@ -19,11 +19,12 @@ public abstract class Ensemble implements Cloneable {
         }
     }
 
-    // Originator methods - Classic Memento Pattern
+    // Save current state
     public EnsembleMemento save() {
         return new EnsembleMemento(this.name);
     }
 
+    // Restore from memento
     public void restore(EnsembleMemento memento) {
         if (memento != null) {
             this.name = memento.getName();
