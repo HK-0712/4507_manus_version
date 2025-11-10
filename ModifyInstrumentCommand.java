@@ -5,7 +5,8 @@ public class ModifyInstrumentCommand implements EnsembleCommand {
     private int newrole;
     private final String instrmntName;
     private final String descr;
-    private Object memento;
+    // Classic Memento Pattern: Command saves the Memento of the specific Musician being modified
+    private Musician.MusicianMemento memento;
 
     @Override
     public Ensemble getEnsemble() {
@@ -27,19 +28,17 @@ public class ModifyInstrumentCommand implements EnsembleCommand {
 
     @Override
     public void execute() {
-
-        if (manager != null) {
-            memento = manager.saveState();
-        }
+        // Classic Memento Pattern: Save state of only the Musician being modified
+        memento = musician.save();
         musician.setRole(newrole);
         System.out.println("instrument is updated.");
     }
 
     @Override
     public void undo() {
-
-        if (manager != null && memento != null) {
-            manager.restoreState(memento);
+        // Classic Memento Pattern: Restore state of only the Musician
+        if (memento != null) {
+            musician.restore(memento);
         }
     }
 

@@ -1,27 +1,37 @@
 public class Musician implements Cloneable {
 
     // Memento class (Inner class for encapsulation)
-    private class MusicianMemento {
+    public static class MusicianMemento {
         private final int role;
 
-        public MusicianMemento(int role) {
+        private MusicianMemento(int role) {
             this.role = role;
         }
 
-        // Package-private access for the Caretaker to get the state
-        public int getRole() {
+        private int getRole() {
             return role;
         }
     }
 
-    // Originator methods
-    public Object saveState() {
+    // Originator methods - Classic Memento Pattern
+    public MusicianMemento save() {
         return new MusicianMemento(this.role);
+    }
+
+    public void restore(MusicianMemento memento) {
+        if (memento != null) {
+            this.role = memento.getRole();
+        }
+    }
+
+    // Legacy methods for backward compatibility
+    public Object saveState() {
+        return save();
     }
 
     public void restoreState(Object memento) {
         if (memento instanceof MusicianMemento) {
-            this.role = ((MusicianMemento) memento).getRole();
+            restore((MusicianMemento) memento);
         }
     }
 

@@ -2,7 +2,8 @@ public class ChangeNameCommand implements EnsembleCommand {
     private EnsembleManager manager;
     private Ensemble ensemble;
     private String newName;
-    private Object memento;
+    // Classic Memento Pattern: Command saves the Memento of the specific Ensemble being modified
+    private Ensemble.EnsembleMemento memento;
 
     @Override
     public Ensemble getEnsemble() {
@@ -21,19 +22,17 @@ public class ChangeNameCommand implements EnsembleCommand {
 
     @Override
     public void execute() {
-
-        if (manager != null) {
-            memento = manager.saveState();
-        }
+        // Classic Memento Pattern: Save state of only the Ensemble being modified
+        memento = ensemble.save();
         ensemble.setName(newName);
         System.out.println("Ensemble's name is updated.");
     }
 
     @Override
     public void undo() {
-
-        if (manager != null && memento != null) {
-            manager.restoreState(memento);
+        // Classic Memento Pattern: Restore state of only the Ensemble
+        if (memento != null) {
+            ensemble.restore(memento);
         }
     }
 
