@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class TestEnsemble {
+public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         EnsembleManager manager = new EnsembleManager();
