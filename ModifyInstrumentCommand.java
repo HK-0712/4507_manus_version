@@ -5,7 +5,7 @@ public class ModifyInstrumentCommand implements EnsembleCommand {
     private int newrole;
     private final String instrmntName;
     private final String descr;
-    private Memento memento;
+    private Object memento;
 
     @Override
     public Ensemble getEnsemble() {

@@ -14,28 +14,44 @@ public class EnsembleManager {
         this.redoStack = new Stack<>();
     }
 
-    public Memento saveState() {
-
-        return new Memento(ensembles);
-    }
-
-    public void restoreState(Memento memento) {
-
+    public Object saveState() {
+        // Caretaker saves the state of all relevant Originators
+        LinkedList<Object> mementos = new LinkedList<>();
         for (Ensemble e : ensembles) {
+            Object ensembleMemento = e.saveState();
+            mementos.add(ensembleMemento);
+
             java.util.Iterator<Musician> it = e.getMusicians();
             while (it.hasNext()) {
                 Musician m = it.next();
-                Integer savedRole = memento.getMusicianRoles().get(m.getMID());
-                if (savedRole != null) {
-                    m.setRole(savedRole);
-                }
+                Object musicianMemento = m.saveState();
+                mementos.add(musicianMemento);
             }
         }
+        return mementos;
+    }
+
+    public void restoreState(Object memento) {
+        if (!(memento instanceof LinkedList)) {
+            return;
+        }
+
+        LinkedList<Object> mementos = (LinkedList<Object>) memento;
+        int mementoIndex = 0;
 
         for (Ensemble e : ensembles) {
-            String savedName = memento.getEnsembleNames().get(e.getEnsembleID());
-            if (savedName != null) {
-                e.setName(savedName);
+            // Restore Ensemble state
+            if (mementoIndex < mementos.size()) {
+                e.restoreState(mementos.get(mementoIndex++));
+            }
+
+            // Restore Musician states
+            java.util.Iterator<Musician> it = e.getMusicians();
+            while (it.hasNext()) {
+                Musician m = it.next();
+                if (mementoIndex < mementos.size()) {
+                    m.restoreState(mementos.get(mementoIndex++));
+                }
             }
         }
     }

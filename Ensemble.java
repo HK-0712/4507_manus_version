@@ -6,6 +6,33 @@ import java.util.Map;
 
 public abstract class Ensemble implements Cloneable {
 
+    // Memento class (Inner class for encapsulation)
+    private class EnsembleMemento {
+        private final String name;
+
+        public EnsembleMemento(String name) {
+            this.name = name;
+        }
+
+        // Package-private access for the Caretaker (EnsembleManager) to get the state
+        // In this case, we'll make it public for simplicity, but ideally it should be
+        // accessible only by the Originator and Caretaker (via package-private or interface)
+        public String getName() {
+            return name;
+        }
+    }
+
+    // Originator methods
+    public Object saveState() {
+        return new EnsembleMemento(this.name);
+    }
+
+    public void restoreState(Object memento) {
+        if (memento instanceof EnsembleMemento) {
+            this.name = ((EnsembleMemento) memento).getName();
+        }
+    }
+
     private String eID;
     private String name;
     private Map<String, Musician> musicians;

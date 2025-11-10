@@ -2,7 +2,7 @@ public class ChangeNameCommand implements EnsembleCommand {
     private EnsembleManager manager;
     private Ensemble ensemble;
     private String newName;
-    private Memento memento;
+    private Object memento;
 
     @Override
     public Ensemble getEnsemble() {
