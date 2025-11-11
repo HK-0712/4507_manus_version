@@ -17,7 +17,7 @@ c → o → E001 → Symphony Orchestra
 ```
 **Expected:** "orchestra ensemble is created." and becomes current ensemble
 
-**Screenshot:** [Insert screenshot here]
+**Screenshot:** ![alt text](image.png)
 
 ---
 
@@ -28,7 +28,7 @@ c → j → J001 → Cool Jazz Band
 ```
 **Expected:** "jazz band ensemble is created." and becomes current ensemble
 
-**Screenshot:** [Insert screenshot here]
+**Screenshot:** ![alt text](image-1.png)
 
 ---
 
@@ -40,7 +40,7 @@ a → M001, John Smith → 1
 ```
 **Expected:** "Musician is added."
 
-**Screenshot:** [Insert screenshot here]
+**Screenshot:** ![alt text](image-2.png)
 
 ---
 
@@ -52,7 +52,7 @@ a → M002, Mary Johnson → 2
 ```
 **Expected:** "Musician is added."
 
-**Screenshot:** [Insert screenshot here]
+**Screenshot:** ![alt text](image-3.png)
 
 ---
 
@@ -65,7 +65,7 @@ a → J001, Charlie Parker → 1
 ```
 **Expected:** "Musician is added."
 
-**Screenshot:** [Insert screenshot here]
+**Screenshot:** ![alt text](image-4.png)
 
 ---
 
@@ -77,7 +77,7 @@ se
 ```
 **Expected:** Display ensemble info with musicians listed by instrument
 
-**Screenshot:** [Insert screenshot here]
+**Screenshot:** ![alt text](image-5.png)
 
 ---
 
@@ -89,7 +89,7 @@ sa
 ```
 **Expected:** List all ensembles with type and name
 
-**Screenshot:** [Insert screenshot here]
+**Screenshot:** ![alt text](image-6.png)
 
 ---
 
@@ -101,7 +101,7 @@ m → M001 → 2
 ```
 **Expected:** "instrument is updated." (M001 becomes cellist)
 
-**Screenshot:** [Insert screenshot here]
+**Screenshot:** ![alt text](image-7.png)
 
 ---
 
@@ -113,7 +113,7 @@ u
 ```
 **Expected:** "Command (...) is undone." (M001 back to violinist)
 
-**Screenshot:** [Insert screenshot here]
+**Screenshot:** ![alt text](image-8.png)
 
 ---
 
@@ -125,7 +125,7 @@ cn → Royal Symphony
 ```
 **Expected:** "Ensemble's name is updated."
 
-**Screenshot:** [Insert screenshot here]
+**Screenshot:** ![alt text](image-9.png)
 
 ---
 
@@ -137,7 +137,7 @@ u
 ```
 **Expected:** "Command (...) is undone." (name restored)
 
-**Screenshot:** [Insert screenshot here]
+**Screenshot:** ![alt text](image-10.png)
 
 ---
 
@@ -149,7 +149,7 @@ r
 ```
 **Expected:** "Command (...) is redone."
 
-**Screenshot:** [Insert screenshot here]
+**Screenshot:** ![alt text](image-11.png)
 
 ---
 
@@ -161,7 +161,7 @@ l
 ```
 **Expected:** Show undo list and redo list
 
-**Screenshot:** [Insert screenshot here]
+**Screenshot:** ![alt text](image-12.png)
 
 ---
 
@@ -173,7 +173,7 @@ d → M002
 ```
 **Expected:** "Musician is deleted."
 
-**Screenshot:** [Insert screenshot here]
+**Screenshot:** ![alt text](image-13.png)
 
 ---
 
@@ -185,7 +185,7 @@ u
 ```
 **Expected:** "Command (...) is undone." (M002 restored)
 
-**Screenshot:** [Insert screenshot here]
+**Screenshot:** ![alt text](image-14.png)
 
 ---
 
@@ -197,7 +197,7 @@ s → E001
 ```
 **Expected:** "Changed current ensemble to E001."
 
-**Screenshot:** [Insert screenshot here]
+**Screenshot:** ![alt text](image-15.png)
 
 ---
 
@@ -208,7 +208,7 @@ c → x → E999 → Test
 ```
 **Expected:** "Invalid music type."
 
-**Screenshot:** [Insert screenshot here]
+**Screenshot:** ![alt text](image-16.png)
 
 ---
 
@@ -220,19 +220,21 @@ m → M999
 ```
 **Expected:** "Musician not found in current ensemble."
 
-**Screenshot:** [Insert screenshot here]
+**Screenshot:** ![alt text](image-17.png)
 
 ---
 
 ### TC019: Error - No Current Ensemble
-**Prerequisites:** No current ensemble or after deleting current
+**Prerequisites:** Start fresh system (no ensembles created yet)
 **Input:**
 ```
 a
 ```
 **Expected:** "No current ensemble set."
 
-**Screenshot:** [Insert screenshot here]
+**Note:** This test should be run at the beginning, before TC001.
+
+**Screenshot:** ![alt text](image-19.png)
 
 ---
 
@@ -243,7 +245,7 @@ x
 ```
 **Expected:** "Exiting system."
 
-**Screenshot:** [Insert screenshot here]
+**Screenshot:** ![alt text](image-18.png)
 
 ---
 

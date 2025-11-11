@@ -9,25 +9,27 @@ public abstract class Ensemble implements Cloneable {
     // Memento pattern - stores ensemble name for undo/redo
     public static class EnsembleMemento {
         private final String name;
+        private final Ensemble ensemble;
 
-        private EnsembleMemento(String name) {
-            this.name = name;
+        private EnsembleMemento(Ensemble ensemble) {
+            this.ensemble = ensemble;
+            this.name = ensemble.name;
         }
 
-        private String getName() {
-            return name;
+        private void restore() {
+            ensemble.setName(name);
         }
     }
 
     // Save current state
     public EnsembleMemento save() {
-        return new EnsembleMemento(this.name);
+        return new EnsembleMemento(this);
     }
 
-    // Restore from memento
+    // Restore from memento (calls memento's restore method)
     public void restore(EnsembleMemento memento) {
         if (memento != null) {
-            this.name = memento.getName();
+            memento.restore();
         }
     }
 
