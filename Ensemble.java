@@ -5,8 +5,6 @@ import java.util.TreeMap;
 import java.util.Map;
 
 public abstract class Ensemble implements Cloneable {
-
-    // Memento pattern - stores ensemble name for undo/redo
     public static class EnsembleMemento {
         private final String name;
         private final Ensemble ensemble;
@@ -21,19 +19,16 @@ public abstract class Ensemble implements Cloneable {
         }
     }
 
-    // Save current state
     public EnsembleMemento save() {
         return new EnsembleMemento(this);
     }
 
-    // Restore from memento (calls memento's restore method)
     public void restore(EnsembleMemento memento) {
         if (memento != null) {
             memento.restore();
         }
     }
 
-    // Legacy methods for backward compatibility
     public Object saveState() {
         return save();
     }
@@ -94,8 +89,6 @@ public abstract class Ensemble implements Cloneable {
     public Iterator<Musician> getMusicians() {
         return musicians.values().iterator();
     }
-
-    public abstract void updateMusicianRole();
 
     public abstract void showEnsemble();
 }

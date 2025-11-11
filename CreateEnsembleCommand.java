@@ -1,6 +1,5 @@
 import java.util.LinkedList;
 
-// Command to create new ensemble
 public class CreateEnsembleCommand implements EnsembleCommand {
     private EnsembleManager manager;
     private LinkedList<Ensemble> ensembles;

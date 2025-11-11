@@ -2,7 +2,6 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-// Orchestra ensemble with specific instruments
 public class OrchestraEnsemble extends Ensemble {
 
     public static final int VIOLINIST_ROLE = 1;
@@ -10,11 +9,6 @@ public class OrchestraEnsemble extends Ensemble {
 
     public OrchestraEnsemble(String eID) {
         super(eID);
-    }
-
-    @Override
-    public void updateMusicianRole() {
-
     }
 
     @Override

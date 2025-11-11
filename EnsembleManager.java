@@ -1,12 +1,11 @@
 import java.util.LinkedList;
 import java.util.Stack;
 
-// Manager class to handle ensembles and command history
 public class EnsembleManager {
     private LinkedList<Ensemble> ensembles;
     private Ensemble currentEnsemble;
-    private Stack<Command> history;  // for undo
-    private Stack<Command> redoStack;  // for redo
+    private Stack<Command> history;  
+    private Stack<Command> redoStack;  
 
     public EnsembleManager() {
         this.ensembles = new LinkedList<>();
@@ -16,7 +15,7 @@ public class EnsembleManager {
     }
 
     public Object saveState() {
-        // Caretaker saves the state of all relevant Originators
+        
         LinkedList<Object> mementos = new LinkedList<>();
         for (Ensemble e : ensembles) {
             Object ensembleMemento = e.saveState();
@@ -41,12 +40,12 @@ public class EnsembleManager {
         int mementoIndex = 0;
 
         for (Ensemble e : ensembles) {
-            // Restore Ensemble state
+            
             if (mementoIndex < mementos.size()) {
                 e.restoreState(mementos.get(mementoIndex++));
             }
 
-            // Restore Musician states
+            
             java.util.Iterator<Musician> it = e.getMusicians();
             while (it.hasNext()) {
                 Musician m = it.next();
@@ -58,7 +57,7 @@ public class EnsembleManager {
     }
 
     public void executeCommand(Command command) {
-        // Clear redo stack when new command is executed
+        
         redoStack.clear();
 
         command.execute();
