@@ -1,11 +1,11 @@
 # Part 3: Design Patterns
 
-This section explain the three design patterns that I used in MEMS system and why they are important.
+This section explains the three design patterns that I used in MEMS system and why they are important.
 
 ## 3.1 Command Pattern
 
 ### 3.1.1 What is Command Pattern
-Command Pattern is a behavioral design pattern that turn a request into a stand-alone object. This object contains all information about the request.
+Command Pattern is a behavioral design pattern that turns a request into a stand-alone object. This object contains all information about the request.
 
 ### 3.1.2 Why I Use It
 In MEMS, I have 12 different functions (create ensemble, add musician, delete musician, etc.). Without Command Pattern, all these logic will be put in Main class which make the code very messy and hard to maintain. Also, I need undo/redo functionality which is very difficult to implement without Command Pattern.
@@ -22,7 +22,7 @@ public interface Command {
 }
 ```
 
-All commands must implement these four methods. The `execute()` do the actual work, `undo()` reverse the operation, `getDescription()` return description for undo/redo list.
+All commands must implement these four methods. The `execute()` does the actual work, `undo()` reverses the operation, `getDescription()` returns description for undo/redo list.
 
 **Concrete Command Classes:**
 I created 12 concrete command classes for 12 functions:
@@ -40,17 +40,17 @@ I created 12 concrete command classes for 12 functions:
 12. QuitCommand - exit program
 
 **Invoker (EnsembleManager):**
-The EnsembleManager class act as invoker. It maintain two stacks:
+The EnsembleManager class acts as invoker. It maintains two stacks:
 - `history` stack - store executed commands for undo
 - `redoStack` - store undone commands for redo
 
 When user execute command, manager push it to history stack. When user undo, manager pop from history and push to redo stack.
 
 **Benefits in Our System:**
-- Each command is separate class, easy to understand and modify
+- Each command is a separate class, easy to understand and modify
 - New commands can be added easily without changing existing code
-- Undo/redo implementation become natural and simple
-- Main class is clean, it just create commands and execute them
+- Undo/redo implementation becomes natural and simple
+- Main class is clean, it just creates commands and executes them
 
 ### 3.1.4 Example: AddMusicianCommand
 ```java
@@ -75,7 +75,7 @@ When user add musician, execute() is called. If user want to undo, the undo() me
 ## 3.2 Factory Pattern
 
 ### 3.2.1 What is Factory Pattern
-Factory Pattern is creational design pattern that provide a way to create objects without specify the exact class of object that will be created.
+Factory Pattern is creational design pattern that provides a way to create objects without specifying the exact class of object that will be created.
 
 ### 3.2.2 Why I Use It
 Creating command objects is complicated because:
@@ -103,14 +103,14 @@ public class CommandFactory {
 }
 ```
 
-The factory have one main method `createCommand()` that take command code (like "c", "a", "d") and return appropriate Command object.
+The factory has one main method `createCommand()` that takes command code (like "c", "a", "d") and returns appropriate Command object.
 
 **How It Works:**
-1. User type command code in Main
-2. Main pass the code to CommandFactory
-3. Factory create the correct Command object
-4. Factory handle all user input needed for that command
-5. Factory return ready-to-execute Command back to Main
+1. User types command code in Main
+2. Main passes the code to CommandFactory
+3. Factory creates the correct Command object
+4. Factory handles all user input needed for that command
+5. Factory returns ready-to-execute Command back to Main
 
 **Benefits in Our System:**
 - Main class don't need to know details of creating commands
@@ -145,11 +145,11 @@ Memento Pattern is behavioral design pattern that let you save and restore previ
 
 ### 3.3.2 Why I Use It
 For undo functionality, I need to save the state before making changes. For example:
-- Before change musician's instrument, save the old instrument
-- Before change ensemble name, save the old name
+- Before changing musician's instrument, save the old instrument
+- Before changing ensemble name, save the old name
 - When user undo, restore the saved state
 
-Without Memento Pattern, Command classes would need to know internal details of Musician and Ensemble classes, which break encapsulation.
+Without Memento Pattern, Command classes would need to know internal details of Musician and Ensemble classes, which breaks encapsulation.
 
 ### 3.3.3 How I Implement It
 
@@ -233,7 +233,7 @@ All three patterns work together to make MEMS flexible and maintainable:
    - History stack enable undo/redo
    - Each command know how to undo itself
 
-This combination make the system:
+This combination makes the system:
 - Easy to extend (add new commands)
 - Easy to maintain (each pattern has clear responsibility)
 - Easy to test (each command can be tested separately)
@@ -247,4 +247,4 @@ This combination make the system:
 | Factory | Create command objects | CommandFactory |
 | Memento | Save and restore state | MusicianMemento, EnsembleMemento |
 
-These patterns are not just for fulfill assignment requirement, they actually solve real problems in the system design and make code better organized and easier to understand.
+These patterns are not just to fulfill assignment requirement, they actually solve real problems in the system design and make code better organized and easier to understand.
