@@ -28,7 +28,6 @@ public class CreateEnsembleCommand implements EnsembleCommand {
     @Override
     public void execute() {
         ensembles.add(ensemble);
-        System.out.println(ensembleTypeLabel + " is created.");
     }
 
     @Override

@@ -1,7 +1,7 @@
 public class ChangeNameCommand implements EnsembleCommand {
     private final Ensemble ensemble;
     private final String newName;
-    private String oldName;
+    private EnsembleMemento memento;
 
     @Override
     public Ensemble getEnsemble() {
@@ -20,14 +20,13 @@ public class ChangeNameCommand implements EnsembleCommand {
 
     @Override
     public void execute() {
-        oldName = ensemble.getName();
+        memento = new EnsembleMemento(ensemble);
         ensemble.setName(newName);
-        System.out.println("Ensemble's name is updated.");
     }
 
     @Override
     public void undo() {
-        ensemble.setName(oldName);
+        memento.restore();
     }
 
     @Override

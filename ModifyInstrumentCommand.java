@@ -4,7 +4,7 @@ public class ModifyInstrumentCommand implements EnsembleCommand {
     private final int newRole;
     private final String instrumentName;
     private final String description;
-    private int previousRole;
+    private MusicianMemento memento;
 
     @Override
     public Ensemble getEnsemble() {
@@ -26,16 +26,13 @@ public class ModifyInstrumentCommand implements EnsembleCommand {
 
     @Override
     public void execute() {
-        previousRole = musician.getRole();
+        memento = new MusicianMemento(musician);
         musician.setRole(newRole);
-        ensemble.updateMusicianRole();
-        System.out.println("instrument is updated.");
     }
 
     @Override
     public void undo() {
-        musician.setRole(previousRole);
-        ensemble.updateMusicianRole();
+        memento.restore();
     }
 
     @Override

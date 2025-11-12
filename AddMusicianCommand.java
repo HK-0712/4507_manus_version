@@ -24,7 +24,6 @@ public class AddMusicianCommand implements EnsembleCommand {
     @Override
     public void execute() {
         ensemble.addMusician(musician);
-        System.out.println("Musician is added.");
     }
 
     @Override

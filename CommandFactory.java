@@ -15,14 +15,22 @@ public class CommandFactory {
         switch (commandCode) {
             case "c":
                 return createEnsembleCommand();
+            case "s":
+                return setCurrentEnsembleCommand();
             case "a":
                 return addMusicianCommand();
             case "m":
                 return modifyInstrumentCommand();
             case "d":
                 return deleteMusicianCommand();
+            case "se":
+                return new ShowEnsembleCommand(manager);
+            case "sa":
+                return new DisplayAllEnsemblesCommand(manager);
             case "cn":
                 return changeNameCommand();
+            case "l":
+                return new ListUndoRedoCommand(manager);
 
             default:
                 return null;
@@ -198,6 +206,12 @@ public class CommandFactory {
         }
 
     return new DeleteMusicianCommand(currentEnsemble, musican);
+    }
+
+    private Command setCurrentEnsembleCommand() {
+        System.out.print("Please input ensemble ID:- ");
+        String eID = scanner.nextLine().trim();
+        return new SetCurrentEnsembleCommand(manager, eID);
     }
 
     private Command changeNameCommand() {

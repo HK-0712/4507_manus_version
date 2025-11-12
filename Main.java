@@ -31,53 +31,52 @@ public class Main {
             if (commandCode.equals("x")) {
                 System.out.println("Exiting system.");
                 break;
-            } else if (commandCode.equals("s")) {
-                System.out.print("Please input ensemble ID:- ");
-                String eID = scanner.nextLine().trim();
-                Ensemble ens = null;
-                for (Ensemble e : manager.getEnsembles()) {
-                    if (e.getEnsembleID().equals(eID)) {
-                        ens = e;
-                        break;
-                    }
-                }
-                if (ens != null) {
-                    manager.setCurrentEnsemble(ens);
-                    System.out.println("Changed current ensemble to " + eID + ".");
-                } else {
-                    System.out.println("Ensemble " + eID + " is not found!!");
-                }
-            } else if (commandCode.equals("se")) {
-                manager.showCurrentEnsemble();
-            } else if (commandCode.equals("sa")) {
-                manager.displayAllEnsembles();
             } else if (commandCode.equals("u")) {
                 manager.undo();
             } else if (commandCode.equals("r")) {
                 manager.redo();
-            } else if (commandCode.equals("l")) {
-                manager.listUndoRedo();
             } else {
                 Command command = factory.createCommand(commandCode);
                 if (command != null) {
 
                     command.setManager(manager);
-                    manager.executeCommand(command);
+                    
+                    // Special handling for commands that don't modify state and shouldn't be in undo list
+                    if (commandCode.equals("se") || commandCode.equals("sa") || commandCode.equals("l")) {
+                        command.execute();
+                    } else if (commandCode.equals("s")) {
+                        // Set current ensemble - execute but don't add to history
+                        command.execute();
+                        SetCurrentEnsembleCommand setCmd = (SetCurrentEnsembleCommand) command;
+                        if (setCmd.isSuccess()) {
+                            System.out.println("Changed current ensemble to " + setCmd.getEnsembleID() + ".");
+                        } else {
+                            System.out.println("Ensemble " + setCmd.getEnsembleID() + " is not found!!");
+                        }
+                    } else {
+                        // Commands that modify state
+                        manager.executeCommand(command);
 
-                    if (commandCode.equals("c")) {
-
-                        Ensemble ens = manager.getEnsembles().get(manager.getEnsembles().size() - 1);
-                        manager.setCurrentEnsemble(ens);
-
-                        System.out.println("Current ensemble is changed to " + ens.getEnsembleID() + ".");
-                    } else if (commandCode.equals("a")) {
-
-                    } else if (commandCode.equals("m")) {
-
-                    } else if (commandCode.equals("d")) {
-
-                    } else if (commandCode.equals("cn")) {
-
+                        if (commandCode.equals("c")) {
+                            Ensemble ens = manager.getEnsembles().get(manager.getEnsembles().size() - 1);
+                            
+                            if (ens instanceof OrchestraEnsemble) {
+                                System.out.println("Orchestra ensemble is created.");
+                            } else if (ens instanceof JazzBandEnsemble) {
+                                System.out.println("Jazz band ensemble is created.");
+                            }
+                            
+                            manager.setCurrentEnsemble(ens);
+                            System.out.println("Current ensemble is changed to " + ens.getEnsembleID() + ".");
+                        } else if (commandCode.equals("a")) {
+                            System.out.println("Musician is added.");
+                        } else if (commandCode.equals("m")) {
+                            System.out.println("instrument is updated.");
+                        } else if (commandCode.equals("d")) {
+                            System.out.println("Musician is deleted.");
+                        } else if (commandCode.equals("cn")) {
+                            System.out.println("Ensemble's name is updated.");
+                        }
                     }
                 } else if (!commandCode.isEmpty()) {
                     System.out.println("Invalid command.");
