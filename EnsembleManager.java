@@ -167,14 +167,6 @@ public class EnsembleManager {
         }
     }
 
-    public Stack<Command> getHistory() {
-        return history;
-    }
-
-    public Stack<Command> getRedoStack() {
-        return redoStack;
-    }
-
     private String getEnsembleTypeLabel(Ensemble ensemble) {
         if (ensemble instanceof OrchestraEnsemble) {
             return "orchestra ensemble";

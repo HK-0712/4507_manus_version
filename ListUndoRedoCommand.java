@@ -7,7 +7,7 @@ public class ListUndoRedoCommand implements Command {
 
     @Override
     public void setManager(EnsembleManager manager) {
-        // Already set in constructor
+        
     }
 
     @Override
@@ -17,7 +17,7 @@ public class ListUndoRedoCommand implements Command {
 
     @Override
     public void undo() {
-        // List command doesn't need undo
+        
     }
 
     @Override

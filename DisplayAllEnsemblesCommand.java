@@ -7,7 +7,7 @@ public class DisplayAllEnsemblesCommand implements Command {
 
     @Override
     public void setManager(EnsembleManager manager) {
-        // Already set in constructor
+        
     }
 
     @Override
@@ -17,7 +17,7 @@ public class DisplayAllEnsemblesCommand implements Command {
 
     @Override
     public void undo() {
-        // Display command doesn't need undo
+        
     }
 
     @Override

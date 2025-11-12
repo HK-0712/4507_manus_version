@@ -1,4 +1,4 @@
 @echo off
-javac *.java 2>nul
+javac *.java
 java Main
 pause

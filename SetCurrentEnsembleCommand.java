@@ -11,14 +11,13 @@ public class SetCurrentEnsembleCommand implements Command {
 
     @Override
     public void setManager(EnsembleManager manager) {
-        // Already set in constructor
+        
     }
 
     @Override
     public void execute() {
         previousEnsemble = manager.getCurrentEnsemble();
         
-        // Find the ensemble
         targetEnsemble = null;
         for (Ensemble e : manager.getEnsembles()) {
             if (e.getEnsembleID().equals(ensembleID)) {

@@ -41,11 +41,11 @@ public class Main {
 
                     command.setManager(manager);
                     
-                    // Special handling for commands that don't modify state and shouldn't be in undo list
+                    
                     if (commandCode.equals("se") || commandCode.equals("sa") || commandCode.equals("l")) {
                         command.execute();
                     } else if (commandCode.equals("s")) {
-                        // Set current ensemble - execute but don't add to history
+                        
                         command.execute();
                         SetCurrentEnsembleCommand setCmd = (SetCurrentEnsembleCommand) command;
                         if (setCmd.isSuccess()) {
@@ -54,7 +54,7 @@ public class Main {
                             System.out.println("Ensemble " + setCmd.getEnsembleID() + " is not found!!");
                         }
                     } else {
-                        // Commands that modify state
+                        
                         manager.executeCommand(command);
 
                         if (commandCode.equals("c")) {

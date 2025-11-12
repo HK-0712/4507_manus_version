@@ -20,12 +20,12 @@ public class DeleteMusicianCommand implements EnsembleCommand {
 
     @Override
     public void setManager(EnsembleManager manager) {
-        // Not required for current operations.
+        
     }
 
     @Override
     public void execute() {
-        // Save the complete order of all musicians before deletion
+        
         allMusiciansBeforeDelete.clear();
         Iterator<Musician> iterator = ensemble.getMusicians();
         while (iterator.hasNext()) {
@@ -37,7 +37,7 @@ public class DeleteMusicianCommand implements EnsembleCommand {
 
     @Override
     public void undo() {
-        // Remove all current musicians
+        
         List<Musician> currentMusicians = new ArrayList<>();
         Iterator<Musician> iterator = ensemble.getMusicians();
         while (iterator.hasNext()) {
@@ -47,7 +47,7 @@ public class DeleteMusicianCommand implements EnsembleCommand {
             ensemble.dropMusician(m);
         }
         
-        // Re-add all musicians in the original order
+        
         for (Musician m : allMusiciansBeforeDelete) {
             ensemble.addMusician(m);
         }

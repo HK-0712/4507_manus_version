@@ -22,7 +22,7 @@ public class CreateEnsembleCommand implements EnsembleCommand {
 
     @Override
     public void setManager(EnsembleManager manager) {
-        // Not required for current operations.
+        
     }
 
     @Override
