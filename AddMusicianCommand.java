@@ -1,10 +1,8 @@
 public class AddMusicianCommand implements EnsembleCommand {
-
-    private EnsembleManager manager;
-    private Ensemble ensemble;
-    private Musician musician;
-    private final String instrumnt;
-    private final String desc;
+    private final Ensemble ensemble;
+    private final Musician musician;
+    private final String instrumentLabel;
+    private final String description;
 
     @Override
     public Ensemble getEnsemble() {
@@ -14,13 +12,13 @@ public class AddMusicianCommand implements EnsembleCommand {
     public AddMusicianCommand(Ensemble ensemble, Musician musician) {
         this.ensemble = ensemble;
         this.musician = musician;
-        this.instrumnt = getRoleStr(musician.getRole());
-        this.desc = makeDesc();
+        this.instrumentLabel = getRoleStr(musician.getRole());
+        this.description = buildDescription();
     }
 
     @Override
     public void setManager(EnsembleManager manager) {
-        this.manager = manager;
+        // Not required for current operations.
     }
 
     @Override
@@ -36,18 +34,31 @@ public class AddMusicianCommand implements EnsembleCommand {
 
     @Override
     public String getDescription() {
-        return desc;
+        return description;
     }
 
-    private String makeDesc() {
-        return "Add musician, " + musician.getMID() + ", " + musician.getName() + ", " + instrumnt;
+    private String buildDescription() {
+        return "Add musician, " + musician.getMID() + ", " + musician.getName() + ", " + instrumentLabel;
     }
 
     private String getRoleStr(int role) {
         if (ensemble instanceof OrchestraEnsemble) {
-            return ((OrchestraEnsemble) ensemble).getRoleName(role);
+            if (role == OrchestraEnsemble.VIOLINIST_ROLE) {
+                return "violinist";
+            }
+            if (role == OrchestraEnsemble.CELLIST_ROLE) {
+                return "cellist";
+            }
         } else if (ensemble instanceof JazzBandEnsemble) {
-            return ((JazzBandEnsemble) ensemble).getRoleName(role);
+            if (role == JazzBandEnsemble.PIANIST_ROLE) {
+                return "pianist";
+            }
+            if (role == JazzBandEnsemble.SAXOPHONIST_ROLE) {
+                return "saxophonist";
+            }
+            if (role == JazzBandEnsemble.DRUMMER_ROLE) {
+                return "drummer";
+            }
         }
         return "unknown";
     }

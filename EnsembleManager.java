@@ -2,10 +2,10 @@ import java.util.LinkedList;
 import java.util.Stack;
 
 public class EnsembleManager {
-    private LinkedList<Ensemble> ensembles;
+    private final LinkedList<Ensemble> ensembles;
     private Ensemble currentEnsemble;
-    private Stack<Command> history;  
-    private Stack<Command> redoStack;  
+    private final Stack<Command> history;
+    private final Stack<Command> redoStack;
 
     public EnsembleManager() {
         this.ensembles = new LinkedList<>();
@@ -14,50 +14,7 @@ public class EnsembleManager {
         this.redoStack = new Stack<>();
     }
 
-    public Object saveState() {
-        
-        LinkedList<Object> mementos = new LinkedList<>();
-        for (Ensemble e : ensembles) {
-            Object ensembleMemento = e.saveState();
-            mementos.add(ensembleMemento);
-
-            java.util.Iterator<Musician> it = e.getMusicians();
-            while (it.hasNext()) {
-                Musician m = it.next();
-                Object musicianMemento = m.saveState();
-                mementos.add(musicianMemento);
-            }
-        }
-        return mementos;
-    }
-
-    public void restoreState(Object memento) {
-        if (!(memento instanceof LinkedList)) {
-            return;
-        }
-
-        LinkedList<Object> mementos = (LinkedList<Object>) memento;
-        int mementoIndex = 0;
-
-        for (Ensemble e : ensembles) {
-            
-            if (mementoIndex < mementos.size()) {
-                e.restoreState(mementos.get(mementoIndex++));
-            }
-
-            
-            java.util.Iterator<Musician> it = e.getMusicians();
-            while (it.hasNext()) {
-                Musician m = it.next();
-                if (mementoIndex < mementos.size()) {
-                    m.restoreState(mementos.get(mementoIndex++));
-                }
-            }
-        }
-    }
-
     public void executeCommand(Command command) {
-        
         redoStack.clear();
 
         command.execute();
@@ -97,13 +54,7 @@ public class EnsembleManager {
             if (!(command instanceof CreateEnsembleCommand) && command instanceof EnsembleCommand) {
                 Ensemble ens = ((EnsembleCommand) command).getEnsemble();
 
-                boolean ensExists = false;
-                for (Ensemble e : ensembles) {
-                    if (e.equals(ens)) {
-                        ensExists = true;
-                        break;
-                    }
-                }
+                boolean ensExists = ensembles.contains(ens);
 
                 if (ensExists && !ens.equals(currentEnsemble)) {
 
@@ -150,13 +101,7 @@ public class EnsembleManager {
             else if (command instanceof EnsembleCommand) {
                 Ensemble ens = ((EnsembleCommand) command).getEnsemble();
 
-                boolean ensExists = false;
-                for (Ensemble e : ensembles) {
-                    if (e.equals(ens)) {
-                        ensExists = true;
-                        break;
-                    }
-                }
+                boolean ensExists = ensembles.contains(ens);
 
                 if (ensExists && !ens.equals(currentEnsemble)) {
 
@@ -218,7 +163,7 @@ public class EnsembleManager {
             return;
         }
         for (Ensemble e : ensembles) {
-            System.out.println(e.getEnsembleTypeDescription() + " " + e.getName() + " (" + e.getEnsembleID() + ")");
+            System.out.println(getEnsembleTypeLabel(e) + " " + e.getName() + " (" + e.getEnsembleID() + ")");
         }
     }
 
@@ -228,5 +173,15 @@ public class EnsembleManager {
 
     public Stack<Command> getRedoStack() {
         return redoStack;
+    }
+
+    private String getEnsembleTypeLabel(Ensemble ensemble) {
+        if (ensemble instanceof OrchestraEnsemble) {
+            return "orchestra ensemble";
+        }
+        if (ensemble instanceof JazzBandEnsemble) {
+            return "jazz band ensemble";
+        }
+        return "ensemble";
     }
 }

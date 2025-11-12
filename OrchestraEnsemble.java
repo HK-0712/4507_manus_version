@@ -3,7 +3,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class OrchestraEnsemble extends Ensemble {
-
     public static final int VIOLINIST_ROLE = 1;
     public static final int CELLIST_ROLE = 2;
 
@@ -12,8 +11,15 @@ public class OrchestraEnsemble extends Ensemble {
     }
 
     @Override
-    public String getEnsembleTypeDescription() {
-        return "orchestra ensemble";
+    public void updateMusicianRole() {
+        Iterator<Musician> iterator = getMusicians();
+        while (iterator.hasNext()) {
+            Musician musician = iterator.next();
+            int role = musician.getRole();
+            if (role != VIOLINIST_ROLE && role != CELLIST_ROLE) {
+                musician.setRole(0);
+            }
+        }
     }
 
     @Override
@@ -26,39 +32,31 @@ public class OrchestraEnsemble extends Ensemble {
 
         Iterator<Musician> iterator = getMusicians();
         while (iterator.hasNext()) {
-            Musician m = iterator.next();
-            int role = m.getRole();
+            Musician musician = iterator.next();
+            int role = musician.getRole();
             if (roles.containsKey(role)) {
-                if (roles.get(role).length() > 0) {
-                    roles.get(role).append("\n");
+                StringBuilder builder = roles.get(role);
+                if (builder.length() > 0) {
+                    builder.append("\n");
                 }
-                roles.get(role).append(m.getMID()).append(", ").append(m.getName());
+                builder.append(musician.getMID()).append(", ").append(musician.getName());
             }
         }
 
         System.out.println("Violinist:");
-        if (roles.get(VIOLINIST_ROLE).length() > 0) {
-            System.out.println(roles.get(VIOLINIST_ROLE).toString());
+        StringBuilder violinistList = roles.get(VIOLINIST_ROLE);
+        if (violinistList != null && violinistList.length() > 0) {
+            System.out.println(violinistList.toString());
         } else {
             System.out.println("NIL");
         }
 
         System.out.println("Cellist:");
-        if (roles.get(CELLIST_ROLE).length() > 0) {
-            System.out.println(roles.get(CELLIST_ROLE).toString());
+        StringBuilder cellistList = roles.get(CELLIST_ROLE);
+        if (cellistList != null && cellistList.length() > 0) {
+            System.out.println(cellistList.toString());
         } else {
             System.out.println("NIL");
-        }
-    }
-
-    public String getRoleName(int role) {
-        switch (role) {
-            case VIOLINIST_ROLE:
-                return "violinist";
-            case CELLIST_ROLE:
-                return "cellist";
-            default:
-                return "unknown";
         }
     }
 }

@@ -1,9 +1,7 @@
 public class ChangeNameCommand implements EnsembleCommand {
-    private EnsembleManager manager;
-    private Ensemble ensemble;
-    private String newName;
-
-    private Ensemble.EnsembleMemento memento;
+    private final Ensemble ensemble;
+    private final String newName;
+    private String oldName;
 
     @Override
     public Ensemble getEnsemble() {
@@ -17,27 +15,23 @@ public class ChangeNameCommand implements EnsembleCommand {
 
     @Override
     public void setManager(EnsembleManager manager) {
-        this.manager = manager;
+        // Not required for current operations.
     }
 
     @Override
     public void execute() {
-
-        memento = ensemble.save();
+        oldName = ensemble.getName();
         ensemble.setName(newName);
         System.out.println("Ensemble's name is updated.");
     }
 
     @Override
     public void undo() {
-
-        if (memento != null) {
-            ensemble.restore(memento);
-        }
+        ensemble.setName(oldName);
     }
 
     @Override
     public String getDescription() {
-        return "Change ensemble\u2019s name, " + ensemble.getEnsembleID() + ", " + newName;
+        return "Change ensemble's name, " + ensemble.getEnsembleID() + ", " + newName;
     }
 }

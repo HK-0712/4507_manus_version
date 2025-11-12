@@ -7,7 +7,7 @@ public class Main {
 
         while (true) {
             
-            CommandFactory factory = new CommandFactory(manager.getEnsembles(), manager.getCurrentEnsemble(), scanner);
+            CommandFactory factory = new CommandFactory(manager, scanner);
 
             System.out.println("");
             System.err.println("Music Ensembles Management System (MEMS)");

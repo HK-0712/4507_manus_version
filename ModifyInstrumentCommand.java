@@ -1,12 +1,10 @@
 public class ModifyInstrumentCommand implements EnsembleCommand {
-    private EnsembleManager manager;
-    private Ensemble ensemble;
-    private Musician musician;
-    private int newrole;
-    private final String instrmntName;
-    private final String descr;
-    
-    private Musician.MusicianMemento memento;
+    private final Ensemble ensemble;
+    private final Musician musician;
+    private final int newRole;
+    private final String instrumentName;
+    private final String description;
+    private int previousRole;
 
     @Override
     public Ensemble getEnsemble() {
@@ -16,47 +14,58 @@ public class ModifyInstrumentCommand implements EnsembleCommand {
     public ModifyInstrumentCommand(Ensemble ensemble, Musician musician, int newRole) {
         this.ensemble = ensemble;
         this.musician = musician;
-        this.newrole = newRole;
-        this.instrmntName = getInstrumentName(newRole);
-        this.descr = getDesc();
+        this.newRole = newRole;
+        this.instrumentName = getInstrumentName(newRole);
+        this.description = buildDescription();
     }
 
     @Override
     public void setManager(EnsembleManager manager) {
-        this.manager = manager;
+        // Not required for current operations.
     }
 
     @Override
     public void execute() {
-        
-        memento = musician.save();
-        musician.setRole(newrole);
+        previousRole = musician.getRole();
+        musician.setRole(newRole);
+        ensemble.updateMusicianRole();
         System.out.println("instrument is updated.");
     }
 
     @Override
     public void undo() {
-        
-        if (memento != null) {
-            musician.restore(memento);
-        }
+        musician.setRole(previousRole);
+        ensemble.updateMusicianRole();
     }
 
     @Override
     public String getDescription() {
-        return descr;
+        return description;
     }
 
     private String getInstrumentName(int role) {
         if (ensemble instanceof OrchestraEnsemble) {
-            return ((OrchestraEnsemble) ensemble).getRoleName(role);
+            if (role == OrchestraEnsemble.VIOLINIST_ROLE) {
+                return "violinist";
+            }
+            if (role == OrchestraEnsemble.CELLIST_ROLE) {
+                return "cellist";
+            }
         } else if (ensemble instanceof JazzBandEnsemble) {
-            return ((JazzBandEnsemble) ensemble).getRoleName(role);
+            if (role == JazzBandEnsemble.PIANIST_ROLE) {
+                return "pianist";
+            }
+            if (role == JazzBandEnsemble.SAXOPHONIST_ROLE) {
+                return "saxophonist";
+            }
+            if (role == JazzBandEnsemble.DRUMMER_ROLE) {
+                return "drummer";
+            }
         }
         return "unknown";
     }
 
-    private String getDesc() {
-        return "Modify musician's instrument, " + musician.getMID() + ", " + instrmntName;
+    private String buildDescription() {
+        return "Modify musician's instrument, " + musician.getMID() + ", " + instrumentName;
     }
 }

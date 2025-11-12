@@ -1,15 +1,12 @@
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.Scanner;
 
 public class CommandFactory {
-    private LinkedList<Ensemble> ensembles;
-    private Ensemble currentEnsemble;
-    private Scanner scanner;
+    private final EnsembleManager manager;
+    private final Scanner scanner;
 
-    public CommandFactory(LinkedList<Ensemble> ensembles, Ensemble currentEnsemble, Scanner scanner) {
-        this.ensembles = ensembles;
-        this.currentEnsemble = currentEnsemble;
+    public CommandFactory(EnsembleManager manager, Scanner scanner) {
+        this.manager = manager;
         this.scanner = scanner;
     }
 
@@ -43,21 +40,23 @@ public class CommandFactory {
         System.out.print("Ensemble Name:- ");
         String eName = scanner.nextLine().trim();
 
-        Ensemble ens = null;
-        if (type.equals("o")) {
-            ens = new OrchestraEnsemble(eID);
-        } else if (type.equals("j")) {
-            ens = new JazzBandEnsemble(eID);
-        } else {
-            System.out.println("Invalid music type.");
-            return null;
+        switch (type) {
+            case "o":
+                OrchestraEnsemble orchestra = new OrchestraEnsemble(eID);
+                orchestra.setName(eName);
+            return new CreateEnsembleCommand(manager.getEnsembles(), orchestra, "orchestra ensemble");
+            case "j":
+                JazzBandEnsemble jazzBand = new JazzBandEnsemble(eID);
+                jazzBand.setName(eName);
+            return new CreateEnsembleCommand(manager.getEnsembles(), jazzBand, "jazz band ensemble");
+            default:
+                System.out.println("Invalid music type.");
+                return null;
         }
-
-        ens.setName(eName);
-        return new CreateEnsembleCommand(ensembles, ens);
     }
 
     private Command addMusicianCommand() {
+        Ensemble currentEnsemble = manager.getCurrentEnsemble();
         if (currentEnsemble == null) {
             System.out.println("No current ensemble set.");
             return null;
@@ -81,7 +80,7 @@ public class CommandFactory {
         Musician m = new Musician(mID);
         m.setName(mName);
 
-        if (currentEnsemble instanceof OrchestraEnsemble) {
+    if (currentEnsemble instanceof OrchestraEnsemble) {
             System.out.print("Instrument (1 = violinist | 2 = cellist ):- ");
             try {
                 int inst = Integer.parseInt(scanner.nextLine().trim());
@@ -115,10 +114,11 @@ public class CommandFactory {
             return null;
         }
 
-        return new AddMusicianCommand(currentEnsemble, m);
+    return new AddMusicianCommand(currentEnsemble, m);
     }
 
     private Command modifyInstrumentCommand() {
+        Ensemble currentEnsemble = manager.getCurrentEnsemble();
         if (currentEnsemble == null) {
             System.out.println("No current ensemble set.");
             return null;
@@ -128,7 +128,7 @@ public class CommandFactory {
         String mID = scanner.nextLine().trim();
 
         Musician musican = null;
-        Iterator<Musician> it = currentEnsemble.getMusicians();
+    Iterator<Musician> it = currentEnsemble.getMusicians();
         while (it.hasNext()) {
             Musician m = it.next();
             if (m.getMID().equals(mID)) {
@@ -143,7 +143,7 @@ public class CommandFactory {
         }
 
         int role = 0;
-        if (currentEnsemble instanceof OrchestraEnsemble) {
+    if (currentEnsemble instanceof OrchestraEnsemble) {
             System.out.print("Instrument (1 = violinist | 2 = cellist ):- ");
             try {
                 role = Integer.parseInt(scanner.nextLine().trim());
@@ -169,10 +169,11 @@ public class CommandFactory {
             }
         }
 
-        return new ModifyInstrumentCommand(currentEnsemble, musican, role);
+    return new ModifyInstrumentCommand(currentEnsemble, musican, role);
     }
 
     private Command deleteMusicianCommand() {
+        Ensemble currentEnsemble = manager.getCurrentEnsemble();
         if (currentEnsemble == null) {
             System.out.println("No current ensemble set.");
             return null;
@@ -182,7 +183,7 @@ public class CommandFactory {
         String mID = scanner.nextLine().trim();
 
         Musician musican = null;
-        Iterator<Musician> it = currentEnsemble.getMusicians();
+    Iterator<Musician> it = currentEnsemble.getMusicians();
         while (it.hasNext()) {
             Musician m = it.next();
             if (m.getMID().equals(mID)) {
@@ -196,10 +197,11 @@ public class CommandFactory {
             return null;
         }
 
-        return new DeleteMusicianCommand(currentEnsemble, musican);
+    return new DeleteMusicianCommand(currentEnsemble, musican);
     }
 
     private Command changeNameCommand() {
+        Ensemble currentEnsemble = manager.getCurrentEnsemble();
         if (currentEnsemble == null) {
             System.out.println("No current ensemble set.");
             return null;
@@ -208,6 +210,6 @@ public class CommandFactory {
         System.out.print("Please input new name of the current ensemble:- ");
         String newName = scanner.nextLine().trim();
 
-        return new ChangeNameCommand(currentEnsemble, newName);
+    return new ChangeNameCommand(currentEnsemble, newName);
     }
 }

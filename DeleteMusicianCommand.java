@@ -1,7 +1,6 @@
 public class DeleteMusicianCommand implements EnsembleCommand {
-    private EnsembleManager manager;
-    private Ensemble ensemble;
-    private Musician musician;
+    private final Ensemble ensemble;
+    private final Musician musician;
 
     @Override
     public Ensemble getEnsemble() {
@@ -15,7 +14,7 @@ public class DeleteMusicianCommand implements EnsembleCommand {
 
     @Override
     public void setManager(EnsembleManager manager) {
-        this.manager = manager;
+        // Not required for current operations.
     }
 
     @Override
