@@ -3,11 +3,11 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        EnsembleManager manager = new EnsembleManager();
+        EnsembleService manager = new EnsembleService();
 
         while (true) {
 
-            CommandFactory factory = new CommandFactory(manager, scanner);
+            CommandParser factory = new CommandParser(manager, scanner);
 
             System.out.println("");
             System.err.println("Music Ensembles Management System (MEMS)");
@@ -51,7 +51,7 @@ public class Main {
                         }
                     } else {
 
-                        manager.executeCommand(command);
+                        manager.execute(command);
 
                         if (commandCode.equals("c")) {
                             Ensemble ens = manager.getEnsembles().get(manager.getEnsembles().size() - 1);

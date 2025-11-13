@@ -1,9 +1,9 @@
-import java.util.LinkedList;
+import java.util.*;
 
-public class CreateEnsembleCommand implements EnsembleCommand {
+public class MakeEnsembleCmd implements EnsembleCommand {
     private final LinkedList<Ensemble> ensembles;
     private final Ensemble ensemble;
-    private final String ensembleTypeLabel;
+    private final String ensembleType;
     private final String eID;
     private final String ensembleName;
 
@@ -12,16 +12,16 @@ public class CreateEnsembleCommand implements EnsembleCommand {
         return ensemble;
     }
 
-    public CreateEnsembleCommand(LinkedList<Ensemble> ensembles, Ensemble ensemble, String typeLabel) {
+    public MakeEnsembleCmd(LinkedList<Ensemble> ensembles, Ensemble ensemble, String typeLabel) {
         this.ensembles = ensembles;
         this.ensemble = ensemble;
-        this.ensembleTypeLabel = typeLabel;
+        this.ensembleType = typeLabel;
         this.eID = ensemble.getEnsembleID();
         this.ensembleName = ensemble.getName();
     }
 
     @Override
-    public void setManager(EnsembleManager manager) {
+    public void setManager(EnsembleService manager) {
         
     }
 
@@ -37,6 +37,6 @@ public class CreateEnsembleCommand implements EnsembleCommand {
 
     @Override
     public String getDescription() {
-        return "Create " + ensembleTypeLabel + ", " + eID + ", " + ensembleName;
+        return "Create " + ensembleType + ", " + eID + ", " + ensembleName;
     }
 }

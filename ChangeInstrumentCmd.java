@@ -1,33 +1,33 @@
-public class ModifyInstrumentCommand implements EnsembleCommand {
+public class ChangeInstrumentCmd implements EnsembleCommand {
     private final Ensemble ensemble;
     private final Musician musician;
-    private final int newRole;
+    private final int newInstrument;
     private final String instrumentName;
     private final String description;
-    private MusicianMemento memento;
+    private MusicianState memento;
 
     @Override
     public Ensemble getEnsemble() {
         return ensemble;
     }
 
-    public ModifyInstrumentCommand(Ensemble ensemble, Musician musician, int newRole) {
+    public ChangeInstrumentCmd(Ensemble ensemble, Musician musician, int newInstrument) {
         this.ensemble = ensemble;
         this.musician = musician;
-        this.newRole = newRole;
-        this.instrumentName = getInstrumentName(newRole);
+        this.newInstrument = newInstrument;
+        this.instrumentName = getInstrumentName(newInstrument);
         this.description = buildDescription();
     }
 
     @Override
-    public void setManager(EnsembleManager manager) {
+    public void setManager(EnsembleService manager) {
         
     }
 
     @Override
     public void execute() {
-        memento = new MusicianMemento(musician);
-        musician.setRole(newRole);
+        memento = new MusicianState(musician);
+        musician.setRole(newInstrument);
     }
 
     @Override

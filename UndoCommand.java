@@ -1,12 +1,12 @@
 public class UndoCommand implements Command {
-    private EnsembleManager manager;
+    private EnsembleService manager;
 
-    public UndoCommand(EnsembleManager manager) {
+    public UndoCommand(EnsembleService manager) {
         this.manager = manager;
     }
 
     @Override
-    public void setManager(EnsembleManager manager) {
+    public void setManager(EnsembleService manager) {
         this.manager = manager;
     }
 

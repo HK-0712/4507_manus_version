@@ -1,10 +1,10 @@
 import java.util.*;
 
-public class CommandFactory {
-    private final EnsembleManager manager;
+public class CommandParser {
+    private final EnsembleService manager;
     private final Scanner scanner;
 
-    public CommandFactory(EnsembleManager manager, Scanner scanner) {
+    public CommandParser(EnsembleService manager, Scanner scanner) {
         this.manager = manager;
         this.scanner = scanner;
     }
@@ -12,23 +12,23 @@ public class CommandFactory {
     public Command createCommand(String commandCode) {
         switch (commandCode) {
             case "c":
-                return createEnsembleCommand();
+                return makeEnsembleCmd();
             case "s":
                 return setCurrentEnsembleCommand();
             case "a":
                 return addMusicianCommand();
             case "m":
-                return modifyInstrumentCommand();
+                return changeInstrumentCmd();
             case "d":
                 return deleteMusicianCommand();
             case "se":
                 return new ShowEnsembleCommand(manager);
             case "sa":
-                return new DisplayAllEnsemblesCommand(manager);
+                return new ShowAllEnsemblesCmd(manager);
             case "cn":
                 return changeNameCommand();
             case "l":
-                return new ListUndoRedoCommand(manager);
+                return new ShowHistoryCommand(manager);
             case "u":
                 return new UndoCommand(manager);
             case "r":
@@ -39,7 +39,7 @@ public class CommandFactory {
         }
     }
 
-    private Command createEnsembleCommand() {
+    private Command makeEnsembleCmd() {
         System.out.print("Enter music type (o = orchestra | j = jazz band) :- ");
         String type = scanner.nextLine().trim().toLowerCase();
 
@@ -53,11 +53,11 @@ public class CommandFactory {
             case "o":
                 OrchestraEnsemble orchestra = new OrchestraEnsemble(eID);
                 orchestra.setName(eName);
-                return new CreateEnsembleCommand(manager.getEnsembles(), orchestra, "orchestra ensemble");
+                return new MakeEnsembleCmd(manager.getEnsembles(), orchestra, "orchestra ensemble");
             case "j":
                 JazzBandEnsemble jazzBand = new JazzBandEnsemble(eID);
                 jazzBand.setName(eName);
-                return new CreateEnsembleCommand(manager.getEnsembles(), jazzBand, "jazz band ensemble");
+                return new MakeEnsembleCmd(manager.getEnsembles(), jazzBand, "jazz band ensemble");
             default:
                 System.out.println("Invalid music type.");
                 return null;
@@ -126,7 +126,7 @@ public class CommandFactory {
         return new AddMusicianCommand(currentEnsemble, m);
     }
 
-    private Command modifyInstrumentCommand() {
+    private Command changeInstrumentCmd() {
         Ensemble currentEnsemble = manager.getCurrentEnsemble();
         if (currentEnsemble == null) {
             System.out.println("No current ensemble set.");
@@ -178,7 +178,7 @@ public class CommandFactory {
             }
         }
 
-        return new ModifyInstrumentCommand(currentEnsemble, musican, role);
+        return new ChangeInstrumentCmd(currentEnsemble, musican, role);
     }
 
     private Command deleteMusicianCommand() {

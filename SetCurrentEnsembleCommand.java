@@ -1,16 +1,16 @@
 public class SetCurrentEnsembleCommand implements Command {
-    private final EnsembleManager manager;
+    private final EnsembleService manager;
     private final String ensembleID;
     private Ensemble previousEnsemble;
     private Ensemble targetEnsemble;
 
-    public SetCurrentEnsembleCommand(EnsembleManager manager, String ensembleID) {
+    public SetCurrentEnsembleCommand(EnsembleService manager, String ensembleID) {
         this.manager = manager;
         this.ensembleID = ensembleID;
     }
 
     @Override
-    public void setManager(EnsembleManager manager) {
+    public void setManager(EnsembleService manager) {
         
     }
 

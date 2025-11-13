@@ -1,20 +1,20 @@
 import java.util.*;
 
-public class EnsembleManager {
+public class EnsembleService {
     private final LinkedList<Ensemble> ensembles;
     private Ensemble currentEnsemble;
     private final Stack<Command> history;
-    private final Stack<Command> redoStack;
+    private final Stack<Command> undoneCommands;
 
-    public EnsembleManager() {
+    public EnsembleService() {
         this.ensembles = new LinkedList<>();
         this.currentEnsemble = null;
         this.history = new Stack<>();
-        this.redoStack = new Stack<>();
+        this.undoneCommands = new Stack<>();
     }
 
-    public void executeCommand(Command command) {
-        redoStack.clear();
+    public void execute(Command command) {
+        undoneCommands.clear();
 
         command.execute();
         history.push(command);
@@ -26,7 +26,7 @@ public class EnsembleManager {
             command.undo();
 
             boolean switched = false;
-            if (command instanceof CreateEnsembleCommand) {
+            if (command instanceof MakeEnsembleCmd) {
 
                 boolean currExists = false;
                 for (Ensemble e : ensembles) {
@@ -50,7 +50,7 @@ public class EnsembleManager {
                 }
             }
 
-            if (!(command instanceof CreateEnsembleCommand) && command instanceof EnsembleCommand) {
+            if (!(command instanceof MakeEnsembleCmd) && command instanceof EnsembleCommand) {
                 Ensemble ens = ((EnsembleCommand) command).getEnsemble();
 
                 boolean ensExists = ensembles.contains(ens);
@@ -62,7 +62,7 @@ public class EnsembleManager {
                 }
             }
 
-            redoStack.push(command);
+            undoneCommands.push(command);
 
             System.out.println("Command (" + command.getDescription() + ") is undone.");
 
@@ -78,8 +78,8 @@ public class EnsembleManager {
     }
 
     public void redo() {
-        if (!redoStack.isEmpty()) {
-            Command command = redoStack.pop();
+        if (!undoneCommands.isEmpty()) {
+            Command command = undoneCommands.pop();
             command.execute();
             history.push(command);
 
@@ -87,9 +87,9 @@ public class EnsembleManager {
 
             boolean switched = false;
 
-            if (command instanceof CreateEnsembleCommand) {
+            if (command instanceof MakeEnsembleCmd) {
 
-                Ensemble ens = ((CreateEnsembleCommand) command).getEnsemble();
+                Ensemble ens = ((MakeEnsembleCmd) command).getEnsemble();
                 this.currentEnsemble = ens;
                 switched = true;
             }
@@ -115,7 +115,7 @@ public class EnsembleManager {
         }
     }
 
-    public void listUndoRedo() {
+    public void showHistory() {
         System.out.println("Undo List");
         for (int i = 0; i < history.size(); i++) {
             System.out.println(history.get(i).getDescription());
@@ -124,8 +124,8 @@ public class EnsembleManager {
         System.err.println("");
 
         System.out.println("Redo List");
-        for (int i = 0; i < redoStack.size(); i++) {
-            System.out.println(redoStack.get(i).getDescription());
+        for (int i = 0; i < undoneCommands.size(); i++) {
+            System.out.println(undoneCommands.get(i).getDescription());
         }
         System.out.println("-- End of redo list --");
     }
@@ -156,11 +156,11 @@ public class EnsembleManager {
             return;
         }
         for (Ensemble e : ensembles) {
-            System.out.println(getEnsembleTypeLabel(e) + " " + e.getName() + " (" + e.getEnsembleID() + ")");
+            System.out.println(getEnsembleType(e) + " " + e.getName() + " (" + e.getEnsembleID() + ")");
         }
     }
 
-    private String getEnsembleTypeLabel(Ensemble ensemble) {
+    private String getEnsembleType(Ensemble ensemble) {
         if (ensemble instanceof OrchestraEnsemble) {
             return "orchestra ensemble";
         }

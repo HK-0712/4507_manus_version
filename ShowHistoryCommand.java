@@ -1,18 +1,18 @@
-public class ListUndoRedoCommand implements Command {
-    private final EnsembleManager manager;
+public class ShowHistoryCommand implements Command {
+    private final EnsembleService manager;
 
-    public ListUndoRedoCommand(EnsembleManager manager) {
+    public ShowHistoryCommand(EnsembleService manager) {
         this.manager = manager;
     }
 
     @Override
-    public void setManager(EnsembleManager manager) {
+    public void setManager(EnsembleService manager) {
         
     }
 
     @Override
     public void execute() {
-        manager.listUndoRedo();
+        manager.showHistory();
     }
 
     @Override

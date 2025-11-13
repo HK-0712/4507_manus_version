@@ -1,12 +1,12 @@
 public class RedoCommand implements Command {
-    private EnsembleManager manager;
+    private EnsembleService manager;
 
-    public RedoCommand(EnsembleManager manager) {
+    public RedoCommand(EnsembleService manager) {
         this.manager = manager;
     }
 
     @Override
-    public void setManager(EnsembleManager manager) {
+    public void setManager(EnsembleService manager) {
         this.manager = manager;
     }
 

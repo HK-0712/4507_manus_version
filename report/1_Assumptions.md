@@ -50,7 +50,7 @@ To develop this Music Ensemble Management System (MEMS), I made several assumpti
 - Some commands don't need undo (like display commands) so their undo() method can be empty
 
 ### 1.2.2 Factory Pattern
-- CommandFactory is responsible for creating all command objects
+- CommandParser is responsible for creating all command objects
 - Main class should not directly create command objects using "new" keyword
 - Factory will handle the complexity of creating different types of commands
 

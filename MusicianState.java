@@ -1,8 +1,8 @@
-public class MusicianMemento {
+public class MusicianState {
     private final int role;
     private final Musician musician;
 
-    public MusicianMemento(Musician musician) {
+    public MusicianState(Musician musician) {
         this.musician = musician;
         this.role = musician.getRole();
     }

@@ -18,7 +18,7 @@ public interface Command {
     void execute();
     void undo();
     String getDescription();
-    void setManager(EnsembleManager manager);
+    void setManager(EnsembleService manager);
 }
 ```
 
@@ -26,23 +26,23 @@ All commands must implement these four methods. The `execute()` does the actual 
 
 **Concrete Command Classes:**
 I created 12 concrete command classes for 12 functions:
-1. CreateEnsembleCommand - create new ensemble
+1. MakeEnsembleCmd - create new ensemble
 2. SetCurrentEnsembleCommand - set which ensemble to work on
 3. AddMusicianCommand - add musician to ensemble
-4. ModifyInstrumentCommand - change musician's instrument
+4. ChangeInstrumentCmd - change musician's instrument
 5. DeleteMusicianCommand - remove musician from ensemble
 6. ChangeNameCommand - change ensemble name
 7. ShowEnsembleCommand - display current ensemble info
-8. DisplayAllEnsemblesCommand - show all ensembles
-9. ListUndoRedoCommand - show undo/redo lists
+8. ShowAllEnsemblesCmd - show all ensembles
+9. ShowHistoryCommand - show undo/redo lists
 10. UndoCommand - undo last operation
 11. RedoCommand - redo undone operation
 12. QuitCommand - exit program
 
-**Invoker (EnsembleManager):**
-The EnsembleManager class acts as invoker. It maintains two stacks:
+**Invoker (EnsembleService):**
+The EnsembleService class acts as invoker. It maintains two stacks:
 - `history` stack - store executed commands for undo
-- `redoStack` - store undone commands for redo
+- `undoneCommands` - store undone commands for redo
 
 When user execute command, manager push it to history stack. When user undo, manager pop from history and push to redo stack.
 
@@ -86,15 +86,15 @@ Creating command objects is complicated because:
 
 ### 3.2.3 How I Implement It
 
-**CommandFactory Class:**
+**CommandParser Class:**
 ```java
-public class CommandFactory {
-    private final EnsembleManager manager;
+public class CommandParser {
+    private final EnsembleService manager;
     private final Scanner scanner;
     
     public Command createCommand(String commandCode) {
         switch (commandCode) {
-            case "c": return createEnsembleCommand();
+            case "c": return makeEnsembleCmd();
             case "a": return addMusicianCommand();
             case "d": return deleteMusicianCommand();
             // ... more cases
@@ -107,7 +107,7 @@ The factory has one main method `createCommand()` that takes command code (like 
 
 **How It Works:**
 1. User types command code in Main
-2. Main passes the code to CommandFactory
+2. Main passes the code to CommandParser
 3. Factory creates the correct Command object
 4. Factory handles all user input needed for that command
 5. Factory returns ready-to-execute Command back to Main
@@ -153,13 +153,13 @@ Without Memento Pattern, Command classes would need to know internal details of 
 
 ### 3.3.3 How I Implement It
 
-**MusicianMemento Class:**
+**MusicianState Class:**
 ```java
-public class MusicianMemento {
+public class MusicianState {
     private final int role;
     private final Musician musician;
     
-    public MusicianMemento(Musician musician) {
+    public MusicianState(Musician musician) {
         this.musician = musician;
         this.role = musician.getRole();
     }
@@ -172,13 +172,13 @@ public class MusicianMemento {
 
 This memento save musician's role/instrument. When need to restore, just call `restore()` method.
 
-**EnsembleMemento Class:**
+**EnsembleState Class:**
 ```java
-public class EnsembleMemento {
+public class EnsembleState {
     private final String name;
     private final Ensemble ensemble;
     
-    public EnsembleMemento(Ensemble ensemble) {
+    public EnsembleState(Ensemble ensemble) {
         this.ensemble = ensemble;
         this.name = ensemble.getName();
     }
@@ -192,14 +192,14 @@ public class EnsembleMemento {
 This memento save ensemble's name for undo operations.
 
 **How It's Used in Commands:**
-In ModifyInstrumentCommand:
+In ChangeInstrumentCmd:
 ```java
-public class ModifyInstrumentCommand implements EnsembleCommand {
-    private MusicianMemento memento;
+public class ChangeInstrumentCmd implements EnsembleCommand {
+    private MusicianState memento;
     
     public void execute() {
-        memento = new MusicianMemento(musician); // save state
-        musician.setRole(newRole); // change role
+        memento = new MusicianState(musician); // save state
+        musician.setRole(newInstrument); // change role
     }
     
     public void undo() {
@@ -244,7 +244,7 @@ This combination makes the system:
 | Pattern | Purpose | Main Classes |
 |---------|---------|--------------|
 | Command | Encapsulate operations as objects | Command, EnsembleCommand, 12 concrete commands |
-| Factory | Create command objects | CommandFactory |
-| Memento | Save and restore state | MusicianMemento, EnsembleMemento |
+| Factory | Create command objects | CommandParser |
+| Memento | Save and restore state | MusicianState, EnsembleState |
 
 These patterns are not just to fulfill assignment requirement, they actually solve real problems in the system design and make code better organized and easier to understand.

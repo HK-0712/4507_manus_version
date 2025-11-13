@@ -1,12 +1,12 @@
 public class ShowEnsembleCommand implements Command {
-    private final EnsembleManager manager;
+    private final EnsembleService manager;
 
-    public ShowEnsembleCommand(EnsembleManager manager) {
+    public ShowEnsembleCommand(EnsembleService manager) {
         this.manager = manager;
     }
 
     @Override
-    public void setManager(EnsembleManager manager) {
+    public void setManager(EnsembleService manager) {
         
     }
 

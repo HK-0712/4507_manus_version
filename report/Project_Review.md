@@ -10,29 +10,29 @@ This document contains a comprehensive review of the Music Ensemble Management S
 
 ### 1.1 Overall Code Structure ✓
 - **Command Pattern**: Properly implemented with 9 command classes
-- **Factory Pattern**: Well-implemented in CommandFactory
+- **Factory Pattern**: Well-implemented in CommandParser
 - **Memento Pattern**: Correctly used for undo functionality
 - All design patterns are working together effectively
 
 ### 1.2 Individual Class Analysis
 
 #### ✓ **Command Classes** (All Good)
-- `CreateEnsembleCommand` - Clean implementation
+- `MakeEnsembleCmd` - Clean implementation
 - `AddMusicianCommand` - Proper use of Memento pattern
 - `DeleteMusicianCommand` - Good state preservation for undo
-- `ModifyInstrumentCommand` - Correct Memento usage
+- `ChangeInstrumentCmd` - Correct Memento usage
 - `ChangeNameCommand` - Simple and effective
 - `ShowEnsembleCommand` - Read-only, properly implemented
-- `DisplayAllEnsemblesCommand` - Read-only, correct
-- `ListUndoRedoCommand` - Read-only, works well
+- `ShowAllEnsemblesCmd` - Read-only, correct
+- `ShowHistoryCommand` - Read-only, works well
 - `SetCurrentEnsembleCommand` - Good implementation
 
 #### ✓ **Core Classes**
-- `EnsembleManager` - Well-structured, handles undo/redo correctly
-- `CommandFactory` - Good separation of concerns
+- `EnsembleService` - Well-structured, handles undo/redo correctly
+- `CommandParser` - Good separation of concerns
 - `Ensemble`, `OrchestraEnsemble`, `JazzBandEnsemble` - Clean hierarchy
 - `Musician` - Simple and effective
-- `MusicianMemento`, `EnsembleMemento` - Correct Memento pattern
+- `MusicianState`, `EnsembleState` - Correct Memento pattern
 
 #### ✓ **Main Class**
 - Clean and simple
@@ -42,8 +42,8 @@ This document contains a comprehensive review of the Music Ensemble Management S
 ### 1.3 Code Issues Found
 
 #### Minor Issues:
-1. **CommandFactory line 136**: Variable name typo `musican` should be `musician` (appears 3 times)
-2. **CommandFactory line 191**: Same typo `musican` should be `musician` (appears 3 times)
+1. **CommandParser line 136**: Variable name typo `musican` should be `musician` (appears 3 times)
+2. **CommandParser line 191**: Same typo `musican` should be `musician` (appears 3 times)
 3. **No major bugs found** - The code should work correctly despite the typos
 
 ---
@@ -223,8 +223,8 @@ This document contains a comprehensive review of the Music Ensemble Management S
 - Should be: "`getDescription()` returns a description"
 
 **Line 45**: ❌ Grammar Error
-- Current: "The EnsembleManager class act as invoker"
-- Should be: "The EnsembleManager class acts as the invoker"
+- Current: "The EnsembleService class act as invoker"
+- Should be: "The EnsembleService class acts as the invoker"
 
 **Line 46**: ❌ Grammar Error
 - Current: "It maintain two stacks"
@@ -299,11 +299,11 @@ This document contains a comprehensive review of the Music Ensemble Management S
 - Should be: "which breaks encapsulation"
 
 **Line 149**: ❌ Grammar Error
-- Current: "memento = new MusicianMemento(musician); // save state"
+- Current: "memento = new MusicianState(musician); // save state"
 - Comment should be: "// saves state"
 
 **Line 150**: ❌ Grammar Error
-- Current: "musician.setRole(newRole); // change role"
+- Current: "musician.setRole(newInstrument); // change role"
 - Comment should be: "// changes role"
 
 **Line 154**: ❌ Grammar Error
@@ -396,7 +396,7 @@ This document contains a comprehensive review of the Music Ensemble Management S
 2. ❌ **Extensive grammar errors in Design_Patterns.md** (30+ errors)
 
 ### Minor Issues (Can Fix):
-1. ⚠️ Variable name typo in CommandFactory: `musican` → `musician`
+1. ⚠️ Variable name typo in CommandParser: `musican` → `musician`
 
 ---
 
@@ -409,7 +409,7 @@ This document contains a comprehensive review of the Music Ensemble Management S
 
 2. **Fix all grammar errors** in both documentation files using simpler, clearer English
 
-3. **Fix variable name typo** in CommandFactory (optional but recommended)
+3. **Fix variable name typo** in CommandParser (optional but recommended)
 
 ### Language Improvement Tips:
 - Use articles: "a", "an", "the" where needed

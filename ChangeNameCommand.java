@@ -1,7 +1,7 @@
 public class ChangeNameCommand implements EnsembleCommand {
     private final Ensemble ensemble;
     private final String newName;
-    private EnsembleMemento memento;
+    private EnsembleState memento;
 
     @Override
     public Ensemble getEnsemble() {
@@ -14,13 +14,13 @@ public class ChangeNameCommand implements EnsembleCommand {
     }
 
     @Override
-    public void setManager(EnsembleManager manager) {
+    public void setManager(EnsembleService manager) {
         
     }
 
     @Override
     public void execute() {
-        memento = new EnsembleMemento(ensemble);
+        memento = new EnsembleState(ensemble);
         ensemble.setName(newName);
     }
 

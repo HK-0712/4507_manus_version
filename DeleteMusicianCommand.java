@@ -19,7 +19,7 @@ public class DeleteMusicianCommand implements EnsembleCommand {
     }
 
     @Override
-    public void setManager(EnsembleManager manager) {
+    public void setManager(EnsembleService manager) {
         
     }
 
