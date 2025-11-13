@@ -14,21 +14,21 @@ public class CommandParser {
             case "c":
                 return makeEnsembleCmd();
             case "s":
-                return setCurrentEnsembleCommand();
+                return setCurrentEnsembleCmd();
             case "a":
-                return addMusicianCommand();
+                return addMusicianCmd();
             case "m":
                 return changeInstrumentCmd();
             case "d":
-                return deleteMusicianCommand();
+                return deleteMusicianCmd();
             case "se":
-                return new ShowEnsembleCommand(manager);
+                return new ShowEnsembleCmd(manager);
             case "sa":
                 return new ShowAllEnsemblesCmd(manager);
             case "cn":
-                return changeNameCommand();
+                return changeNameCmd();
             case "l":
-                return new ShowHistoryCommand(manager);
+                return new ShowHistoryCmd(manager);
             case "u":
                 return new UndoCommand(manager);
             case "r":
@@ -64,7 +64,7 @@ public class CommandParser {
         }
     }
 
-    private Command addMusicianCommand() {
+    private Command addMusicianCmd() {
         Ensemble currentEnsemble = manager.getCurrentEnsemble();
         if (currentEnsemble == null) {
             System.out.println("No current ensemble set.");
@@ -123,7 +123,7 @@ public class CommandParser {
             return null;
         }
 
-        return new AddMusicianCommand(currentEnsemble, m);
+        return new AddMusicianCmd(currentEnsemble, m);
     }
 
     private Command changeInstrumentCmd() {
@@ -181,7 +181,7 @@ public class CommandParser {
         return new ChangeInstrumentCmd(currentEnsemble, musican, role);
     }
 
-    private Command deleteMusicianCommand() {
+    private Command deleteMusicianCmd() {
         Ensemble currentEnsemble = manager.getCurrentEnsemble();
         if (currentEnsemble == null) {
             System.out.println("No current ensemble set.");
@@ -206,16 +206,16 @@ public class CommandParser {
             return null;
         }
 
-        return new DeleteMusicianCommand(currentEnsemble, musican);
+        return new DeleteMusicianCmd(currentEnsemble, musican);
     }
 
-    private Command setCurrentEnsembleCommand() {
+    private Command setCurrentEnsembleCmd() {
         System.out.print("Please input ensemble ID:- ");
         String eID = scanner.nextLine().trim();
-        return new SetCurrentEnsembleCommand(manager, eID);
+        return new SetCurrentEnsembleCmd(manager, eID);
     }
 
-    private Command changeNameCommand() {
+    private Command changeNameCmd() {
         Ensemble currentEnsemble = manager.getCurrentEnsemble();
         if (currentEnsemble == null) {
             System.out.println("No current ensemble set.");
@@ -225,6 +225,6 @@ public class CommandParser {
         System.out.print("Please input new name of the current ensemble:- ");
         String newName = scanner.nextLine().trim();
 
-        return new ChangeNameCommand(currentEnsemble, newName);
+        return new ChangeNameCmd(currentEnsemble, newName);
     }
 }

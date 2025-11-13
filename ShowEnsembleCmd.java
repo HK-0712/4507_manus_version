@@ -1,7 +1,7 @@
-public class ShowHistoryCommand implements Command {
+public class ShowEnsembleCmd implements Command {
     private final EnsembleService manager;
 
-    public ShowHistoryCommand(EnsembleService manager) {
+    public ShowEnsembleCmd(EnsembleService manager) {
         this.manager = manager;
     }
 
@@ -12,7 +12,7 @@ public class ShowHistoryCommand implements Command {
 
     @Override
     public void execute() {
-        manager.showHistory();
+        manager.showCurrentEnsemble();
     }
 
     @Override
@@ -22,6 +22,6 @@ public class ShowHistoryCommand implements Command {
 
     @Override
     public String getDescription() {
-        return "List undo/redo";
+        return "Show current ensemble";
     }
 }

@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class DeleteMusicianCommand implements EnsembleCommand {
+public class DeleteMusicianCmd implements EnsembleCommand {
     private final Ensemble ensemble;
     private final Musician musician;
     private List<Musician> allMusiciansBeforeDelete;
@@ -10,7 +10,7 @@ public class DeleteMusicianCommand implements EnsembleCommand {
         return ensemble;
     }
 
-    public DeleteMusicianCommand(Ensemble ensemble, Musician musician) {
+    public DeleteMusicianCmd(Ensemble ensemble, Musician musician) {
         this.ensemble = ensemble;
         this.musician = musician;
         this.allMusiciansBeforeDelete = new ArrayList<>();

@@ -27,14 +27,14 @@ All commands must implement these four methods. The `execute()` does the actual 
 **Concrete Command Classes:**
 I created 12 concrete command classes for 12 functions:
 1. MakeEnsembleCmd - create new ensemble
-2. SetCurrentEnsembleCommand - set which ensemble to work on
-3. AddMusicianCommand - add musician to ensemble
+2. SetCurrentEnsembleCmd - set which ensemble to work on
+3. AddMusicianCmd - add musician to ensemble
 4. ChangeInstrumentCmd - change musician's instrument
-5. DeleteMusicianCommand - remove musician from ensemble
-6. ChangeNameCommand - change ensemble name
-7. ShowEnsembleCommand - display current ensemble info
+5. DeleteMusicianCmd - remove musician from ensemble
+6. ChangeNameCmd - change ensemble name
+7. ShowEnsembleCmd - display current ensemble info
 8. ShowAllEnsemblesCmd - show all ensembles
-9. ShowHistoryCommand - show undo/redo lists
+9. ShowHistoryCmd - show undo/redo lists
 10. UndoCommand - undo last operation
 11. RedoCommand - redo undone operation
 12. QuitCommand - exit program
@@ -52,9 +52,9 @@ When user execute command, manager push it to history stack. When user undo, man
 - Undo/redo implementation becomes natural and simple
 - Main class is clean, it just creates commands and executes them
 
-### 3.1.4 Example: AddMusicianCommand
+### 3.1.4 Example: AddMusicianCmd
 ```java
-public class AddMusicianCommand implements EnsembleCommand {
+public class AddMusicianCmd implements EnsembleCommand {
     private final Ensemble ensemble;
     private final Musician musician;
     
@@ -95,8 +95,8 @@ public class CommandParser {
     public Command createCommand(String commandCode) {
         switch (commandCode) {
             case "c": return makeEnsembleCmd();
-            case "a": return addMusicianCommand();
-            case "d": return deleteMusicianCommand();
+            case "a": return addMusicianCmd();
+            case "d": return deleteMusicianCmd();
             // ... more cases
         }
     }
@@ -118,9 +118,9 @@ The factory has one main method `createCommand()` that takes command code (like 
 - Easy to add new command types
 - User input handling is separated from Main class
 
-### 3.2.4 Example: Creating AddMusicianCommand
+### 3.2.4 Example: Creating AddMusicianCmd
 ```java
-private Command addMusicianCommand() {
+private Command addMusicianCmd() {
     if (manager.getCurrentEnsemble() == null) {
         // show error, return null
     }
@@ -131,8 +131,8 @@ private Command addMusicianCommand() {
     
     // ask for instrument/role
     // create Musician object
-    // create AddMusicianCommand with musician
-    return new AddMusicianCommand(ensemble, musician);
+    // create AddMusicianCmd with musician
+    return new AddMusicianCmd(ensemble, musician);
 }
 ```
 

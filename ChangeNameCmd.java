@@ -1,4 +1,4 @@
-public class ChangeNameCommand implements EnsembleCommand {
+public class ChangeNameCmd implements EnsembleCommand {
     private final Ensemble ensemble;
     private final String newName;
     private EnsembleState memento;
@@ -8,7 +8,7 @@ public class ChangeNameCommand implements EnsembleCommand {
         return ensemble;
     }
 
-    public ChangeNameCommand(Ensemble ensemble, String newName) {
+    public ChangeNameCmd(Ensemble ensemble, String newName) {
         this.ensemble = ensemble;
         this.newName = newName;
     }

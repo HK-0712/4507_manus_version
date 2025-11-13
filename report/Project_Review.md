@@ -18,14 +18,14 @@ This document contains a comprehensive review of the Music Ensemble Management S
 
 #### ✓ **Command Classes** (All Good)
 - `MakeEnsembleCmd` - Clean implementation
-- `AddMusicianCommand` - Proper use of Memento pattern
-- `DeleteMusicianCommand` - Good state preservation for undo
+- `AddMusicianCmd` - Proper use of Memento pattern
+- `DeleteMusicianCmd` - Good state preservation for undo
 - `ChangeInstrumentCmd` - Correct Memento usage
-- `ChangeNameCommand` - Simple and effective
-- `ShowEnsembleCommand` - Read-only, properly implemented
+- `ChangeNameCmd` - Simple and effective
+- `ShowEnsembleCmd` - Read-only, properly implemented
 - `ShowAllEnsemblesCmd` - Read-only, correct
-- `ShowHistoryCommand` - Read-only, works well
-- `SetCurrentEnsembleCommand` - Good implementation
+- `ShowHistoryCmd` - Read-only, works well
+- `SetCurrentEnsembleCmd` - Good implementation
 
 #### ✓ **Core Classes**
 - `EnsembleService` - Well-structured, handles undo/redo correctly

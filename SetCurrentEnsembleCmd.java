@@ -1,10 +1,10 @@
-public class SetCurrentEnsembleCommand implements Command {
+public class SetCurrentEnsembleCmd implements Command {
     private final EnsembleService manager;
     private final String ensembleID;
     private Ensemble previousEnsemble;
     private Ensemble targetEnsemble;
 
-    public SetCurrentEnsembleCommand(EnsembleService manager, String ensembleID) {
+    public SetCurrentEnsembleCmd(EnsembleService manager, String ensembleID) {
         this.manager = manager;
         this.ensembleID = ensembleID;
     }

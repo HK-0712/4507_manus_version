@@ -43,7 +43,7 @@ public class Main {
                     } else if (commandCode.equals("s")) {
 
                         command.execute();
-                        SetCurrentEnsembleCommand setCmd = (SetCurrentEnsembleCommand) command;
+                        SetCurrentEnsembleCmd setCmd = (SetCurrentEnsembleCmd) command;
                         if (setCmd.isSuccess()) {
                             System.out.println("Changed current ensemble to " + setCmd.getEnsembleID() + ".");
                         } else {

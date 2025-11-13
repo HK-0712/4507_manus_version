@@ -1,4 +1,4 @@
-public class AddMusicianCommand implements EnsembleCommand {
+public class AddMusicianCmd implements EnsembleCommand {
     private final Ensemble ensemble;
     private final Musician musician;
     private final String instrumentLabel;
@@ -9,7 +9,7 @@ public class AddMusicianCommand implements EnsembleCommand {
         return ensemble;
     }
 
-    public AddMusicianCommand(Ensemble ensemble, Musician musician) {
+    public AddMusicianCmd(Ensemble ensemble, Musician musician) {
         this.ensemble = ensemble;
         this.musician = musician;
         this.instrumentLabel = getRoleStr(musician.getRole());
