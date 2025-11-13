@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -6,7 +6,7 @@ public class Main {
         EnsembleManager manager = new EnsembleManager();
 
         while (true) {
-            
+
             CommandFactory factory = new CommandFactory(manager, scanner);
 
             System.out.println("");
@@ -31,21 +31,17 @@ public class Main {
             if (commandCode.equals("x")) {
                 System.out.println("Exiting system.");
                 break;
-            } else if (commandCode.equals("u")) {
-                manager.undo();
-            } else if (commandCode.equals("r")) {
-                manager.redo();
             } else {
                 Command command = factory.createCommand(commandCode);
                 if (command != null) {
 
                     command.setManager(manager);
-                    
-                    
-                    if (commandCode.equals("se") || commandCode.equals("sa") || commandCode.equals("l")) {
+
+                    if (commandCode.equals("se") || commandCode.equals("sa") || commandCode.equals("l") ||
+                            commandCode.equals("u") || commandCode.equals("r")) {
                         command.execute();
                     } else if (commandCode.equals("s")) {
-                        
+
                         command.execute();
                         SetCurrentEnsembleCommand setCmd = (SetCurrentEnsembleCommand) command;
                         if (setCmd.isSuccess()) {
@@ -54,18 +50,18 @@ public class Main {
                             System.out.println("Ensemble " + setCmd.getEnsembleID() + " is not found!!");
                         }
                     } else {
-                        
+
                         manager.executeCommand(command);
 
                         if (commandCode.equals("c")) {
                             Ensemble ens = manager.getEnsembles().get(manager.getEnsembles().size() - 1);
-                            
+
                             if (ens instanceof OrchestraEnsemble) {
                                 System.out.println("Orchestra ensemble is created.");
                             } else if (ens instanceof JazzBandEnsemble) {
                                 System.out.println("Jazz band ensemble is created.");
                             }
-                            
+
                             manager.setCurrentEnsemble(ens);
                             System.out.println("Current ensemble is changed to " + ens.getEnsembleID() + ".");
                         } else if (commandCode.equals("a")) {

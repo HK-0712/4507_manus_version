@@ -1,5 +1,4 @@
-import java.util.Iterator;
-import java.util.Scanner;
+import java.util.*;
 
 public class CommandFactory {
     private final EnsembleManager manager;
@@ -10,7 +9,6 @@ public class CommandFactory {
         this.scanner = scanner;
     }
 
-    
     public Command createCommand(String commandCode) {
         switch (commandCode) {
             case "c":
@@ -31,13 +29,16 @@ public class CommandFactory {
                 return changeNameCommand();
             case "l":
                 return new ListUndoRedoCommand(manager);
+            case "u":
+                return new UndoCommand(manager);
+            case "r":
+                return new RedoCommand(manager);
 
             default:
                 return null;
         }
     }
 
-    
     private Command createEnsembleCommand() {
         System.out.print("Enter music type (o = orchestra | j = jazz band) :- ");
         String type = scanner.nextLine().trim().toLowerCase();
@@ -52,11 +53,11 @@ public class CommandFactory {
             case "o":
                 OrchestraEnsemble orchestra = new OrchestraEnsemble(eID);
                 orchestra.setName(eName);
-            return new CreateEnsembleCommand(manager.getEnsembles(), orchestra, "orchestra ensemble");
+                return new CreateEnsembleCommand(manager.getEnsembles(), orchestra, "orchestra ensemble");
             case "j":
                 JazzBandEnsemble jazzBand = new JazzBandEnsemble(eID);
                 jazzBand.setName(eName);
-            return new CreateEnsembleCommand(manager.getEnsembles(), jazzBand, "jazz band ensemble");
+                return new CreateEnsembleCommand(manager.getEnsembles(), jazzBand, "jazz band ensemble");
             default:
                 System.out.println("Invalid music type.");
                 return null;
@@ -88,7 +89,7 @@ public class CommandFactory {
         Musician m = new Musician(mID);
         m.setName(mName);
 
-    if (currentEnsemble instanceof OrchestraEnsemble) {
+        if (currentEnsemble instanceof OrchestraEnsemble) {
             System.out.print("Instrument (1 = violinist | 2 = cellist ):- ");
             try {
                 int inst = Integer.parseInt(scanner.nextLine().trim());
@@ -122,7 +123,7 @@ public class CommandFactory {
             return null;
         }
 
-    return new AddMusicianCommand(currentEnsemble, m);
+        return new AddMusicianCommand(currentEnsemble, m);
     }
 
     private Command modifyInstrumentCommand() {
@@ -136,7 +137,7 @@ public class CommandFactory {
         String mID = scanner.nextLine().trim();
 
         Musician musican = null;
-    Iterator<Musician> it = currentEnsemble.getMusicians();
+        Iterator<Musician> it = currentEnsemble.getMusicians();
         while (it.hasNext()) {
             Musician m = it.next();
             if (m.getMID().equals(mID)) {
@@ -151,7 +152,7 @@ public class CommandFactory {
         }
 
         int role = 0;
-    if (currentEnsemble instanceof OrchestraEnsemble) {
+        if (currentEnsemble instanceof OrchestraEnsemble) {
             System.out.print("Instrument (1 = violinist | 2 = cellist ):- ");
             try {
                 role = Integer.parseInt(scanner.nextLine().trim());
@@ -177,7 +178,7 @@ public class CommandFactory {
             }
         }
 
-    return new ModifyInstrumentCommand(currentEnsemble, musican, role);
+        return new ModifyInstrumentCommand(currentEnsemble, musican, role);
     }
 
     private Command deleteMusicianCommand() {
@@ -191,7 +192,7 @@ public class CommandFactory {
         String mID = scanner.nextLine().trim();
 
         Musician musican = null;
-    Iterator<Musician> it = currentEnsemble.getMusicians();
+        Iterator<Musician> it = currentEnsemble.getMusicians();
         while (it.hasNext()) {
             Musician m = it.next();
             if (m.getMID().equals(mID)) {
@@ -205,7 +206,7 @@ public class CommandFactory {
             return null;
         }
 
-    return new DeleteMusicianCommand(currentEnsemble, musican);
+        return new DeleteMusicianCommand(currentEnsemble, musican);
     }
 
     private Command setCurrentEnsembleCommand() {
@@ -224,6 +225,6 @@ public class CommandFactory {
         System.out.print("Please input new name of the current ensemble:- ");
         String newName = scanner.nextLine().trim();
 
-    return new ChangeNameCommand(currentEnsemble, newName);
+        return new ChangeNameCommand(currentEnsemble, newName);
     }
 }

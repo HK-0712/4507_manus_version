@@ -1,5 +1,4 @@
-import java.util.LinkedList;
-import java.util.Stack;
+import java.util.*;
 
 public class EnsembleManager {
     private final LinkedList<Ensemble> ensembles;
@@ -21,7 +20,7 @@ public class EnsembleManager {
         history.push(command);
     }
 
-    public Command undo() {
+    public void undo() {
         if (!history.isEmpty()) {
             Command command = history.pop();
             command.undo();
@@ -73,15 +72,12 @@ public class EnsembleManager {
                             + " " + this.currentEnsemble.getName() + ".");
                 }
             }
-
-            return command;
         } else {
             System.out.println("Undo List is empty.");
         }
-        return null;
     }
 
-    public Command redo() {
+    public void redo() {
         if (!redoStack.isEmpty()) {
             Command command = redoStack.pop();
             command.execute();
@@ -114,12 +110,9 @@ public class EnsembleManager {
                 System.out.println("The current ensemble is changed to " + this.currentEnsemble.getEnsembleID() + " "
                         + this.currentEnsemble.getName() + ".");
             }
-
-            return command;
         } else {
             System.out.println("Redo List is empty.");
         }
-        return null;
     }
 
     public void listUndoRedo() {
