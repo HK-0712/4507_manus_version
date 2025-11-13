@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class DeleteMusicianCommand implements EnsembleCommand {
     private final Ensemble ensemble;

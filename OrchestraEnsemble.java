@@ -1,6 +1,4 @@
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 public class OrchestraEnsemble extends Ensemble {
     public static final int VIOLINIST_ROLE = 1;

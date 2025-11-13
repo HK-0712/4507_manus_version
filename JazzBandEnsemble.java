@@ -1,6 +1,4 @@
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 public class JazzBandEnsemble extends Ensemble {
     public static final int PIANIST_ROLE = 1;
