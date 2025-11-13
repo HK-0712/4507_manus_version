@@ -1,16 +1,18 @@
-# Part 3: Design Patterns
+# Part 3 - Design Patterns
 
-This section explains the three design patterns that I used in MEMS system and why they are important.
+## Discussion and Explanation on Design Patterns
 
-## 3.1 Command Pattern
+This section discuss and explain each of the design patterns applied to this Music Ensembles Management System.
 
-### 3.1.1 What is Command Pattern
-Command Pattern is a behavioral design pattern that turns a request into a stand-alone object. This object contains all information about the request.
+---
 
-### 3.1.2 Why I Use It
-In MEMS, I have 12 different functions (create ensemble, add musician, delete musician, etc.). Without Command Pattern, all these logic will be put in Main class which make the code very messy and hard to maintain. Also, I need undo/redo functionality which is very difficult to implement without Command Pattern.
+## 1. Command Pattern
 
-### 3.1.3 How I Implement It
+### What is Command Pattern
+
+Command Pattern is behavioral design pattern that encapsulate a request as an object. This pattern turn operations into stand-alone objects that contain all information about the operation.
+
+### Implementation in MEMS
 
 **Command Interface:**
 ```java
@@ -22,71 +24,57 @@ public interface Command {
 }
 ```
 
-All commands must implement these four methods. The `execute()` does the actual work, `undo()` reverses the operation, `getDescription()` returns description for undo/redo list.
+The system implement 11 concrete command classes:
+- `MakeEnsembleCmd`, `AddMusicianCmd`, `DeleteMusicianCmd`, `ChangeInstrumentCmd`, `ChangeNameCmd`
+- `SetCurrentEnsembleCmd`, `ShowEnsembleCmd`, `ShowAllEnsemblesCmd`, `ShowHistoryCmd`
+- `UndoCommand`, `RedoCommand`
 
-**Concrete Command Classes:**
-I created 12 concrete command classes for 12 functions:
-1. MakeEnsembleCmd - create new ensemble
-2. SetCurrentEnsembleCmd - set which ensemble to work on
-3. AddMusicianCmd - add musician to ensemble
-4. ChangeInstrumentCmd - change musician's instrument
-5. DeleteMusicianCmd - remove musician from ensemble
-6. ChangeNameCmd - change ensemble name
-7. ShowEnsembleCmd - display current ensemble info
-8. ShowAllEnsemblesCmd - show all ensembles
-9. ShowHistoryCmd - show undo/redo lists
-10. UndoCommand - undo last operation
-11. RedoCommand - redo undone operation
-12. QuitCommand - exit program
+Some commands also implement `EnsembleCommand` interface which extend Command and add getEnsemble() method.
 
 **Invoker (EnsembleService):**
-The EnsembleService class acts as invoker. It maintains two stacks:
-- `history` stack - store executed commands for undo
-- `undoneCommands` - store undone commands for redo
-
-When user execute command, manager push it to history stack. When user undo, manager pop from history and push to redo stack.
-
-**Benefits in Our System:**
-- Each command is a separate class, easy to understand and modify
-- New commands can be added easily without changing existing code
-- Undo/redo implementation becomes natural and simple
-- Main class is clean, it just creates commands and executes them
-
-### 3.1.4 Example: AddMusicianCmd
 ```java
-public class AddMusicianCmd implements EnsembleCommand {
-    private final Ensemble ensemble;
-    private final Musician musician;
+public class EnsembleService {
+    private final Stack<Command> history;
+    private final Stack<Command> undoneCommands;
     
-    public void execute() {
-        ensemble.addMusician(musician);
-        // show success message
-    }
-    
-    public void undo() {
-        ensemble.removeMusician(musician);
-        // show undo message
+    public void execute(Command command) {
+        undoneCommands.clear();
+        command.execute();
+        history.push(command);
     }
 }
 ```
 
-When user add musician, execute() is called. If user want to undo, the undo() method will remove the musician back.
+EnsembleService maintain two stacks for undo/redo functionality.
 
-## 3.2 Factory Pattern
+### How It Work
 
-### 3.2.1 What is Factory Pattern
-Factory Pattern is creational design pattern that provides a way to create objects without specifying the exact class of object that will be created.
+1. CommandParser create appropriate Command object from user input
+2. For modification commands (create, add, delete, change), Main call manager.execute() which store command in history
+3. For query commands (se, sa, l) and control commands (u, r), Main call command.execute() directly without storing in history
+4. When undo is called, command pop from history and execute undo()
+5. Undone commands can be redone
 
-### 3.2.2 Why I Use It
-Creating command objects is complicated because:
-- Different commands need different parameters
-- Some commands need user input from scanner
-- Main class should not know the details of how to create each command
-- I want to keep Main class simple and clean
+This design allow modification commands to be undone while query commands don't affect undo/redo history.
 
-### 3.2.3 How I Implement It
+### Benefits
 
-**CommandParser Class:**
+- Each operation is separate class with own logic
+- Easy to implement undo/redo functionality for modification commands
+- New commands can add but require modify CommandParser switch statement
+- Main class don't need know implementation details of each operation
+
+---
+
+## 2. Factory Pattern
+
+### What is Factory Pattern
+
+Factory Pattern is creational design pattern that provide interface for creating objects without specify their exact classes.
+
+### Implementation in MEMS
+
+**CommandParser Factory:**
 ```java
 public class CommandParser {
     private final EnsembleService manager;
@@ -96,64 +84,48 @@ public class CommandParser {
         switch (commandCode) {
             case "c": return makeEnsembleCmd();
             case "a": return addMusicianCmd();
+            case "m": return changeInstrumentCmd();
             case "d": return deleteMusicianCmd();
-            // ... more cases
+            // ... other cases
+            default: return null;
         }
     }
 }
 ```
 
-The factory has one main method `createCommand()` that takes command code (like "c", "a", "d") and returns appropriate Command object.
+Factory have helper methods to create complex commands and collect user input. This is simple factory pattern implementation where factory handle both object creation and user input collection.
 
-**How It Works:**
-1. User types command code in Main
-2. Main passes the code to CommandParser
-3. Factory creates the correct Command object
-4. Factory handles all user input needed for that command
-5. Factory returns ready-to-execute Command back to Main
+### How It Work
 
-**Benefits in Our System:**
-- Main class don't need to know details of creating commands
-- All creation logic is centralized in one place
-- Easy to add new command types
-- User input handling is separated from Main class
+1. Main class receive command code from user
+2. CommandParser's createCommand() is called
+3. Factory use switch statement to determine which command to create
+4. Factory collect necessary parameters from user (using Scanner)
+5. Factory return ready-to-execute Command object
 
-### 3.2.4 Example: Creating AddMusicianCmd
-```java
-private Command addMusicianCmd() {
-    if (manager.getCurrentEnsemble() == null) {
-        // show error, return null
-    }
-    
-    // ask user for musician name
-    System.out.print("Enter musician name: ");
-    String name = scanner.nextLine();
-    
-    // ask for instrument/role
-    // create Musician object
-    // create AddMusicianCmd with musician
-    return new AddMusicianCmd(ensemble, musician);
-}
-```
+### Benefits and Limitations
 
-Factory handle all the interaction with user to collect information, then create and return the command.
+**Benefits:**
+- All object creation logic in one place
+- Main class don't need know how to create each command
+- User input handling separated from Main class
 
-## 3.3 Memento Pattern
+**Limitations:**
+- Factory use switch statement, so adding new command require modify factory code (not fully follow Open-Closed Principle)
+- Factory have dual responsibility: create objects and collect user input (coupling UI and creation logic)
+- This is acceptable for assignment simplification but can be improved by separate concerns
 
-### 3.3.1 What is Memento Pattern
-Memento Pattern is behavioral design pattern that let you save and restore previous state of an object without revealing details of its implementation.
+---
 
-### 3.3.2 Why I Use It
-For undo functionality, I need to save the state before making changes. For example:
-- Before changing musician's instrument, save the old instrument
-- Before changing ensemble name, save the old name
-- When user undo, restore the saved state
+## 3. Memento Pattern
 
-Without Memento Pattern, Command classes would need to know internal details of Musician and Ensemble classes, which breaks encapsulation.
+### What is Memento Pattern
 
-### 3.3.3 How I Implement It
+Memento Pattern is behavioral design pattern that let you save and restore previous state of an object without reveal implementation details.
 
-**MusicianState Class:**
+### Implementation in MEMS
+
+**Memento Classes:**
 ```java
 public class MusicianState {
     private final int role;
@@ -170,9 +142,6 @@ public class MusicianState {
 }
 ```
 
-This memento save musician's role/instrument. When need to restore, just call `restore()` method.
-
-**EnsembleState Class:**
 ```java
 public class EnsembleState {
     private final String name;
@@ -189,62 +158,77 @@ public class EnsembleState {
 }
 ```
 
-This memento save ensemble's name for undo operations.
-
-**How It's Used in Commands:**
-In ChangeInstrumentCmd:
+**Usage in Commands:**
 ```java
 public class ChangeInstrumentCmd implements EnsembleCommand {
     private MusicianState memento;
     
     public void execute() {
-        memento = new MusicianState(musician); // save state
-        musician.setRole(newInstrument); // change role
+        memento = new MusicianState(musician);  // save state
+        musician.setRole(newInstrument);         // change state
     }
     
     public void undo() {
-        memento.restore(); // restore old state
+        memento.restore();  // restore old state
     }
 }
 ```
 
-**Benefits in Our System:**
-- Clean separation between command and domain objects
-- Easy to save and restore state
-- Domain classes (Musician, Ensemble) don't need to know about undo functionality
-- Simple and clear code
+### How It Work
 
-## 3.4 How Patterns Work Together
+1. Before modify object, command create memento to save current state
+2. Memento store reference to original object and old values
+3. Command execute and change object state
+4. When undo called, memento restore old state
 
-All three patterns work together to make MEMS flexible and maintainable:
+### Benefits
 
-1. **User Input → Factory → Command**
-   - User type command code
-   - Factory create appropriate Command object
-   - Command is ready to execute
+- Object internal state remain private
+- Easy to restore previous state
+- Undo logic separate from business logic
+- Don't need expose object internals
 
-2. **Command → Memento → Undo**
-   - Before execute, Command create Memento to save state
-   - Execute change the state
-   - Undo use Memento to restore state
+---
 
-3. **Manager → Stack → History**
-   - Manager execute commands and store in history
-   - History stack enable undo/redo
-   - Each command know how to undo itself
+## How Patterns Work Together
 
-This combination makes the system:
-- Easy to extend (add new commands)
-- Easy to maintain (each pattern has clear responsibility)
-- Easy to test (each command can be tested separately)
-- Clean code structure (Main class is simple)
+The three patterns work together in this workflow:
 
-## 3.5 Summary
+**For Modification Commands (create, add, delete, change):**
+```
+User Input → Factory create Command → Command save state with Memento (if needed)
+          → Main call manager.execute(command)
+          → Command execute and store in history stack
+          → User type "u" → Undo pop command from history
+          → Command use Memento to restore old state (for change operations)
+```
 
-| Pattern | Purpose | Main Classes |
-|---------|---------|--------------|
-| Command | Encapsulate operations as objects | Command, EnsembleCommand, 12 concrete commands |
-| Factory | Create command objects | CommandParser |
-| Memento | Save and restore state | MusicianState, EnsembleState |
+**For Query Commands (show ensemble, show all, list history):**
+```
+User Input → Factory create Command → Main call command.execute() directly
+          → Command execute (no history storage)
+          → Command undo() is empty (no-op)
+```
 
-These patterns are not just to fulfill assignment requirement, they actually solve real problems in the system design and make code better organized and easier to understand.
+**For Control Commands (undo, redo):**
+```
+User Input "u" or "r" → Factory create UndoCommand or RedoCommand
+                     → Main call command.execute() directly
+                     → Command manipulate history stacks in EnsembleService
+```
+
+**Summary:**
+
+| Pattern | Role | Key Classes |
+|---------|------|-------------|
+| Command | Encapsulate operations, enable undo/redo for modification commands | Command interface, EnsembleCommand interface, 11 concrete commands, EnsembleService |
+| Factory | Create command objects and collect user input | CommandParser |
+| Memento | Save and restore state for change operations | MusicianState, EnsembleState |
+
+**Key Points:**
+- Not all commands go through EnsembleService.execute() - only modification commands do
+- Query and control commands execute directly but still implement Command interface
+- Factory use switch statement which require modification when add new command type
+- Factory handle both object creation and user input (dual responsibility for simplification)
+
+These three design patterns was applied according to assignment requirements. They solve specific problems: Factory solve object creation, Command solve undo/redo for modifications, Memento solve state preservation for change operations.
