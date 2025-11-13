@@ -1,3 +1,6 @@
+// This is Memento pattern
+// It save the state of ensemble
+// So we can restore it later for undo
 public class EnsembleState {
     private final String name;
     private final Ensemble ensemble;

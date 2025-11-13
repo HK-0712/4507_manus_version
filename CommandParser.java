@@ -1,3 +1,7 @@
+// This is Factory pattern
+// It create command object for you
+// So main class no need to know how to create
+
 import java.util.*;
 
 public class CommandParser {

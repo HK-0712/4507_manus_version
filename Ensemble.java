@@ -1,3 +1,6 @@
+// This is base class for ensemble, like template method pattern
+// Subclass will decide how to show and update musician
+
 import java.util.*;
 
 public abstract class Ensemble {

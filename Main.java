@@ -1,5 +1,8 @@
 import java.util.*;
 
+// This is the client
+// It use CommandParser factory to create command
+// and use EnsembleService invoker to run command
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);

@@ -1,3 +1,5 @@
+// This is a concrete command
+// It for add musician
 public class AddMusicianCmd implements EnsembleCommand {
     private final Ensemble ensemble;
     private final Musician musician;

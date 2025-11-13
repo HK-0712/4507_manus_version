@@ -1,3 +1,5 @@
+// This is a concrete command
+// It for set current ensemble
 public class SetCurrentEnsembleCmd implements Command {
     private final EnsembleService manager;
     private final String ensembleID;

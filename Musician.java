@@ -1,3 +1,5 @@
+// This is Originator for Memento pattern
+// It state can be saved and restored
 public class Musician {
     private final String musicianID;
     private String mName;

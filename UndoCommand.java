@@ -1,3 +1,5 @@
+// This is a concrete command
+// It for undo last command
 public class UndoCommand implements Command {
     private EnsembleService manager;
 

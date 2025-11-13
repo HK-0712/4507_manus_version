@@ -1,3 +1,5 @@
+// This is concrete command for change instrument
+// It use Memento pattern for undo
 public class ChangeInstrumentCmd implements EnsembleCommand {
     private final Ensemble ensemble;
     private final Musician musician;
@@ -26,12 +28,14 @@ public class ChangeInstrumentCmd implements EnsembleCommand {
 
     @Override
     public void execute() {
+        // create memento for save state before change
         memento = new MusicianState(musician);
         musician.setRole(newInstrument);
     }
 
     @Override
     public void undo() {
+        // use memento to restore old state
         memento.restore();
     }
 

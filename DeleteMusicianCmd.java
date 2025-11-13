@@ -1,3 +1,6 @@
+// This is a concrete command
+// It for delete musician
+
 import java.util.*;
 
 public class DeleteMusicianCmd implements EnsembleCommand {

@@ -1,3 +1,6 @@
+// This is concrete ensemble for orchestra
+// It extends the base Ensemble class
+
 import java.util.*;
 
 public class OrchestraEnsemble extends Ensemble {

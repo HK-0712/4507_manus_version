@@ -1,3 +1,5 @@
+// This is concrete command for change name
+// It use Memento pattern for undo
 public class ChangeNameCmd implements EnsembleCommand {
     private final Ensemble ensemble;
     private final String newName;
@@ -20,12 +22,14 @@ public class ChangeNameCmd implements EnsembleCommand {
 
     @Override
     public void execute() {
+        // create memento for save state before change
         memento = new EnsembleState(ensemble);
         ensemble.setName(newName);
     }
 
     @Override
     public void undo() {
+        // use memento to restore old state
         memento.restore();
     }
 

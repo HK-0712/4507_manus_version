@@ -1,5 +1,8 @@
 import java.util.*;
 
+// This is Invoker in Command pattern
+// It take command and execute it
+// It also keep history for undo and redo, so it is Caretaker for Memento
 public class EnsembleService {
     private final LinkedList<Ensemble> ensembles;
     private Ensemble currentEnsemble;

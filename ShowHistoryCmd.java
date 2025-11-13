@@ -1,3 +1,5 @@
+// This is a concrete command
+// It for show undo redo history
 public class ShowHistoryCmd implements Command {
     private final EnsembleService manager;
 

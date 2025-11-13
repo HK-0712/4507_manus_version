@@ -1,3 +1,5 @@
+// This is a concrete command
+// It for show all ensembles
 public class ShowAllEnsemblesCmd implements Command {
     private final EnsembleService manager;
 

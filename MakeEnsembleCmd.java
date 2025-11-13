@@ -1,5 +1,7 @@
 import java.util.*;
 
+// This is a concrete command
+// It for make new ensemble
 public class MakeEnsembleCmd implements EnsembleCommand {
     private final LinkedList<Ensemble> ensembles;
     private final Ensemble ensemble;

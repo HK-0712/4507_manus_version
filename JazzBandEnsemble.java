@@ -1,3 +1,6 @@
+// This is concrete ensemble for jazz band
+// It extends the base Ensemble class
+
 import java.util.*;
 
 public class JazzBandEnsemble extends Ensemble {
