@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>0_report.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="part-1---assumptions">Part 1 - Assumptions</h1>
+<h2 id="assumptions-regarding-the-problem-context">Assumptions Regarding the Problem Context</h2>
+<h3 id="1-ensemble-structure">1. Ensemble Structure</h3>
+<ul>
+<li>Each ensemble must have unique ensemble ID (String type)</li>
+<li>Ensemble can have a name that can be modified after creation</li>
+<li>Two concrete ensemble types exist: OrchestraEnsemble and JazzBandEnsemble</li>
+<li>OrchestraEnsemble support two roles: Violinist (role=1) and Cellist (role=2)</li>
+<li>JazzBandEnsemble support three roles: Pianist (role=1), Saxophonist (role=2), Drummer (role=3)</li>
+<li>Ensemble use LinkedList to store musicians internally</li>
+<li>Abstract class Ensemble define common behavior for all ensemble types</li>
+<li>System don't enforce unique ensemble ID globally, assume user provide unique ID</li>
+</ul>
+<h3 id="2-musician-structure">2. Musician Structure</h3>
+<ul>
+<li>Each musician have unique musician ID (String type) within same ensemble</li>
+<li>Musician have a name (String) and role (int value)</li>
+<li>Role value represent the instrument musician play in the ensemble</li>
+<li>When musician move to different ensemble type, invalid roles are reset to 0</li>
+<li>Musician object store in ensemble's musician list</li>
+<li>If add musician with duplicate ID to same ensemble, old musician is removed first then new one added</li>
+</ul>
+<h3 id="3-command-execution">3. Command Execution</h3>
+<ul>
+<li>All operations implement Command interface with execute() and undo() methods</li>
+<li>Commands that modify data (create, add, delete, change) are executed through EnsembleService and stored in history</li>
+<li>Query commands (show, display) and control commands (undo, redo) execute directly in Main class</li>
+<li>Query commands still implement Command interface but undo() is empty (no-op)</li>
+<li>Each command provide description for display in history list</li>
+</ul>
+<h3 id="4-current-ensemble-concept">4. Current Ensemble Concept</h3>
+<ul>
+<li>System maintain single &quot;current ensemble&quot; reference at any time</li>
+<li>Operations like add musician, delete musician work on current ensemble only</li>
+<li>User can switch current ensemble using set current ensemble command</li>
+<li>If current ensemble become null, operations that need it should show error</li>
+<li>When new ensemble created, Main class set it as current ensemble (not automatic by EnsembleService)</li>
+</ul>
+<h3 id="5-undoredo-mechanism">5. Undo/Redo Mechanism</h3>
+<ul>
+<li>EnsembleService maintain two stacks: history stack and undoneCommands stack</li>
+<li>Only modification commands (create, add, delete, change name, change instrument) push to history stack</li>
+<li>When command execute through manager, it push to history stack</li>
+<li>When undo occur, command pop from history and push to undone stack</li>
+<li>When new modification command execute, undone stack is cleared</li>
+<li>Commands store necessary information (like previous state) to support undo</li>
+</ul>
+<h3 id="6-state-preservation">6. State Preservation</h3>
+<ul>
+<li>Before modify musician role, save old role using MusicianState memento</li>
+<li>Before modify ensemble name, save old name using EnsembleState memento</li>
+<li>Memento objects store reference to original object and old values</li>
+<li>Restore operation apply saved values back to object</li>
+<li>Only ChangeInstrumentCmd and ChangeNameCmd use memento pattern</li>
+<li>Creation and deletion commands don't need memento (they restore by reverse operation)</li>
+</ul>
+<h3 id="7-command-creation">7. Command Creation</h3>
+<ul>
+<li>CommandParser factory class responsible for create all command objects</li>
+<li>Factory method take user input and construct appropriate command</li>
+<li>Each command type need different parameters from user input</li>
+<li>Factory also handle user input collection using Scanner (factory have dual responsibility)</li>
+<li>Main class don't directly instantiate command classes</li>
+<li>Factory use switch statement to determine which command to create</li>
+</ul>
+<h3 id="8-collection-usage">8. Collection Usage</h3>
+<ul>
+<li>Ensemble use AbstractList<Musician> (implemented as LinkedList)</li>
+<li>EnsembleService use LinkedList<Ensemble> for storing ensembles</li>
+<li>Iterator pattern used to traverse musician list without exposing internal structure</li>
+<li>When add musician with duplicate ID, old musician is removed first then new one added</li>
+<li>Order of musicians preserved in insertion order</li>
+</ul>
+<h3 id="9-polymorphism">9. Polymorphism</h3>
+<ul>
+<li>Different ensemble types override updateMusicianRole() with specific logic</li>
+<li>Different ensemble types override showEnsemble() with specific display format</li>
+<li>Commands implement common Command interface but have different execute logic</li>
+<li>Factory return Command interface type, actual type determined at runtime</li>
+</ul>
+<h3 id="10-inputoutput-assumptions">10. Input/Output Assumptions</h3>
+<ul>
+<li>Musician input format is &quot;id, name&quot; (comma and space separator)</li>
+<li>Instrument/role input is integer value (1, 2, or 3 depend on ensemble type)</li>
+<li>Invalid input should show error message and not execute command</li>
+<li>System output follow specific format for ensemble and musician display</li>
+<li>All interaction through console (System.out and Scanner)</li>
+</ul>
+<h1 id="part-2---application-design">Part 2 - Application Design</h1>
+<h2 id="system-architecture">System Architecture</h2>
+<p>The Music Ensembles Management System (MEMS) is design using object-oriented principles with several design patterns to make code more flexible and maintainable.</p>
+<h2 id="class-diagram">Class Diagram</h2>
+<p><img src="2_Class_Diagram.jpg" alt="alt text"></p>
+<h2 id="main-components">Main Components</h2>
+<h3 id="1-main-application-layer">1. Main Application Layer</h3>
+<ul>
+<li><strong>Main.java</strong>: Entry point of program, handle user interface and main loop</li>
+<li><strong>EnsembleService.java</strong>: Central manager that coordinate all operations and maintain system state</li>
+</ul>
+<h3 id="2-ensemble-layer">2. Ensemble Layer</h3>
+<ul>
+<li><strong>Ensemble.java</strong>: Abstract base class for all ensemble types</li>
+<li><strong>OrchestraEnsemble.java</strong>: Concrete class for orchestra ensemble with violinist and cellist</li>
+<li><strong>JazzBandEnsemble.java</strong>: Concrete class for jazz band with pianist, saxophonist, and drummer</li>
+</ul>
+<h3 id="3-musician-layer">3. Musician Layer</h3>
+<ul>
+<li><strong>Musician.java</strong>: Represent individual musician with ID, name and role/instrument</li>
+</ul>
+<h3 id="4-command-layer">4. Command Layer</h3>
+<ul>
+<li><strong>Command.java</strong>: Interface define command operations</li>
+<li><strong>EnsembleCommand.java</strong>: Interface for commands that operate on ensemble</li>
+<li><strong>CommandParser.java</strong>: Factory class create command objects from user input</li>
+<li>Concrete command classes:
+<ul>
+<li><strong>MakeEnsembleCmd.java</strong>: Create new ensemble</li>
+<li><strong>AddMusicianCmd.java</strong>: Add musician to ensemble</li>
+<li><strong>ChangeInstrumentCmd.java</strong>: Change musician instrument</li>
+<li><strong>ChangeNameCmd.java</strong>: Change ensemble name</li>
+<li><strong>DeleteMusicianCmd.java</strong>: Remove musician from ensemble</li>
+<li><strong>SetCurrentEnsembleCmd.java</strong>: Switch current ensemble</li>
+<li><strong>ShowEnsembleCmd.java</strong>: Display current ensemble</li>
+<li><strong>ShowAllEnsemblesCmd.java</strong>: Display all ensembles</li>
+<li><strong>ShowHistoryCmd.java</strong>: Show undo/redo history</li>
+<li><strong>UndoCommand.java</strong>: Undo last operation</li>
+<li><strong>RedoCommand.java</strong>: Redo undone operation</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-state-management-layer">5. State Management Layer</h3>
+<ul>
+<li><strong>EnsembleState.java</strong>: Store ensemble state for memento pattern</li>
+<li><strong>MusicianState.java</strong>: Store musician state for memento pattern</li>
+</ul>
+<h1 id="part-3---design-patterns">Part 3 - Design Patterns</h1>
+<h2 id="discussion-and-explanation-on-design-patterns">Discussion and Explanation on Design Patterns</h2>
+<p>This section discuss and explain each of the design patterns applied to this Music Ensembles Management System.</p>
+<hr>
+<h2 id="1-command-pattern">1. Command Pattern</h2>
+<h3 id="what-is-command-pattern">What is Command Pattern</h3>
+<p>Command Pattern is behavioral design pattern that encapsulate a request as an object. This pattern turn operations into stand-alone objects that contain all information about the operation.</p>
+<h3 id="implementation-in-mems">Implementation in MEMS</h3>
+<p><strong>Command Interface:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Command</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">execute</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">undo</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-function">String <span class="hljs-title">getDescription</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">setManager</span><span class="hljs-params">(EnsembleService manager)</span></span>;
+}
+</div></code></pre>
+<p>The system implement 11 concrete command classes:</p>
+<ul>
+<li><code>MakeEnsembleCmd</code>, <code>AddMusicianCmd</code>, <code>DeleteMusicianCmd</code>, <code>ChangeInstrumentCmd</code>, <code>ChangeNameCmd</code></li>
+<li><code>SetCurrentEnsembleCmd</code>, <code>ShowEnsembleCmd</code>, <code>ShowAllEnsemblesCmd</code>, <code>ShowHistoryCmd</code></li>
+<li><code>UndoCommand</code>, <code>RedoCommand</code></li>
+</ul>
+<p>Some commands also implement <code>EnsembleCommand</code> interface which extend Command and add getEnsemble() method.</p>
+<p><strong>Invoker (EnsembleService):</strong></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">EnsembleService</span> </span>{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Stack&lt;Command&gt; history;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Stack&lt;Command&gt; undoneCommands;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">execute</span><span class="hljs-params">(Command command)</span> </span>{
+        undoneCommands.clear();
+        command.execute();
+        history.push(command);
+    }
+}
+</div></code></pre>
+<p>EnsembleService maintain two stacks for undo/redo functionality.</p>
+<h3 id="how-it-work">How It Work</h3>
+<ol>
+<li>CommandParser create appropriate Command object from user input</li>
+<li>For modification commands (create, add, delete, change), Main call manager.execute() which store command in history</li>
+<li>For query commands (se, sa, l) and control commands (u, r), Main call command.execute() directly without storing in history</li>
+<li>When undo is called, command pop from history and execute undo()</li>
+<li>Undone commands can be redone</li>
+</ol>
+<p>This design allow modification commands to be undone while query commands don't affect undo/redo history.</p>
+<h3 id="benefits">Benefits</h3>
+<ul>
+<li>Each operation is separate class with own logic</li>
+<li>Easy to implement undo/redo functionality for modification commands</li>
+<li>New commands can add but require modify CommandParser switch statement</li>
+<li>Main class don't need know implementation details of each operation</li>
+</ul>
+<hr>
+<h2 id="2-factory-pattern">2. Factory Pattern</h2>
+<h3 id="what-is-factory-pattern">What is Factory Pattern</h3>
+<p>Factory Pattern is creational design pattern that provide interface for creating objects without specify their exact classes.</p>
+<h3 id="implementation-in-mems">Implementation in MEMS</h3>
+<p><strong>CommandParser Factory:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CommandParser</span> </span>{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> EnsembleService manager;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Scanner scanner;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Command <span class="hljs-title">createCommand</span><span class="hljs-params">(String commandCode)</span> </span>{
+        <span class="hljs-keyword">switch</span> (commandCode) {
+            <span class="hljs-keyword">case</span> <span class="hljs-string">"c"</span>: <span class="hljs-keyword">return</span> makeEnsembleCmd();
+            <span class="hljs-keyword">case</span> <span class="hljs-string">"a"</span>: <span class="hljs-keyword">return</span> addMusicianCmd();
+            <span class="hljs-keyword">case</span> <span class="hljs-string">"m"</span>: <span class="hljs-keyword">return</span> changeInstrumentCmd();
+            <span class="hljs-keyword">case</span> <span class="hljs-string">"d"</span>: <span class="hljs-keyword">return</span> deleteMusicianCmd();
+            <span class="hljs-comment">// ... other cases</span>
+            <span class="hljs-keyword">default</span>: <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+        }
+    }
+}
+</div></code></pre>
+<p>Factory have helper methods to create complex commands and collect user input. This is simple factory pattern implementation where factory handle both object creation and user input collection.</p>
+<h3 id="how-it-work">How It Work</h3>
+<ol>
+<li>Main class receive command code from user</li>
+<li>CommandParser's createCommand() is called</li>
+<li>Factory use switch statement to determine which command to create</li>
+<li>Factory collect necessary parameters from user (using Scanner)</li>
+<li>Factory return ready-to-execute Command object</li>
+</ol>
+<h3 id="benefits-and-limitations">Benefits and Limitations</h3>
+<p><strong>Benefits:</strong></p>
+<ul>
+<li>All object creation logic in one place</li>
+<li>Main class don't need know how to create each command</li>
+<li>User input handling separated from Main class</li>
+</ul>
+<p><strong>Limitations:</strong></p>
+<ul>
+<li>Factory use switch statement, so adding new command require modify factory code (not fully follow Open-Closed Principle)</li>
+<li>Factory have dual responsibility: create objects and collect user input (coupling UI and creation logic)</li>
+<li>This is acceptable for assignment simplification but can be improved by separate concerns</li>
+</ul>
+<hr>
+<h2 id="3-memento-pattern">3. Memento Pattern</h2>
+<h3 id="what-is-memento-pattern">What is Memento Pattern</h3>
+<p>Memento Pattern is behavioral design pattern that let you save and restore previous state of an object without reveal implementation details.</p>
+<h3 id="implementation-in-mems">Implementation in MEMS</h3>
+<p><strong>Memento Classes:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MusicianState</span> </span>{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> role;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Musician musician;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MusicianState</span><span class="hljs-params">(Musician musician)</span> </span>{
+        <span class="hljs-keyword">this</span>.musician = musician;
+        <span class="hljs-keyword">this</span>.role = musician.getRole();
+    }
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">restore</span><span class="hljs-params">()</span> </span>{
+        musician.setRole(role);
+    }
+}
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">EnsembleState</span> </span>{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String name;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Ensemble ensemble;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">EnsembleState</span><span class="hljs-params">(Ensemble ensemble)</span> </span>{
+        <span class="hljs-keyword">this</span>.ensemble = ensemble;
+        <span class="hljs-keyword">this</span>.name = ensemble.getName();
+    }
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">restore</span><span class="hljs-params">()</span> </span>{
+        ensemble.setName(name);
+    }
+}
+</div></code></pre>
+<p><strong>Usage in Commands:</strong></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ChangeInstrumentCmd</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">EnsembleCommand</span> </span>{
+    <span class="hljs-keyword">private</span> MusicianState memento;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">execute</span><span class="hljs-params">()</span> </span>{
+        memento = <span class="hljs-keyword">new</span> MusicianState(musician);  <span class="hljs-comment">// save state</span>
+        musician.setRole(newInstrument);         <span class="hljs-comment">// change state</span>
+    }
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">undo</span><span class="hljs-params">()</span> </span>{
+        memento.restore();  <span class="hljs-comment">// restore old state</span>
+    }
+}
+</div></code></pre>
+<h3 id="how-it-work">How It Work</h3>
+<ol>
+<li>Before modify object, command create memento to save current state</li>
+<li>Memento store reference to original object and old values</li>
+<li>Command execute and change object state</li>
+<li>When undo called, memento restore old state</li>
+</ol>
+<h3 id="benefits">Benefits</h3>
+<ul>
+<li>Object internal state remain private</li>
+<li>Easy to restore previous state</li>
+<li>Undo logic separate from business logic</li>
+<li>Don't need expose object internals</li>
+</ul>
+<hr>
+<h2 id="how-patterns-work-together">How Patterns Work Together</h2>
+<p>The three patterns work together in this workflow:</p>
+<p><strong>For Modification Commands (create, add, delete, change):</strong></p>
+<pre class="hljs"><code><div>User Input → Factory create Command → Command save state with Memento (if needed)
+          → Main call manager.execute(command)
+          → Command execute and store in history stack
+          → User type &quot;u&quot; → Undo pop command from history
+          → Command use Memento to restore old state (for change operations)
+</div></code></pre>
+<p><strong>For Query Commands (show ensemble, show all, list history):</strong></p>
+<pre class="hljs"><code><div>User Input → Factory create Command → Main call command.execute() directly
+          → Command execute (no history storage)
+          → Command undo() is empty (no-op)
+</div></code></pre>
+<p><strong>For Control Commands (undo, redo):</strong></p>
+<pre class="hljs"><code><div>User Input &quot;u&quot; or &quot;r&quot; → Factory create UndoCommand or RedoCommand
+                     → Main call command.execute() directly
+                     → Command manipulate history stacks in EnsembleService
+</div></code></pre>
+<p><strong>Summary:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Role</th>
+<th>Key Classes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Command</td>
+<td>Encapsulate operations, enable undo/redo for modification commands</td>
+<td>Command interface, EnsembleCommand interface, 11 concrete commands, EnsembleService</td>
+</tr>
+<tr>
+<td>Factory</td>
+<td>Create command objects and collect user input</td>
+<td>CommandParser</td>
+</tr>
+<tr>
+<td>Memento</td>
+<td>Save and restore state for change operations</td>
+<td>MusicianState, EnsembleState</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Points:</strong></p>
+<ul>
+<li>Not all commands go through EnsembleService.execute() - only modification commands do</li>
+<li>Query and control commands execute directly but still implement Command interface</li>
+<li>Factory use switch statement which require modification when add new command type</li>
+<li>Factory handle both object creation and user input (dual responsibility for simplification)</li>
+</ul>
+<p>These three design patterns was applied according to assignment requirements. They solve specific problems: Factory solve object creation, Command solve undo/redo for modifications, Memento solve state preservation for change operations.</p>
+<h1 id="part-4---test-cases">Part 4 - Test Cases</h1>
+<h2 id="test-cases-overview">Test Cases Overview</h2>
+<p>This document contains test cases covering all system commands including create, modify, delete, query operations, and Undo/Redo functionality.</p>
+<hr>
+<h2 id="test-case-1-create-orchestra-ensemble">Test Case 1: Create Orchestra Ensemble</h2>
+<p><strong>Input:</strong></p>
+<pre class="hljs"><code><div>c
+o
+E001
+Vienna Orchestra
+</div></code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre class="hljs"><code><div>Orchestra ensemble is created.
+Current ensemble is changed to E001.
+</div></code></pre>
+<p><strong>Explanation:</strong> Create an orchestra ensemble with ID E001 and name Vienna Orchestra</p>
+<p><strong>Screenshot:</strong> <img src="image.png" alt="alt text"></p>
+<hr>
+<h2 id="test-case-2-create-jazz-band-ensemble">Test Case 2: Create Jazz Band Ensemble</h2>
+<p><strong>Input:</strong></p>
+<pre class="hljs"><code><div>c
+j
+J001
+Blue Note Band
+</div></code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre class="hljs"><code><div>Jazz band ensemble is created.
+Current ensemble is changed to J001.
+</div></code></pre>
+<p><strong>Explanation:</strong> Create a jazz band ensemble with ID J001 and name Blue Note Band</p>
+<p><strong>Screenshot:</strong> <img src="image-1.png" alt="alt text"></p>
+<hr>
+<h2 id="test-case-3-display-all-ensembles">Test Case 3: Display All Ensembles</h2>
+<p><strong>Input:</strong></p>
+<pre class="hljs"><code><div>sa
+</div></code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre class="hljs"><code><div>orchestra ensemble Vienna Orchestra (E001)
+jazz band ensemble Blue Note Band (J001)
+</div></code></pre>
+<p><strong>Explanation:</strong> List all ensembles in the system</p>
+<p><strong>Screenshot:</strong> <img src="image-2.png" alt="alt text"></p>
+<hr>
+<h2 id="test-case-4-set-current-ensemble">Test Case 4: Set Current Ensemble</h2>
+<p><strong>Input:</strong></p>
+<pre class="hljs"><code><div>s
+E001
+</div></code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre class="hljs"><code><div>Changed current ensemble to E001.
+</div></code></pre>
+<p><strong>Explanation:</strong> Switch current working ensemble to E001</p>
+<p><strong>Screenshot:</strong> <img src="image-3.png" alt="alt text"></p>
+<hr>
+<h2 id="test-case-5-add-musician-to-orchestra">Test Case 5: Add Musician to Orchestra</h2>
+<p><strong>Precondition:</strong> Current ensemble is E001 (Orchestra)</p>
+<p><strong>Input:</strong></p>
+<pre class="hljs"><code><div>a
+M001, John Smith
+1
+</div></code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre class="hljs"><code><div>Musician is added.
+</div></code></pre>
+<p><strong>Explanation:</strong> Add violinist John Smith (ID: M001) to orchestra, role code 1 represents violinist</p>
+<p><strong>Screenshot:</strong> <img src="image-4.png" alt="alt text"></p>
+<hr>
+<h2 id="test-case-6-add-musician-to-jazz-band">Test Case 6: Add Musician to Jazz Band</h2>
+<p><strong>Precondition:</strong> Current ensemble is J001 (Jazz Band)</p>
+<p><strong>Input:</strong></p>
+<pre class="hljs"><code><div>s
+J001
+a
+M002, Mary Johnson
+1
+</div></code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre class="hljs"><code><div>Changed current ensemble to J001.
+Musician is added.
+</div></code></pre>
+<p><strong>Explanation:</strong> Add saxophonist Mary Johnson (ID: M002) to jazz band, role code 1 represents pianist</p>
+<p><strong>Screenshot:</strong> <img src="image-5.png" alt="alt text"></p>
+<hr>
+<h2 id="test-case-7-show-ensemble-details">Test Case 7: Show Ensemble Details</h2>
+<p><strong>Precondition:</strong> Current ensemble has musicians</p>
+<p><strong>Input:</strong></p>
+<pre class="hljs"><code><div>se
+</div></code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre class="hljs"><code><div>Jazz Band Ensemble Blue Note Band (J001)
+Pianist:
+M002, Mary Johnson
+Saxophonist:
+NIL
+Drummer:
+NIL
+</div></code></pre>
+<p><strong>Explanation:</strong> Display current ensemble details including all musicians and their roles</p>
+<p><strong>Screenshot:</strong> <img src="image-6.png" alt="alt text"></p>
+<hr>
+<h2 id="test-case-8-modify-musicians-instrument">Test Case 8: Modify Musician's Instrument</h2>
+<p><strong>Precondition:</strong> Current ensemble is J001, has musician M002</p>
+<p><strong>Input:</strong></p>
+<pre class="hljs"><code><div>m
+M002
+2
+</div></code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre class="hljs"><code><div>instrument is updated.
+</div></code></pre>
+<p><strong>Explanation:</strong> Change musician M002's instrument from pianist to saxophonist (role code 2)</p>
+<p><strong>Screenshot:</strong> <img src="image-7.png" alt="alt text"></p>
+<hr>
+<h2 id="test-case-9-change-ensemble-name">Test Case 9: Change Ensemble Name</h2>
+<p><strong>Precondition:</strong> Current ensemble is J001</p>
+<p><strong>Input:</strong></p>
+<pre class="hljs"><code><div>cn
+Blue Note Jazz Ensemble
+</div></code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre class="hljs"><code><div>Ensemble's name is updated.
+</div></code></pre>
+<p><strong>Explanation:</strong> Change ensemble J001's name from &quot;Blue Note Band&quot; to &quot;Blue Note Jazz Ensemble&quot;</p>
+<p><strong>Screenshot:</strong> <img src="image-8.png" alt="alt text"></p>
+<hr>
+<h2 id="test-case-10-delete-musician">Test Case 10: Delete Musician</h2>
+<p><strong>Precondition:</strong> Current ensemble has musician M002</p>
+<p><strong>Input:</strong></p>
+<pre class="hljs"><code><div>d
+M002
+</div></code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre class="hljs"><code><div>Musician is deleted.
+</div></code></pre>
+<p><strong>Explanation:</strong> Delete musician with ID M002 from current ensemble</p>
+<p><strong>Screenshot:</strong> <img src="image-9.png" alt="alt text"></p>
+<hr>
+<h2 id="test-case-11-list-undoredo-history">Test Case 11: List Undo/Redo History</h2>
+<p><strong>Input:</strong></p>
+<pre class="hljs"><code><div>l
+</div></code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre class="hljs"><code><div>Undo List
+Create orchestra ensemble, E001, Vienna Orchestra
+Create jazz band ensemble, J001, Blue Note Band
+Add musician, M001, John Smith, violinist
+Add musician, M002, Mary Johnson, pianist
+Modify musician's instrument, M002, saxophonist
+Change ensemble's name, J001, Blue Note Jazz
+Delete musician, M002
+-- End of undo list --
+
+Redo List
+-- End of redo list --
+</div></code></pre>
+<p><strong>Explanation:</strong> Display all undoable and redoable commands</p>
+<p><strong>Screenshot:</strong> <img src="image-10.png" alt="alt text"></p>
+<hr>
+<h2 id="test-case-12-undo-command">Test Case 12: Undo Command</h2>
+<p><strong>Precondition:</strong> At least one undoable command executed</p>
+<p><strong>Input:</strong></p>
+<pre class="hljs"><code><div>u
+</div></code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre class="hljs"><code><div>Command (Delete musician, M002) is undone.
+</div></code></pre>
+<p><strong>Explanation:</strong> Undo the last executed command (delete musician)</p>
+<p><strong>Screenshot:</strong> <img src="image-11.png" alt="alt text"></p>
+<hr>
+<h2 id="test-case-13-redo-command">Test Case 13: Redo Command</h2>
+<p><strong>Precondition:</strong> Undo has been executed</p>
+<p><strong>Input:</strong></p>
+<pre class="hljs"><code><div>r
+</div></code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre class="hljs"><code><div>Command (Delete musician, M002) is redone.
+</div></code></pre>
+<p><strong>Explanation:</strong> Redo the previously undone command</p>
+<p><strong>Screenshot:</strong> <img src="image-12.png" alt="alt text"></p>
+<hr>
+<h2 id="test-case-14-multiple-undo-operations">Test Case 14: Multiple Undo Operations</h2>
+<p><strong>Input:</strong></p>
+<pre class="hljs"><code><div>u
+u
+u
+</div></code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre class="hljs"><code><div>Command (Delete musician, M002) is undone.
+Command (Change ensemble's name, J001, Blue Note Jazz) is undone.
+Command (Modify musician's instrument, M002, saxophonist) is undone.
+</div></code></pre>
+<p><strong>Explanation:</strong> Undo multiple operations consecutively</p>
+<p><strong>Screenshot:</strong> <img src="image-13.png" alt="alt text"></p>
+<hr>
+<h2 id="test-case-15-error-handling---add-musician-without-current-ensemble">Test Case 15: Error Handling - Add Musician Without Current Ensemble</h2>
+<p><strong>Precondition:</strong> System just started, no current ensemble set</p>
+<p><strong>Input:</strong></p>
+<pre class="hljs"><code><div>a
+</div></code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre class="hljs"><code><div>No current ensemble set.
+</div></code></pre>
+<p><strong>Explanation:</strong> Test error handling when trying to add musician without current ensemble</p>
+<p><strong>Screenshot:</strong> <img src="image-14.png" alt="alt text"></p>
+<hr>
+<h2 id="test-case-16-error-handling---set-non-existent-ensemble">Test Case 16: Error Handling - Set Non-existent Ensemble</h2>
+<p><strong>Input:</strong></p>
+<pre class="hljs"><code><div>s
+E999
+</div></code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre class="hljs"><code><div>Ensemble E999 is not found!!
+</div></code></pre>
+<p><strong>Explanation:</strong> Test error handling when trying to set a non-existent ensemble ID</p>
+<p><strong>Screenshot:</strong> <img src="image-15.png" alt="alt text"></p>
+<hr>
+<h2 id="test-case-17-error-handling---undo-with-empty-list">Test Case 17: Error Handling - Undo with Empty List</h2>
+<p><strong>Precondition:</strong> System just started or undo list is empty</p>
+<p><strong>Input:</strong></p>
+<pre class="hljs"><code><div>u
+</div></code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre class="hljs"><code><div>Undo List is empty.
+</div></code></pre>
+<p><strong>Explanation:</strong> Test error handling when undo list is empty</p>
+<p><strong>Screenshot:</strong> <img src="image-16.png" alt="alt text"></p>
+<hr>
+<h2 id="test-case-18-error-handling---redo-with-empty-list">Test Case 18: Error Handling - Redo with Empty List</h2>
+<p><strong>Precondition:</strong> No undo has been executed</p>
+<p><strong>Input:</strong></p>
+<pre class="hljs"><code><div>r
+</div></code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre class="hljs"><code><div>Redo List is empty.
+</div></code></pre>
+<p><strong>Explanation:</strong> Test error handling when redo list is empty</p>
+<p><strong>Screenshot:</strong> <img src="image-17.png" alt="alt text"></p>
+<hr>
+<h2 id="test-case-19-exit-system">Test Case 19: Exit System</h2>
+<p><strong>Input:</strong></p>
+<pre class="hljs"><code><div>x
+</div></code></pre>
+<p><strong>Expected Output:</strong></p>
+<pre class="hljs"><code><div>Exiting system.
+</div></code></pre>
+<p><strong>Explanation:</strong> Normal system exit</p>
+<p><strong>Screenshot:</strong> <img src="image-18.png" alt="alt text"></p>
+<hr>
+
+</body>
+</html>
